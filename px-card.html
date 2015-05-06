@@ -1,73 +1,33 @@
-<!--
-    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
-    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
-    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
-    See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
--->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-timeseries/px-time-series.html"/>
-
-
-<!--
-Element providing solution to no problem in particular. As a simple, increments a counter when clicked.
-
-##### Usage
-
-    <px-time-series queries="queries">Hi</px-time-series>
-
-@element px-time-series
-@blurb Element providing solution to no problem in particular.
-@homepage index.html
--->
-<dom-module id="px-card-base"> <!-- extend px-card -->
-
-    <template>
-    </template>
-</dom-module>
-
-<script type="text/javascript">
-    Polymer({
-        is: 'px-card-base',
-        get: function(acard){
-            this.fire('px-change-attr', { card: acard, attr: 'context', startDate : new Date(), endDate: new Date()});
-        }
-    });
-</script>
-
-<dom-module id="my-card"> <!-- extend px-card -->
-
-    <template>
-        <div style="border: 1px;border-color: red;border-style: solid;">
-            <px-card-base></px-card-base><!-- this is like your this.super() -->
-            <h1>My context name is:<span>{{context.name}}</span></h1>
-            <h1>In 1 second:<span>{{context.url}}</span></h1>
-            <button on-click="getMoreData">Get more data</button>
-            <px-time-series></px-time-series>
-        </div>
-    </template>
-</dom-module>
 
 <script type="text/javascript">
 
-    Polymer({
-        is: 'my-card',
-        properties: {
-            context: {
-                type : Object,
-                observer: 'contextChanged'
-            },
-            id: {
-                type: String
+    window.px = {
+        card: {
+            create: function(newCard) {
+                var cardBase = {
+                    properties: {
+                        context: {
+                            type: Object,
+                            observer: 'contextChanged'
+                        },
+                        id: {
+                            type: String
+                        }
+                    },
+                    get: function(acard, params) {
+                        params.card = acard;
+                        params.attr = 'context';
+                        this.fire('px-change-attr', params);
+                    },
+                    contextChanged: function() {
+                        console.log('got the value', arguments);
+                    }
+                };
+
+                Polymer($.extend(true, {}, cardBase, newCard));
             }
-        },
-        ready: function(){
-            this.cardBase = document.querySelector('px-card-base');
-        },
-        getMoreData: function() {
-            this.cardBase.get(this);
-        },
-        contextChanged: function() {
-            console.log('got the value', arguments);
         }
-    });
+    };
+
 </script>
