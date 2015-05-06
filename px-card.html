@@ -11,13 +11,16 @@
                             type: Object,
                             observer: 'contextChanged'
                         },
+                        data: {
+                            type: Object
+                        },
                         id: {
                             type: String
                         }
                     },
                     get: function(acard, params) {
                         params.card = acard;
-                        params.attr = 'context';
+                        params.attr = 'data';
                         this.fire('px-change-attr', params);
                     },
                     contextChanged: function() {
