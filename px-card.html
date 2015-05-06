@@ -19,18 +19,36 @@ Element providing solution to no problem in particular. As a simple, increments 
 @blurb Element providing solution to no problem in particular.
 @homepage index.html
 -->
-
-<dom-module id="my-card"> <!-- extend px-card -->
+<dom-module id="px-card-base"> <!-- extend px-card -->
 
     <template>
-        <h1>My context name is:<span>{{context.name}}</span></h1>
-        <h1>In 1 second:<span>{{context.url}}</span></h1>
-        <button on-click="getMoreData">Get more data</button>
-        <px-time-series></px-time-series>
     </template>
 </dom-module>
 
 <script type="text/javascript">
+    Polymer({
+        is: 'px-card-base',
+        get: function(acard){
+            this.fire('px-change-attr', { card: acard, attr: 'context', startDate : new Date(), endDate: new Date()});
+        }
+    });
+</script>
+
+<dom-module id="my-card"> <!-- extend px-card -->
+
+    <template>
+        <div style="border: 1px;border-color: red;border-style: solid;">
+            <px-card-base></px-card-base><!-- this is like your this.super() -->
+            <h1>My context name is:<span>{{context.name}}</span></h1>
+            <h1>In 1 second:<span>{{context.url}}</span></h1>
+            <button on-click="getMoreData">Get more data</button>
+            <px-time-series></px-time-series>
+        </div>
+    </template>
+</dom-module>
+
+<script type="text/javascript">
+
     Polymer({
         is: 'my-card',
         properties: {
@@ -42,9 +60,11 @@ Element providing solution to no problem in particular. As a simple, increments 
                 type: String
             }
         },
+        ready: function(){
+            this.cardBase = document.querySelector('px-card-base');
+        },
         getMoreData: function() {
-//            this.super.get();
-            this.fire('px-change-attr', { attr: 'context', startDate : new Date(), endDate: new Date()});
+            this.cardBase.get(this);
         },
         contextChanged: function() {
             console.log('got the value', arguments);
