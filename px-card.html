@@ -37,11 +37,14 @@ Element providing solution to no problem in particular. As a simple, increments 
             context: {
                 type : Object,
                 observer: 'contextChanged'
+            },
+            id: {
+                type: String
             }
         },
         getMoreData: function() {
 //            this.super.get();
-            this.fire('px-card-more-data', 'Hi Clement');
+            this.fire('px-change-attr', { attr: 'context', startDate : new Date(), endDate: new Date()});
         },
         contextChanged: function() {
             console.log('got the value', arguments);
