@@ -1,0 +1,22 @@
+{
+  "name": "px-card",
+  "version": "0.0.1",
+  "authors": [
+    "predix.experience.group@ge.com"
+  ],
+  "description": "Holder for all the widgets",
+  "main": "px-card.html",
+  "keywords": [
+    "px-card",
+    "PX"
+  ],
+  "license": "GE",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
