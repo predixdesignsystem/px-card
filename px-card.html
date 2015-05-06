@@ -20,157 +20,31 @@ Element providing solution to no problem in particular. As a simple, increments 
 @homepage index.html
 -->
 
-<dom-module id="px-card">
+<dom-module id="my-card"> <!-- extend px-card -->
 
     <template>
-        <button on-click="addCoolThing">Add Cool Thing</button>
-        <div id="container"></div>
+        <h1>My context name is:<span>{{context.name}}</span></h1>
+        <h1>In 1 second:<span>{{context.url}}</span></h1>
+        <button on-click="getMoreData">Get more data</button>
+        <px-time-series></px-time-series>
     </template>
 </dom-module>
 
 <script type="text/javascript">
     Polymer({
-        is: 'px-card',
+        is: 'my-card',
         properties: {
             context: {
-                type: Object,
+                type : Object,
                 observer: 'contextChanged'
             }
         },
-        addCoolThing: function() {
-            $(this.$.container).append('<px-time-series id="myts"></px-time-series>');
-
-            var self=this;
-            setTimeout(function(){
-                document.querySelector('#myts').queries = self.mydata.queries;
-            }, 2000)
-
-
+        getMoreData: function() {
+//            this.super.get();
+            this.fire('px-card-more-data', 'Hi Clement');
         },
-        ready: function(){
-            var timeSeriesData =  [
-                {
-                    'sample_size': 1071,
-                    'results': [
-                        {
-                            'name': 'Winter 1970-1971',
-                            'values': [
-                                [
-                                    25833600000,
-                                    0
-                                ],
-                                [
-                                    27043200000,
-                                    0.6
-                                ],
-                                [
-                                    27734400000,
-                                    0.7
-                                ],
-                                [
-                                    28944000000,
-                                    0.8
-                                ],
-                                [
-                                    29548800000,
-                                    0.6
-                                ],
-                                [
-                                    30153600000,
-                                    0.6
-                                ],
-                                [
-                                    31190400000,
-                                    0.67
-                                ],
-                                [
-                                    31536000000,
-                                    0.81
-                                ],
-                                [
-                                    32140800000,
-                                    0.78
-                                ],
-                                [
-                                    32486400000,
-                                    0.98
-                                ],
-                                [
-                                    33782400000,
-                                    1.84
-                                ],
-                                [
-                                    34992000000,
-                                    1.8
-                                ],
-                                [
-                                    35683200000,
-                                    1.8
-                                ],
-                                [
-                                    36201600000,
-                                    1.92
-                                ],
-                                [
-                                    36892800000,
-                                    2.49
-                                ],
-                                [
-                                    37497600000,
-                                    2.79
-                                ],
-                                [
-                                    37843200000,
-                                    2.73
-                                ],
-                                [
-                                    38707200000,
-                                    2.61
-                                ],
-                                [
-                                    39398400000,
-                                    2.76
-                                ],
-                                [
-                                    39744000000,
-                                    2.82
-                                ],
-                                [
-                                    40348800000,
-                                    2.8
-                                ],
-                                [
-                                    42076800000,
-                                    2.1
-                                ],
-                                [
-                                    44064000000,
-                                    1.1
-                                ],
-                                [
-                                    45273600000,
-                                    0.25
-                                ],
-                                [
-                                    45532800000,
-                                    0
-                                ]
-                            ]
-                        }
-                    ]
-                }
-            ];
-
-
-            /*
-             scope for time series widget
-             */
-            this.mydata = {
-                queries: timeSeriesData
-            };
-        },
-        contextChanged: function(newVal){
-            console.log(newVal);
+        contextChanged: function() {
+            console.log('got the value', arguments);
         }
     });
 </script>
