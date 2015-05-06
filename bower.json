@@ -1,3 +1,4 @@
+
 {
   "name": "px-card",
   "version": "0.0.1",
@@ -10,7 +11,16 @@
     "px-card",
     "PX"
   ],
-  "license": "GE",
+  "dependencies": {
+        "polymer": "~v0.8.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#~v0.6.1"
+    },
+    "devDependencies": {
+        "core-doc-viewer": "https://github.com/Polymer/core-doc-viewer.git#0.8-preview",
+        "px-starter-kit-design": "git://github.sw.ge.com/PXd/px-starter-kit-design.git#master",
+        "web-component-tester": "Polymer/web-component-tester#^2.2.3"
+    },
+  "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
