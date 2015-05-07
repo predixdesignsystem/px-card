@@ -1,24 +1,20 @@
 <script>
 
     (function () {
+
+
         var card = {
             properties: {
                 context: {
                     type: Object,
                     observer: 'contextChanged'
-                },
-                data: {
-                    type: Object
-                },
-                id: {
-                    type: String
                 }
             },
-            get: function (acard, partOfDataToUpdate, params) {
-                params.card = acard;
-                params.attr = 'data';
-                params.parttoupdate = partOfDataToUpdate;
-                this.fire('px-change-attr', params);
+            getDSByName: function(dsName){
+               return px.datasources[dsName];
+            },
+            get: function (dsName, arguments) {
+                return this.getDSByName(dsName).getMoreData.call(this, arguments);
             },
             contextChanged: function () {
                 console.log('got the value', arguments);
