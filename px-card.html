@@ -1,9 +1,7 @@
-<link rel="import" href="../polymer/polymer.html"/>
+<script>
 
-<script type="text/javascript">
-
-    window.px = {
-        card: {
+    (function () {
+        var card = {
             properties: {
                 context: {
                     type: Object,
@@ -16,17 +14,20 @@
                     type: String
                 }
             },
-            get: function(acard, partOfDataToUpdate, params) {
+            get: function (acard, partOfDataToUpdate, params) {
                 params.card = acard;
                 params.attr = 'data';
                 params.parttoupdate = partOfDataToUpdate;
                 this.fire('px-change-attr', params);
             },
-            contextChanged: function() {
+            contextChanged: function () {
                 console.log('got the value', arguments);
             }
 
-        }
-    };
+        };
 
+        window.px = window.px || {};
+        px.card = card;
+
+    })();
 </script>
