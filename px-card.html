@@ -4,32 +4,28 @@
 
     window.px = {
         card: {
-            create: function(newCard) {
-                var cardBase = {
-                    properties: {
-                        context: {
-                            type: Object,
-                            observer: 'contextChanged'
-                        },
-                        data: {
-                            type: Object
-                        },
-                        id: {
-                            type: String
-                        }
-                    },
-                    get: function(acard, params) {
-                        params.card = acard;
-                        params.attr = 'data';
-                        this.fire('px-change-attr', params);
-                    },
-                    contextChanged: function() {
-                        console.log('got the value', arguments);
-                    }
-                };
-
-                Polymer($.extend(true, {}, cardBase, newCard));
+            properties: {
+                context: {
+                    type: Object,
+                    observer: 'contextChanged'
+                },
+                data: {
+                    type: Object
+                },
+                id: {
+                    type: String
+                }
+            },
+            get: function(acard, partOfDataToUpdate, params) {
+                params.card = acard;
+                params.attr = 'data';
+                params.parttoupdate = partOfDataToUpdate;
+                this.fire('px-change-attr', params);
+            },
+            contextChanged: function() {
+                console.log('got the value', arguments);
             }
+
         }
     };
 
