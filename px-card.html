@@ -1,32 +1,45 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+    See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
+-->
 <link rel="import" href="../polymer/polymer.html"/>
 
-<script type="text/javascript">
+<!--
+Element providing refresh controls for cards
 
-    window.px = {
-        card: {
+##### Usage
+
+    <px-card-controls></px-card-controls>
+
+@element px-card-controls
+@blurb Element containing refresh button will fire 'px-card-refresh' event when clicked.
+@homepage index.html
+-->
+<link rel="import" href="px-card-controls.html"/>
+<script type="text/javascript">
+    //px-card interface/behavior
+    (function() {
+        window.px = window.px || {};
+
+        window.px.card = {
             properties: {
                 context: {
                     type: Object,
-                    observer: 'contextChanged'
-                },
-                data: {
-                    type: Object
-                },
-                id: {
-                    type: String
+                    observer: '_contextChanged'
                 }
             },
-            get: function(acard, partOfDataToUpdate, params) {
-                params.card = acard;
-                params.attr = 'data';
-                params.parttoupdate = partOfDataToUpdate;
-                this.fire('px-change-attr', params);
+            _contextChanged: function(newContext, oldContext) {
+                if (this.contextChanged && typeof this.contextChanged === 'function') {
+                    this.contextChanged(newContext, oldContext);
+                }
             },
-            contextChanged: function() {
-                console.log('got the value', arguments);
+            _refresh: function(){
+                if (this.refresh && typeof this.refresh === 'function') {
+                    this.refresh();
+                }
             }
-
-        }
-    };
-
+        };
+    })();
 </script>

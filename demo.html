@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>px-card Demo</title>
+
+        <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+        <script src="../webcomponentsjs/webcomponents.js"></script>
+
+        <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+        <link rel="import" href="px-card.html"/>
+    </head>
+
+    <body>
+
+        <h3>Demo</h3>
+
+        <p>
+            Although related, examples are /not/ the same as the test fixtures.
+            Tests are tests, examples are examples.
+        </p>
+
+        <p>
+            Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
+        </p>
+
+        <!-- instance 1, "predix" theme -->
+        <dom-module id="demo-card">
+            <template>
+                <px-card-controls></px-card-controls>
+            </template>
+        </dom-module>
+
+        <script>
+
+            Polymer({
+                is: 'demo-card',
+                refresh: function(){
+                  console.log('refreshed');
+                },
+                ready: function(){
+
+                },
+                contextChanged: function(newContext, oldContext){
+                    console.log(newContext);
+                },
+                behaviors:[px.card]
+            });
+        </script>
+
+        <demo-card context="my context"></demo-card>
+    </body>
+</html>

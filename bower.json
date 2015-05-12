@@ -1,32 +1,23 @@
-
 {
   "name": "px-card",
   "version": "0.0.1",
-  "authors": [
-    "predix.experience.group@ge.com"
+  "main": [
+    "px-card.html"
   ],
-  "description": "Holder for all the widgets",
-  "main": "px-card.html",
-  "keywords": [
-    "px-card",
-    "PX"
+  "ignore": [
+    ".*",
+    "npm-debug.log",
+    "Gruntfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test"
   ],
   "dependencies": {
-        "polymer": "~v0.8.0",
-        "webcomponentsjs": "webcomponents/webcomponentsjs#~v0.6.1"
-    },
-    "devDependencies": {
-        "core-doc-viewer": "https://github.com/Polymer/core-doc-viewer.git#0.8-preview",
-        "px-starter-kit-design": "git://github.sw.ge.com/PXd/px-starter-kit-design.git#master",
-        "web-component-tester": "Polymer/web-component-tester#^2.2.3"
-    },
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "polymer": "~v0.8.0-rc.7",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#~v0.6.1"
+  },
+  "devDependencies": {
+    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v0.8.3"
+  }
 }
