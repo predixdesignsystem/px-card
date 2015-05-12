@@ -1,0 +1,32 @@
+<link rel="import" href="../polymer/polymer.html"/>
+
+<!--
+@blurb px card behavior or card api
+-->
+
+<script type="text/javascript">
+    //px-card interface/behavior
+    (function() {
+        window.px = window.px || {};
+
+        window.px.cardBehavior = {
+            properties: {
+                context: {
+                    type: Object,
+                    observer: '_contextChanged'
+                }
+            },
+            _contextChanged: function(newContext, oldContext) {
+                if (this.contextChanged && typeof this.contextChanged === 'function') {
+                    this.contextChanged(newContext, oldContext);
+                }
+            },
+            _refresh: function(){
+                if (this.refresh && typeof this.refresh === 'function') {
+                    this.refresh();
+                }
+            }
+        };
+    })();
+</script>
+

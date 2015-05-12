@@ -1,40 +1,38 @@
-<link rel="import" href="../polymer/polymer.html"/>
-
 <!--
-Element providing refresh controls for cards
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+    See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+<!--
+Element providing basic styling for card
 
 ##### Usage
 
-    <px-card-controls></px-card-controls>
+    <px-card></px-card>
 
-@element px-card-controls
-@blurb Element containing refresh button will fire 'px-card-refresh' event when clicked.
+@element px-card
+@blurb Element containing basic styling for card
 @homepage index.html
 -->
-<link rel="import" href="px-card-controls.html"/>
+
+<dom-module id="px-card">
+    <style>
+        :host {
+            display: block;
+            border: 1px solid blue;
+        }
+    </style>
+    <template>
+        <content></content>
+    </template>
+</dom-module>
+
 <script type="text/javascript">
-    //px-card interface/behavior
-    (function() {
-        window.px = window.px || {};
 
-        window.px.card = {
-            properties: {
-                context: {
-                    type: Object,
-                    observer: '_contextChanged'
-                }
-            },
-            _contextChanged: function(newContext, oldContext) {
-                if (this.contextChanged && typeof this.contextChanged === 'function') {
-                    this.contextChanged(newContext, oldContext);
-                }
-            },
-            _refresh: function(){
-                if (this.refresh && typeof this.refresh === 'function') {
-                    this.refresh();
-                }
-            }
-        };
-    })();
+    Polymer({
+        is: 'px-card'
+    });
+
 </script>
-
