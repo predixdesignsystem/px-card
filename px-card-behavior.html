@@ -15,18 +15,7 @@
                     type: Object,
                     observer: '_contextChanged'
                 },
-                spine: {
-                    type: Boolean,
-                    value: false
-                },
-                tile: {
-                    type: Boolean,
-                    value: false
-                },
-                big: {
-                    type: Boolean,
-                    value: false
-                }
+                type: String
             },
             _contextChanged: function(newContext, oldContext) {
                 if (this.contextChanged && typeof this.contextChanged === 'function') {
