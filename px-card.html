@@ -25,7 +25,7 @@ Element providing basic styling for card
         }
     </style>
     <template>
-        <div hidden$="{{isHidden}}">
+        <div>
             <content></content>
         </div>
     </template>
@@ -36,17 +36,7 @@ Element providing basic styling for card
     Polymer({
         is: 'px-card',
         properties: {
-            type: String,
-            isHidden: {
-                type: Boolean,
-                value: true
-            },
-            parenttype: String
-        },
-        ready: function() {
-            if(this.parenttype === this.type) {
-                this.isHidden = false;
-            }
+            type: String
         }
     });
 

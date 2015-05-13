@@ -15,17 +15,32 @@
                     type: Object,
                     observer: '_contextChanged'
                 },
-                type: String
+                type: {
+                    type: String,
+                    observer: '_typeChanged'
+
+                }
             },
             _contextChanged: function(newContext, oldContext) {
                 if (this.contextChanged && typeof this.contextChanged === 'function') {
                     this.contextChanged(newContext, oldContext);
                 }
             },
-            _refresh: function(){
+            _refresh: function() {
                 if (this.refresh && typeof this.refresh === 'function') {
                     this.refresh();
                 }
+            },
+            _typeChanged: function() {
+                var self = this;
+                Polymer.dom(this.root).querySelectorAll('px-card').forEach(function(pxCard){
+                    if (pxCard.type === self.type) {
+                        pxCard.setAttribute('style', 'display:block');
+                    }
+                    else {
+                        pxCard.setAttribute('style', 'display:none');
+                    }
+                });
             }
         };
     })();
