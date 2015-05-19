@@ -21,15 +21,7 @@ common/abstract rules go in px-card-sketch.scss, not in this file.
 
 @import 'px-card-sketch.scss';
 
-.circle {
-  border-style: none;
-  -webkit-box-shadow: 0.2rem 0.2rem 0.2rem 0 rgba(0,0,0,0.5);
-  -moz-box-shadow: 0.2rem 0.2rem 0.2rem 0 rgba(0,0,0,0.5);
-  box-shadow: 0.2rem 0.2rem 0.2rem 0 rgba(0,0,0,0.5);
-}
-
-.counter {
-  background-color: rgb(0,92,185);
-  color: white;
-  font-family: "GE Sans", sans-serif;
+:host {
+    display: block;
+    border: 1px solid blue;
 }
