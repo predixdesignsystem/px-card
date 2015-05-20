@@ -12,6 +12,22 @@
         <link rel="import" href="px-context-name.html"/>
         <link rel="import" href="px-card-controls.html"/>
         <link rel="import" href="px-card-behavior.html"/>
+
+        <link rel="import" href="../px-theme/px-theme.html"/>
+        <link rel="import" href="../iron-ajax/iron-ajax.html"/>
+        <link rel="import" href="../px-ts-chart/px-ts-chart.html"/>
+
+        <style is="custom-style">
+          html {
+            height: 100%;
+            font-size:0.9375em;
+          }
+          body {
+            height: 100%;
+            margin: 0;
+          }
+        </style>
+
     </head>
 
     <body>
@@ -29,7 +45,22 @@
 
         <px-card>
             <px-context-name context-name="My Awesome Context"></px-context-name>
-            <!-- <px-card-controls></px-card-controls> -->
+            <px-ts-chart>
+              <px-chart-yaxis offset="0"></px-chart-yaxis>
+              <px-chart-series id="delta-egt-cruise" axis-index="1">
+                <iron-ajax
+                    url="../px-ts-chart/demo-data/aviation/delta-egt-cruise.json"
+                    handle-as="json"></iron-ajax>
+              </px-chart-series>
+            </px-ts-chart>
+            <px-ts-chart>
+              <px-chart-yaxis offset="0"></px-chart-yaxis>
+              <px-chart-series id="delta-egt-cruise" axis-index="1">
+                <iron-ajax
+                    url="../px-ts-chart/demo-data/aviation/delta-egt-cruise.json"
+                    handle-as="json"></iron-ajax>
+              </px-chart-series>
+            </px-ts-chart>
         </px-card>
     </body>
 </html>
