@@ -43,9 +43,10 @@
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
 
-        <px-card>
-            <px-context-name context-name="My Awesome Context"></px-context-name>
-            <px-ts-chart>
+        <px-card card-state="{{sausages}}">
+          <px-context-name context-name="My Awesome Context"></px-context-name>
+          <template is="dom-bind">
+            <px-ts-chart chart-state="{{beans}}">
               <px-chart-yaxis offset="0"></px-chart-yaxis>
               <px-chart-series id="delta-egt-cruise" axis-index="1">
                 <iron-ajax
@@ -53,7 +54,8 @@
                     handle-as="json"></iron-ajax>
               </px-chart-series>
             </px-ts-chart>
-            <px-ts-chart>
+
+            <px-ts-chart chart-state="[[beans]]">
               <px-chart-yaxis offset="0"></px-chart-yaxis>
               <px-chart-series id="delta-egt-cruise" axis-index="1">
                 <iron-ajax
@@ -61,6 +63,32 @@
                     handle-as="json"></iron-ajax>
               </px-chart-series>
             </px-ts-chart>
+          </template>
         </px-card>
+
+        <px-card card-state="{{sausages}}">
+          <px-context-name context-name="My Awesome Context"></px-context-name>
+          <template is="dom-bind">
+            <px-ts-chart chart-state="{{pudding}}">
+              <px-chart-yaxis offset="0"></px-chart-yaxis>
+              <px-chart-series id="delta-egt-cruise" axis-index="1">
+                <iron-ajax
+                    url="../px-ts-chart/demo-data/aviation/delta-egt-cruise.json"
+                    handle-as="json"></iron-ajax>
+              </px-chart-series>
+            </px-ts-chart>
+
+            <px-ts-chart chart-state="[[pudding]]">
+              <px-chart-yaxis offset="0"></px-chart-yaxis>
+              <px-chart-series id="delta-egt-cruise" axis-index="1">
+                <iron-ajax
+                    url="../px-ts-chart/demo-data/aviation/delta-egt-cruise.json"
+                    handle-as="json"></iron-ajax>
+              </px-chart-series>
+            </px-ts-chart>
+          </template>
+        </px-card>
+
+
     </body>
 </html>

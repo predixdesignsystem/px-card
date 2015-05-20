@@ -19,9 +19,7 @@ Element providing basic styling for card
 
 <dom-module id="px-card">
     <link rel="import" type="css" href="css/px-card.css"/>
-    <template>
-      <content></content>
-    </template>
+    <content></content>
 </dom-module>
 
 <script type="text/javascript">
@@ -29,8 +27,20 @@ Element providing basic styling for card
     Polymer({
         is: 'px-card',
         properties: {
-            type: String
+            cardState:{
+              type: Object,
+              notify: true,
+              value: function () {
+                return {};
+              },
+              observer: '_chartStateChanged'
+            }
+        },
+
+        _chartStateChanged: function(evt){
+          console.log(evt);
         }
+
     });
 
 </script>
