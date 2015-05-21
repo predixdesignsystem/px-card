@@ -33,7 +33,7 @@
             },
             _typeChanged: function() {
                 var self = this;
-                Polymer.dom(this.root).querySelectorAll('px-card').forEach(function(pxCard){
+                Polymer.dom(this.root).querySelectorAll('px-card').forEach(function(pxCard) {
                     if (pxCard.type === self.type) {
                         pxCard.setAttribute('style', 'display:block');
                     }
@@ -41,6 +41,9 @@
                         pxCard.setAttribute('style', 'display:none');
                     }
                 });
+            },
+            ready: function() {
+                this.addEventListener('px-card-refresh', this._refresh);
             }
         };
     })();
