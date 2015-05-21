@@ -14,11 +14,6 @@
                 context: {
                     type: Object,
                     observer: '_contextChanged'
-                },
-                type: {
-                    type: String,
-                    observer: '_typeChanged'
-
                 }
             },
             _contextChanged: function(newContext, oldContext) {
@@ -30,17 +25,6 @@
                 if (this.refresh && typeof this.refresh === 'function') {
                     this.refresh();
                 }
-            },
-            _typeChanged: function() {
-                var self = this;
-                Polymer.dom(this.root).querySelectorAll('px-card').forEach(function(pxCard) {
-                    if (pxCard.type === self.type) {
-                        pxCard.setAttribute('style', 'display:block');
-                    }
-                    else {
-                        pxCard.setAttribute('style', 'display:none');
-                    }
-                });
             },
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
