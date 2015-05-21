@@ -28,6 +28,9 @@
             },
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
+            },
+            getData: function(url) {
+                return deck.getData(url);
             }
         };
     })();
