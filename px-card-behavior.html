@@ -15,9 +15,9 @@
                     type: Object,
                     observer: '_contextChanged'
                 },
-                state: {
+                deckState: {
                     type: Object,
-                    observer: '_stateChanged'
+                    observer: '_deckStateChanged'
                 }
             },
             _contextChanged: function(newContext, oldContext) {
@@ -25,10 +25,10 @@
                     this.contextChanged(newContext, oldContext);
                 }
             },
-            _stateChanged: function(newState, oldState) {
+            _deckStateChanged: function(newDeckState, oldDeckState) {
                 this.fromDeck = true;
-                if (this.stateChanged && typeof this.stateChanged === 'function') {
-                    this.stateChanged(newState, oldState);
+                if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
+                    this.deckStateChanged(newDeckState, oldDeckState);
                 }
                 this.fromDeck = false;
             },
