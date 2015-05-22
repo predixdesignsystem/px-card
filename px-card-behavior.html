@@ -14,12 +14,40 @@
                 context: {
                     type: Object,
                     observer: '_contextChanged'
+                },
+                state: {
+                    type: Object,
+                    observer: '_stateChanged'
                 }
             },
             _contextChanged: function(newContext, oldContext) {
                 if (this.contextChanged && typeof this.contextChanged === 'function') {
                     this.contextChanged(newContext, oldContext);
                 }
+            },
+            _stateChanged: function(newState, oldState) {
+                this.fromDeck = true;
+                if (this.stateChanged && typeof this.stateChanged === 'function') {
+                    this.stateChanged(newState, oldState);
+                }
+                this.fromDeck = false;
+            },
+            updateDeck: function(value) {
+                if (!this.fromDeck) {
+                    if (this.findParentDeck().updateState) {
+                        this.findParentDeck().updateState(this.id, value);
+                    }
+                    else {
+                        console.log('no updatestate');
+                    }
+                }
+                else {
+                    console.log('KILL this update because from deck');
+                }
+            },
+            findParentDeck: function() {
+                var parent = this.parentElement;
+                return parent;
             },
             _refresh: function() {
                 if (this.refresh && typeof this.refresh === 'function') {
@@ -28,6 +56,7 @@
             },
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
+                this._type = 'px-card';
             },
             getData: function(url) {
                 return deck.getData(url);
