@@ -31,7 +31,7 @@ Element providing refresh controls for cards
     Polymer({
         is: 'px-card-controls',
         refresh: function(){
-            this.parentElement.parentElement._refresh(); // GROSSSSS
+            this.fire('px-card-refresh');
         }
     });
 
