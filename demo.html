@@ -27,33 +27,94 @@
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
 
-        <!-- instance 1, "predix" theme -->
+        <!--
+          Steps for creating a Predix card.
+            1. Create a Polymer web component.
+            2. Wrap it in px-card.
+            3. Use the px.cardBehavior
+            4. Compose widgets and ui-elements together to create your custom card.  Implement px.cardBehavior API methods
+                such as refresh and contextChanged, or call methods like getData.  -->
         <dom-module id="demo-card">
             <template>
                 <px-card>
-                    <px-context-name context-name="My Awesome Context"></px-context-name>
-                    <px-card-controls></px-card-controls>
+                    <h1>Hello World</h1>
+                    <p>{{context.name}}</p>
+                    <p>This is the bare minimum you need for a Predix Experience card.</p>
                 </px-card>
             </template>
         </dom-module>
-
         <script>
-
             Polymer({
                 is: 'demo-card',
-                refresh: function(){
-                  console.log('refreshed');
-                },
-                ready: function(){
-
-                },
-                contextChanged: function(newContext, oldContext){
-                    console.log(newContext);
-                },
-                behaviors:[px.cardBehavior]
+                behaviors: [px.cardBehavior]
             });
         </script>
 
-        <demo-card context="my context"></demo-card>
+        <dom-module id="sample-card">
+            <template>
+                <px-card>
+                    <!-- compose any widgets and ui elements you want for your card -->
+                    <px-card-controls></px-card-controls>
+                    <px-context-name context-name="{{context.name}}"></px-context-name>
+                    <p>This is a more complex Predix Experience card.</p>
+                    <button on-click="getMoreTemperatureData">Get More Temperature Data</button>
+                    <p id="temp">Current Temperature:<span>{{currentTemperature}}</span>F</p>
+                </px-card>
+            </template>
+        </dom-module>
+        <script>
+            Polymer({
+                is: 'sample-card',
+                ready: function() {
+                    this.currentTemperature = 65;
+                },
+                /**
+                 * (optionally) implement this API method to refresh your card data
+                 **/
+                refresh: function() {
+                    console.log('refresh!');
+                },
+                /**
+                 * (optionally) implement this API method to do interesting stuff when the context is changed
+                 **/
+                contextChanged: function(newContext, oldContext) {
+                    console.log('context changed!');
+                },
+                /**
+                 * add your own methods, such as this click handler, to do custom logic.
+                 * the px card behaviors include a getData method which will handle fetching the data for you
+                 **/
+                getMoreTemperatureData: function(){
+                    var self = this;
+                    this.getData('/temperature').then(function(currentTemperature) {
+                        // on fulfillment
+                        self.currentTemperature = currentTemperature;
+                    }, function(reason) {
+                        // on rejection
+                        self.currentTemperature = 'ERROR';
+                    });
+                },
+                behaviors: [px.cardBehavior]
+            });
+        </script>
+
+        <demo-card></demo-card>
+        <sample-card></sample-card>
+
+        <script>
+            window.deck = {
+                getData: function() {
+                    return new Promise(function(resolve, reject) {
+                        resolve(70);
+                    });
+                }
+            };
+
+            var context = {
+                name: 'My Context'
+            };
+            document.querySelector('demo-card').context = context;
+            document.querySelector('sample-card').context = context;
+        </script>
     </body>
 </html>
