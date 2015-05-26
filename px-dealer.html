@@ -1,20 +1,21 @@
 <link rel="import" href="../polymer/polymer.html"/>
 
-<dom-module id="px-deck">
+<dom-module id="px-dealer">
     <template>
         <content></content>
     </template>
 </dom-module>
 <script>
-    Polymer({
-        is: 'px-deck',
+    window.px = window.px || {};
+
+    px.dealer = {
         updateState: function(cardId, state) {
             var content = Polymer.dom(this.root).querySelector('content');
             Polymer.dom(content).getDistributedNodes().forEach(function(node) {
                 // find all px-cards
                 if (node._type && node._type === 'px-card') {
                     if (node.id !== cardId) {
-                        node.deckState = state;
+                        node.dealerState = state;
                     }
                     else {
                         console.log('dont send to the card that sent or one that doesnt have an id');
@@ -25,8 +26,18 @@
                 }
             });
         },
-        created: function(){
-            this._type = 'px-deck';
+        ready: function(){
+            var content = Polymer.dom(this.root).querySelector('content');
+            var self = this;
+            Polymer.dom(content).getDistributedNodes().forEach(function(node) {
+                // find all px-cards
+                if (node._type && node._type === 'px-card') {
+                    node._dealer = self;
+                }
+                else {
+                    console.log('not a px-card');
+                }
+            });
         },
         getData: function() {
             return new Promise(function(resolve, reject) {
@@ -37,6 +48,12 @@
                 //reject('error');
             });
         }
+    };
+
+
+    Polymer({
+        is: 'px-dealer',
+        behaviors: [px.dealer]
     });
 
 

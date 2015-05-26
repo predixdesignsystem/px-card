@@ -15,9 +15,9 @@
                     type: Object,
                     observer: '_contextChanged'
                 },
-                deckState: {
+                dealerState: {
                     type: Object,
-                    observer: '_deckStateChanged'
+                    observer: '_dealerStateChanged'
                 }
             },
             _contextChanged: function(newContext, oldContext) {
@@ -25,12 +25,12 @@
                     this.contextChanged(newContext, oldContext);
                 }
             },
-            _deckStateChanged: function(newDeckState, oldDeckState) {
-                this.fromDeck = true;
-                if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
-                    this.deckStateChanged(newDeckState, oldDeckState);
+            _dealerStateChanged: function(newDealerState, oldDealerState) {
+                this.fromDealer = true;
+                if (this.dealerStateChanged && typeof this.dealerStateChanged === 'function') {
+                    this.dealerStateChanged(newDealerState, oldDealerState);
                 }
-                this.fromDeck = false;
+                this.fromDealer = false;
             },
             _refresh: function() {
                 if (this.refresh && typeof this.refresh === 'function') {
@@ -44,9 +44,9 @@
                 this.addEventListener('px-card-refresh', this._refresh);
             },
             updateDeck: function(value) {
-                if (!this.fromDeck) {
-                    if (this.findParentDeck().updateState) {
-                        this.findParentDeck().updateState(this.id, value);
+                if (!this.fromDealer) {
+                    if (this._dealer && this._dealer.updateState) {
+                        this._dealer.updateState(this.id, value);
                     }
                     else {
                         console.log('no updatestate');
@@ -56,18 +56,8 @@
                     console.log('KILL this update because from deck');
                 }
             },
-            findParentDeck: function() {
-                var parent = this.parentElement;
-                while (parent._type !== 'px-deck' && parent.tagName !== 'BODY'){
-                    parent = parent.parentElement;
-                }
-                if (parent.tagName === 'BODY'){
-                    throw new Error('cannot find deck');
-                }
-                return parent;
-            },
             getData: function(url) {
-                return this.findParentDeck().getData(url);
+                return this._dealer.getData(url);
             }
         };
     })();
