@@ -32,6 +32,17 @@
                 }
                 this.fromDeck = false;
             },
+            _refresh: function() {
+                if (this.refresh && typeof this.refresh === 'function') {
+                    this.refresh();
+                }
+            },
+            created: function(){
+                this._type = 'px-card';
+            },
+            ready: function() {
+                this.addEventListener('px-card-refresh', this._refresh);
+            },
             updateDeck: function(value) {
                 if (!this.fromDeck) {
                     if (this.findParentDeck().updateState) {
@@ -47,16 +58,13 @@
             },
             findParentDeck: function() {
                 var parent = this.parentElement;
-                return parent;
-            },
-            _refresh: function() {
-                if (this.refresh && typeof this.refresh === 'function') {
-                    this.refresh();
+                while (parent._type !== 'px-deck' && parent.tagName !== 'BODY'){
+                    parent = parent.parentElement;
                 }
-            },
-            ready: function() {
-                this.addEventListener('px-card-refresh', this._refresh);
-                this._type = 'px-card';
+                if (parent.tagName === 'BODY'){
+                    throw new Error('cannot find deck');
+                }
+                return parent;
             },
             getData: function(url) {
                 return this.findParentDeck().getData(url);

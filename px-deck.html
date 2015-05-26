@@ -25,6 +25,9 @@
                 }
             });
         },
+        created: function(){
+            this._type = 'px-deck';
+        },
         getData: function() {
             return new Promise(function(resolve, reject) {
                 // on success
