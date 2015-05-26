@@ -8,37 +8,34 @@
 <script>
     window.px = window.px || {};
 
+    var findCards = function(root) {
+        var content = Polymer.dom(root).querySelector('content');
+        var cards = [];
+        Polymer.dom(content).getDistributedNodes().forEach(function(node) {
+            if (node._type && node._type === 'px-card') {
+                cards.push(node);
+            }
+        });
+        return cards;
+    };
+
     px.dealer = {
         updateState: function(cardId, state) {
-            var content = Polymer.dom(this.root).querySelector('content');
-            Polymer.dom(content).getDistributedNodes().forEach(function(node) {
-                // find all px-cards
-                if (node._type && node._type === 'px-card') {
-                    if (node.id !== cardId) {
-                        node.dealerState = state;
-                    }
-                    else {
-                        console.log('dont send to the card that sent or one that doesnt have an id');
-                    }
-                }
-                else {
-                    console.log('not a px-card');
+            this.cards.forEach(function(card) {
+                // only update cards with different ids
+                if (card.id !== cardId) {
+                    card.dealerState = state;
                 }
             });
         },
         ready: function() {
-            var content = Polymer.dom(this.root).querySelector('content');
-            var self = this;
+            this.cards = findCards(this.root);
 
-            Polymer.dom(content).getDistributedNodes().forEach(function(node) {
-                // find all px-cards
-                if (node._type && node._type === 'px-card') {
-                    node._dealer = self;
-                    node.init(self);
-                }
-                else {
-                    console.log('not a px-card');
-                }
+            // register cards
+            var self = this;
+            this.cards.forEach(function(card) {
+                card._dealer = self;
+                card.init(self);
             });
         }
     };
