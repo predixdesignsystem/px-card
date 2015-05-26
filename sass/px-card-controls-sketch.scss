@@ -9,7 +9,7 @@
  */
 
 //
-// Sass for the "sketch" notion of the px-card component
+// Sass for the "sketch" notion of the px-card-controls component
 //
 // @author
 //
@@ -46,22 +46,7 @@ in import paths
 
 // Objects
 
-$inuit-enable-btn--large              : true;
+$inuit-enable-btn--small              : true;
+$inuit-enable-btn--primary            : true;
 
 @import "../px-buttons-design/objects.buttons";
-
-// Component
-header {
-  position: relative;
-  z-index: 1;
-  margin-bottom: -#{calculateRem(96px)};
-}
-
-// Trumps
-@import "../px-clearfix-design/trumps.clearfix";
-
-$inuit-enable-margins--none           : true;
-$inuit-enable-margins--large          : true;
-
-@import "../px-spacing-responsive-design/trumps.spacing-responsive";
-@import "../px-widths-responsive-design/trumps.widths-responsive";

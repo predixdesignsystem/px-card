@@ -21,9 +21,10 @@ Element providing refresh controls for cards
 -->
 
 <dom-module id="px-card-controls">
-    <template>
-        <div><button on-click="refresh">refresh</button></div>
-    </template>
+  <link rel="import" type="css" href="css/px-card-controls.css"/>
+  <template>
+    <button class="btn btn--small btn--primary" on-click="refresh">refresh</button>
+  </template>
 </dom-module>
 
 <script type="text/javascript">
