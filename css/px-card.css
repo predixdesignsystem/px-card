@@ -857,12 +857,6 @@ small {
 .btn + .btn {
   margin-left: 0.6666666667rem; }
 
-/**
-     * Large buttons.
-     */
-.btn--large {
-  font-size: 1.3333333333rem; }
-
 header {
   position: relative;
   z-index: 1;
