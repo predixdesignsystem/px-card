@@ -43,6 +43,9 @@
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
             },
+            init: function(){
+                // this default init function is needed in case they don't implement init
+            },
             updateDeck: function(value) {
                 if (!this.fromDealer) {
                     if (this._dealer && this._dealer.updateState) {

@@ -26,26 +26,19 @@
                 }
             });
         },
-        ready: function(){
+        ready: function() {
             var content = Polymer.dom(this.root).querySelector('content');
             var self = this;
+
             Polymer.dom(content).getDistributedNodes().forEach(function(node) {
                 // find all px-cards
                 if (node._type && node._type === 'px-card') {
                     node._dealer = self;
+                    node.init(self);
                 }
                 else {
                     console.log('not a px-card');
                 }
-            });
-        },
-        getData: function() {
-            return new Promise(function(resolve, reject) {
-                // on success
-                resolve(70);
-
-                // on failure
-                //reject('error');
             });
         }
     };
@@ -53,10 +46,21 @@
 
     Polymer({
         is: 'px-dealer',
+        getData: function(url) {
+            var $http = angular.injector(['ng']).get("$http");
+
+            return new Promise(function(resolve, reject) {
+                $http.get(url).
+                    success(function(data, status, headers, config) {
+                        resolve(data);
+                    }).
+                    error(function(data, status, headers, config) {
+                        reject(data);
+                    });
+            });
+
+        },
         behaviors: [px.dealer]
     });
-
-
-
 
 </script>
