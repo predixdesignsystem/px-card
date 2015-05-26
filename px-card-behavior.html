@@ -59,7 +59,7 @@
                 this._type = 'px-card';
             },
             getData: function(url) {
-                return deck.getData(url);
+                return this.findParentDeck().getData(url);
             }
         };
     })();
