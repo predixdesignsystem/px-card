@@ -14,6 +14,10 @@
                 context: {
                     type: Object,
                     observer: '_contextChanged'
+                },
+                deckState: {
+                    type: Object,
+                    observer: '_deckStateChanged'
                 }
             },
             _contextChanged: function(newContext, oldContext) {
@@ -21,16 +25,43 @@
                     this.contextChanged(newContext, oldContext);
                 }
             },
+            _deckStateChanged: function(newDealerState, oldDealerState) {
+                this.fromDealer = true;
+                if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
+                    this.deckStateChanged(newDealerState, oldDealerState);
+                }
+                this.fromDealer = false;
+            },
             _refresh: function() {
                 if (this.refresh && typeof this.refresh === 'function') {
                     this.refresh();
                 }
             },
+            created: function(){
+
+            },
             ready: function() {
+                this._type = 'px-card';
                 this.addEventListener('px-card-refresh', this._refresh);
             },
+            init: function(){
+                // this default init function is needed in case they don't implement init
+            },
+            updateDeck: function(value) {
+                if (!this.fromDealer) {
+                    if (this._dealer && this._dealer.updateState) {
+                        this._dealer.updateState(this.id, value);
+                    }
+                    else {
+                        console.log('no updatestate');
+                    }
+                }
+                else {
+                    console.log('KILL this update because from deck');
+                }
+            },
             getData: function(url) {
-                return deck.getData(url);
+                return this._dealer.getData(url);
             }
         };
     })();
