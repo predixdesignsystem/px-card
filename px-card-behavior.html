@@ -38,9 +38,10 @@
                 }
             },
             created: function(){
-                this._type = 'px-card';
+
             },
             ready: function() {
+                this._type = 'px-card';
                 this.addEventListener('px-card-refresh', this._refresh);
             },
             init: function(){

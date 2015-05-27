@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"/>
 
-<dom-module id="px-angular-dealer">
+<dom-module id="px-deck">
     <template>
         <content></content>
     </template>
@@ -8,41 +8,7 @@
 <script>
     window.px = window.px || {};
 
-    var findCards = function(root) {
-        var content = Polymer.dom(root).querySelector('content');
-        var cards = [];
-        Polymer.dom(content).getDistributedNodes().forEach(function(node) {
-            if (node._type && node._type === 'px-card') {
-                cards.push(node);
-            }
-        });
-        return cards;
-    };
-
-    px.dealer = {
-        updateState: function(cardId, state) {
-            this.cards.forEach(function(card) {
-                // only update cards with different ids
-                if (card.id !== cardId) {
-                    card.dealerState = state;
-                }
-            });
-        },
-        ready: function() {
-            this.cards = findCards(this.root);
-
-            // register cards
-            var self = this;
-            this.cards.forEach(function(card) {
-                card._dealer = self;
-                card.init(self);
-            });
-        }
-    };
-
-
-    Polymer({
-        is: 'px-angular-dealer',
+    px.angularDealer = {
         getData: function(url) {
             var $http = angular.injector(['ng']).get("$http");
 
@@ -55,9 +21,40 @@
                         reject(data);
                     });
             });
+        }
+    };
 
+
+    Polymer({
+        is: 'px-deck',
+        ready: function() {
+            this.cards = this.findCards(this.root);
+            // register cards
+            var self = this;
+            this.cards.forEach(function(card) {
+                card._dealer = self;
+                card.init(self);
+            });
         },
-        behaviors: [px.dealer]
+        updateState: function(cardId, state) {
+            this.cards.forEach(function(card) {
+                // only update cards with different ids
+                if (card.id !== cardId) {
+                    card.dealerState = state;
+                }
+            });
+        },
+        findCards: function(root) {
+            var content = Polymer.dom(root).querySelector('content');
+            var cards = [];
+            Polymer.dom(content).getDistributedNodes().forEach(function(node) {
+                if (node._type && node._type === 'px-card') {
+                    cards.push(node);
+                }
+            });
+            return cards;
+        },
+        behaviors: [px.angularDealer]
     });
 
 </script>
