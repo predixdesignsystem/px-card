@@ -24,10 +24,12 @@
         }
     };
 
-
     Polymer({
         is: 'px-deck',
-        ready: function() {
+        ready: function(){
+            //this.init();
+        },
+        init: function(){
             this.cards = this.findCards(this.root);
             // register cards
             var self = this;
