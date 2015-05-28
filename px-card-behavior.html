@@ -38,11 +38,11 @@
                 }
             },
             created: function(){
-
+                this._type = 'px-card';
             },
             ready: function() {
-                this._type = 'px-card';
                 this.addEventListener('px-card-refresh', this._refresh);
+                this.fire('px-card-ready');
             },
             init: function(){
                 // this default init function is needed in case they don't implement init

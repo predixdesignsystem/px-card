@@ -25,17 +25,20 @@
         }
     };
 
-
-
     Polymer({
         is: 'px-deck',
-        init: function(){
-            this.cards = this.findCards(this.root);
-            // register cards
+        created: function(){
             var self = this;
-            this.cards.forEach(function(card) {
-                card._dealer = self;
-                card.init(self);
+            this.cards = [];
+            this.addEventListener('px-card-ready', function(){
+                self.debounce('px-card-ready', function(){
+                    self.cards = self.findCards();
+                    // register cards
+                    self.cards.forEach(function(card) {
+                        card._dealer = self;
+                        card.init(self);
+                    });
+                }, 10)
             });
         },
         updateState: function(cardId, state) {
@@ -46,8 +49,8 @@
                 }
             });
         },
-        findCards: function(root) {
-            var content = Polymer.dom(root).querySelector('content');
+        findCards: function() {
+            var content = Polymer.dom(this.root).querySelector('content');
             var cards = [];
             Polymer.dom(content).getDistributedNodes().forEach(function(node) {
                 if (node._type && node._type === 'px-card') {
