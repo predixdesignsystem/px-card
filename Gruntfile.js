@@ -24,7 +24,10 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'css/px-card-sketch.css': 'sass/px-card-sketch.scss',
-                    'css/px-card.css': 'sass/px-card-predix.scss'
+                    'css/px-card.css': 'sass/px-card-predix.scss',
+                    'css/px-card-controls-sketch.css': 'sass/px-card-controls-sketch.scss',
+                    'css/px-card-controls.css': 'sass/px-card-controls-predix.scss'
+
                 }
             }
         },
