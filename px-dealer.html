@@ -11,7 +11,7 @@
 
     px.angularDealer = {
         getData: function(url) {
-            var $http = angular.injector(['ng']).get("$http");
+            var $http = angular.element('body').injector().get("$http");
 
             return new Promise(function(resolve, reject) {
                 $http.get(url).
@@ -25,17 +25,17 @@
         }
     };
 
-
-
     Polymer({
         is: 'px-deck',
-        init: function(){
-            this.cards = this.findCards(this.root);
-            // register cards
+        ready: function(){
+
             var self = this;
+            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
             this.cards.forEach(function(card) {
-                card._dealer = self;
-                card.init(self);
+                card.addEventListener('px-card-ready', function(e) {
+                    card._dealer = self;
+                    card.init(self);
+                });
             });
         },
         updateState: function(cardId, state) {
@@ -45,18 +45,7 @@
                     card.deckState = state;
                 }
             });
-        },
-        findCards: function(root) {
-            var content = Polymer.dom(root).querySelector('content');
-            var cards = [];
-            Polymer.dom(content).getDistributedNodes().forEach(function(node) {
-                if (node._type && node._type === 'px-card') {
-                    cards.push(node);
-                }
-            });
-            return cards;
-        },
-        behaviors: [px.angularDealer]
+        }
     });
 
 </script>

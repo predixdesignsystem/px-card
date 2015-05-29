@@ -38,11 +38,11 @@
                 }
             },
             created: function(){
-
+                this._type = 'px-card';
             },
             ready: function() {
-                this._type = 'px-card';
                 this.addEventListener('px-card-refresh', this._refresh);
+                this.fire('px-card-ready');
             },
             init: function(){
                 // this default init function is needed in case they don't implement init
@@ -53,15 +53,15 @@
                         this._dealer.updateState(this.id, value);
                     }
                     else {
-                        console.log('no updatestate');
+                        //console.log('no updatestate');
                     }
                 }
                 else {
-                    console.log('KILL this update because from deck');
+                    //console.log('KILL this update because from deck');
                 }
             },
             getData: function(url) {
-                return this._dealer.getData(url);
+                return px.angularDealer.getData(url);
             }
         };
     })();
