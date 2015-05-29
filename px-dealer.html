@@ -11,7 +11,7 @@
 
     px.angularDealer = {
         getData: function(url) {
-            var $http = angular.injector(['ng']).get("$http");
+            var $http = angular.element('body').injector().get("$http");
 
             return new Promise(function(resolve, reject) {
                 $http.get(url).
@@ -59,7 +59,10 @@
             });
             return cards;
         },
-        behaviors: [px.angularDealer]
+        detached: function(){
+            //this.removeEventListener('px-card-ready');
+            //this.cancelDebouncer('px-card-ready');
+        }
     });
 
 </script>
