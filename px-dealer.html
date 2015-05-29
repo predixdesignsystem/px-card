@@ -27,18 +27,15 @@
 
     Polymer({
         is: 'px-deck',
-        created: function(){
+        ready: function(){
+
             var self = this;
-            this.cards = [];
-            this.addEventListener('px-card-ready', function(){
-                self.debounce('px-card-ready', function(){
-                    self.cards = self.findCards();
-                    // register cards
-                    self.cards.forEach(function(card) {
-                        card._dealer = self;
-                        card.init(self);
-                    });
-                }, 10)
+            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
+            this.cards.forEach(function(card) {
+                card.addEventListener('px-card-ready', function(e) {
+                    card._dealer = self;
+                    card.init(self);
+                });
             });
         },
         updateState: function(cardId, state) {
@@ -48,20 +45,6 @@
                     card.deckState = state;
                 }
             });
-        },
-        findCards: function() {
-            var content = Polymer.dom(this.root).querySelector('content');
-            var cards = [];
-            Polymer.dom(content).getDistributedNodes().forEach(function(node) {
-                if (node._type && node._type === 'px-card') {
-                    cards.push(node);
-                }
-            });
-            return cards;
-        },
-        detached: function(){
-            //this.removeEventListener('px-card-ready');
-            //this.cancelDebouncer('px-card-ready');
         }
     });
 
