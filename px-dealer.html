@@ -1,51 +1,72 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <dom-module id="px-deck">
-    <template>
-        <div style="border:blue 3px solid;">
-        <content></content>
-        </div>
-    </template>
+  <template>
+    <div style="border:blue 3px solid;">
+      <h1>Deck:<span>{{context.name}}</span></h1>
+      <content></content>
+    </div>
+  </template>
 </dom-module>
 <script>
-    window.px = window.px || {};
+  window.px = window.px || {};
 
-    px.angularDealer = {
-        getData: function(url) {
-            var $http = angular.element('body').injector().get("$http");
+  px.angularDealer = {
+    getData: function(url) {
+      var $http = angular.element('body').injector().get("$http");
 
-            return new Promise(function(resolve, reject) {
-                $http.get(url).
-                    success(function(data, status, headers, config) {
-                        resolve(data);
-                    }).
-                    error(function(data, status, headers, config) {
-                        reject(data);
-                    });
-            });
+      return new Promise(function(resolve, reject) {
+        $http.get(url).
+          success(function(data, status, headers, config) {
+            resolve(data);
+          }).
+          error(function(data, status, headers, config) {
+            reject(data);
+          });
+      });
+    }
+  };
+
+  Polymer({
+    is: 'px-deck',
+    properties: {
+      context: {
+        type: Object,
+        observer: 'contextChanged',
+        value: {
+          name: 'abc'
         }
-    };
-
-    Polymer({
-        is: 'px-deck',
-        ready: function(){
-
-            var self = this;
-            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
-            this.cards.forEach(function(card) {
-                card.addEventListener('px-card-ready', function(e) {
-                    card._dealer = self;
-                    card.init(self);
-                });
-            });
-        },
-        updateState: function(cardId, state) {
-            this.cards.forEach(function(card) {
-                // only update cards with different ids
-                if (card.id !== cardId) {
-                    card.deckState = state;
-                }
-            });
+      }
+    },
+    contextChanged: function(thing) {
+      console.log('itchanged', thing);
+//      this.cards.forEach(function(card) {
+//        //card.addEventListener('px-card-ready', function(e) {
+//          console.log('pushing this context again!!!!', thing);
+//          card.context = thing;
+//        console.log(thing, this.context);
+//        //});
+//      });
+    },
+    ready: function() {
+      var self = this;
+      this.cards = Polymer.dom(this).querySelectorAll('.px-card');
+      this.cards.forEach(function(card) {
+        card.addEventListener('px-card-ready', function(e) {
+          card._dealer = self;
+          card.init(self);
+          console.log('pushing this context', self.context);
+          card.context = self.context;
+        });
+      });
+    },
+    updateState: function(cardId, state) {
+      this.cards.forEach(function(card) {
+        // only update cards with different ids
+        if (card.id !== cardId) {
+          card.deckState = state;
         }
-    });
+      });
+    }
+  });
 
 </script>
