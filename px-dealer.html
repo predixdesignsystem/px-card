@@ -1,142 +1,142 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <dom-module id="px-deck">
-  <template>
-    <div style="border:blue 3px solid;">
-      <h1>Deck:<span>{{context.name}}</span></h1>
-      <content></content>
-    </div>
-  </template>
+    <template>
+        <div style="border:blue 3px solid;">
+            <h1>Deck:<span>{{context.name}}</span></h1>
+            <content></content>
+        </div>
+    </template>
 </dom-module>
 <script>
-  window.px = window.px || {};
+    window.px = window.px || {};
 
-  px.angularDealer = {
-    getData: function(url) {
-      var $http = angular.element('body').injector().get("$http");
+    px.angularDealer = {
+        getData: function(url) {
+            var $http = angular.element('body').injector().get("$http");
 
-      return new Promise(function(resolve, reject) {
-        $http.get(url).
-          success(function(data, status, headers, config) {
-            resolve(data);
-          }).
-          error(function(data, status, headers, config) {
-            reject(data);
-          });
-      });
-    }
-  };
+            return new Promise(function(resolve, reject) {
+                $http.get(url).
+                    success(function(data, status, headers, config) {
+                        resolve(data);
+                    }).
+                    error(function(data, status, headers, config) {
+                        reject(data);
+                    });
+            });
+        }
+    };
 
-  Polymer({
-    is: 'px-deck',
-    properties: {
-      context: {
-        type: Object,
-        observer: 'contextChanged'
-      }
-    },
+    Polymer({
+        is: 'px-deck',
+        properties: {
+            context: {
+                type: Object,
+                observer: 'contextChanged'
+            }
+        },
     created: function(){
         this.cards = [];
     },
-    contextChanged: function(thing) {
-      console.log('itchanged', thing);
-      var self = this;
-      this.cards.forEach(function(card) {
-        console.log('pushing this context', self.context);
-        card.context = self.context;
+        contextChanged: function(thing) {
+            console.log('itchanged', thing);
+            var self = this;
+            this.cards.forEach(function(card) {
+                console.log('pushing this context', self.context);
+                card.context = self.context;
 
-      });
-    },
-    ready: function() {
-      var self = this;
+            });
+        },
+        ready: function() {
+            var self = this;
       debugger;
-      this.cards = Polymer.dom(this).querySelectorAll('.px-card');
-      this.cards.forEach(function(card) {
-        card.addEventListener('px-card-ready', function(e) {
-          card._dealer = self;
-          card.init(self);
-          card.context = self.context;
-        });
-      });
-    },
-    updateState: function(cardId, state) {
-      this.cards.forEach(function(card) {
-        // only update cards with different ids
-        if (card.id !== cardId) {
-          card.deckState = state;
+            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
+            this.cards.forEach(function(card) {
+                card.addEventListener('px-card-ready', function(e) {
+                    card._dealer = self;
+                    card.init(self);
+                    card.context = self.context;
+                });
+            });
+        },
+        updateState: function(cardId, state) {
+            this.cards.forEach(function(card) {
+                // only update cards with different ids
+                if (card.id !== cardId) {
+                    card.deckState = state;
+                }
+            });
+        },
+        add: function(markup) {
+            // put markup on page (append to the end of the deck)
         }
-      });
-    }
-  });
+    });
 
 </script>
 
-
 <!-- DASHBOARD -->
 
-
-
 <dom-module id="px-dashboard">
-  <template>
-    <div id="desk"></div>
-  </template>
+    <template>
+        <div id="desk"></div>
+    </template>
 </dom-module>
 <script>
-  window.loaded = window.loaded || {};
+    window.loaded = window.loaded || {};
 
-  Polymer({
-    is: 'px-dashboard',
-    properties: {
-      selectedView: {
-        type: String,
-        observer: "viewSelected"
-      },
-      context: {
-        type: Object,
-        observer: "contextChanged"
-      }
-    },
-    viewSelected: function(newView) {
-      if (newView && newView.substring(0,2) !== '{{' ){
-        console.log('new view switch deck', newView);
-        this.switchDeck(newView);
-      }
+    Polymer({
+        is: 'px-dashboard',
+        properties: {
+            selectedView: {
+                type: String,
+                observer: "viewSelected"
+            },
+            context: {
+                type: Object,
+                observer: "contextChanged"
+            }
+        },
+        viewSelected: function(newView) {
+            if (newView && newView.substring(0, 2) !== '{{') {
+                console.log('new view switch deck', newView);
+                this.switchDeck(newView);
+            }
 
-    },
-    contextChanged: function(newContext) {
-      console.log('NEWCONTEXT', newContext);
-      document.querySelector('px-deck').context = this.context;
+        },
+        contextChanged: function(newContext) {
+            console.log('NEWCONTEXT', newContext);
+            document.querySelector('px-deck').context = this.context;
 
-    },
-    ready: function() {
-    },
-    switchDeck: function(url) {
+        },
+        ready: function() {
+        },
+        switchDeck: function(url) {
 
-      var self = this;
-      console.log('sdfsdf', this.$);
-      var container = this.$.desk;
+            var self = this;
+            console.log('sdfsdf', this.$);
+            var container = this.$.desk;
 
-      if(container) {
-        container.innerHTML = "";
-        if (!loaded[url]) {
+            if (container) {
+                container.innerHTML = "";
+                if (!loaded[url]) {
 
-          Polymer.Base.importHref(url, function(e) {
-            var deck = e.target.import.body;
-            container.appendChild(deck);
-            loaded[url] = deck;
-            document.querySelector('px-deck').context = self.context;
-          }, function(e) {
+                    Polymer.Base.importHref(url, function(e) {
+                        var deck = e.target.import.body;
+                        container.appendChild(deck);
+                        loaded[url] = deck;
+                        document.querySelector('px-deck').context = self.context;
+                    }, function(e) {
 
-          });
+                    });
+                }
+                else {
+                    container.appendChild(loaded[url]);
+                    document.querySelector('px-deck').context = this.context;
+                }
+            }
+            else {
+                console.log('container', container);
+            }
         }
-        else {
-          container.appendChild(loaded[url]);
-          document.querySelector('px-deck').context = this.context;
-        }
-      }
-      else {
-        console.log('container',container);
-      }
-    }
-  });
+    });
 
 </script>

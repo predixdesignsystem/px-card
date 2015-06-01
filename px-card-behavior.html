@@ -37,15 +37,16 @@
                     this.refresh();
                 }
             },
-            created: function(){
+            created: function() {
                 this._type = 'px-card';
             },
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
                 this.fire('px-card-ready');
             },
-            init: function(){
+            init: function() {
                 // this default init function is needed in case they don't implement init
+                // this is the 'instantiate' requirement
             },
             updateDeck: function(value) {
                 if (!this.fromDealer) {
@@ -59,6 +60,12 @@
                 else {
                     //console.log('KILL this update because from deck');
                 }
+            },
+            showCard: function() {
+                this.hidden = false;
+            },
+            hideCard: function() {
+                this.hidden = true;
             },
             getData: function(url) {
                 return px.angularDealer.getData(url);
