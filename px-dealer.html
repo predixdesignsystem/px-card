@@ -31,30 +31,26 @@
     properties: {
       context: {
         type: Object,
-        observer: 'contextChanged',
-        value: {
-          name: 'abc'
-        }
+        observer: 'contextChanged'
       }
     },
     contextChanged: function(thing) {
       console.log('itchanged', thing);
-//      this.cards.forEach(function(card) {
-//        //card.addEventListener('px-card-ready', function(e) {
-//          console.log('pushing this context again!!!!', thing);
-//          card.context = thing;
-//        console.log(thing, this.context);
-//        //});
-//      });
+      var self = this;
+      this.cards.forEach(function(card) {
+        console.log('pushing this context', self.context);
+        card.context = self.context;
+
+      });
     },
     ready: function() {
       var self = this;
+      debugger;
       this.cards = Polymer.dom(this).querySelectorAll('.px-card');
       this.cards.forEach(function(card) {
         card.addEventListener('px-card-ready', function(e) {
           card._dealer = self;
           card.init(self);
-          console.log('pushing this context', self.context);
           card.context = self.context;
         });
       });
@@ -66,6 +62,74 @@
           card.deckState = state;
         }
       });
+    }
+  });
+
+</script>
+
+
+<!-- DASHBOARD -->
+
+
+
+<dom-module id="px-dashboard">
+  <template>
+    <div id="desk"></div>
+  </template>
+</dom-module>
+<script>
+  window.loaded = window.loaded || {};
+
+  Polymer({
+    is: 'px-dashboard',
+    properties: {
+      selectedView: {
+        type: String,
+        observer: "viewSelected"
+      },
+      context: {
+        type: Object,
+        observer: "contextChanged"
+      }
+    },
+    viewSelected: function(newView) {
+      if (newView){
+        console.log('new view switch deck', newView);
+        this.switchDeck(newView);
+      }
+
+    },
+    contextChanged: function(newContext) {
+      console.log('NEWCONTEXT', newContext);
+    },
+    ready: function() {
+    },
+    switchDeck: function(url) {
+
+      var self = this;
+      console.log('sdfsdf', this.$);
+      var container = this.$.desk;
+
+      if(container) {
+        container.innerHTML = "";
+        if (!loaded[url]) {
+          Polymer.Base.importHref(url, function(e) {
+            var deck = e.target.import.body;
+            container.appendChild(deck);
+            loaded[url] = deck;
+            document.querySelector('px-deck').context = self.context;
+          }, function(e) {
+
+          });
+        }
+        else {
+          container.appendChild(loaded[url]);
+          document.querySelector('px-deck').context = this.context;
+        }
+      }
+      else {
+        console.log('container',container);
+      }
     }
   });
 
