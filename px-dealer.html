@@ -34,6 +34,9 @@
         observer: 'contextChanged'
       }
     },
+    created: function(){
+        this.cards = [];
+    },
     contextChanged: function(thing) {
       console.log('itchanged', thing);
       var self = this;
@@ -93,7 +96,7 @@
       }
     },
     viewSelected: function(newView) {
-      if (newView){
+      if (newView && newView.substring(0,2) !== '{{' ){
         console.log('new view switch deck', newView);
         this.switchDeck(newView);
       }
@@ -101,6 +104,8 @@
     },
     contextChanged: function(newContext) {
       console.log('NEWCONTEXT', newContext);
+      document.querySelector('px-deck').context = this.context;
+
     },
     ready: function() {
     },
@@ -113,6 +118,7 @@
       if(container) {
         container.innerHTML = "";
         if (!loaded[url]) {
+
           Polymer.Base.importHref(url, function(e) {
             var deck = e.target.import.body;
             container.appendChild(deck);
