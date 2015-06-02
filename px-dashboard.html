@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <dom-module id="px-dashboard">
     <template>
-        <div id="desk"></div>
+        <div id="container"></div>
     </template>
 </dom-module>
 <script>
@@ -51,7 +51,7 @@
         switchDeck: function(url) {
 
             var self = this;
-            var container = this.$.desk;
+            var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
                 if (!loaded[url]) {
