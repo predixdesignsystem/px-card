@@ -11,7 +11,6 @@
         <link rel="import" href="px-card.html"/>
         <link rel="import" href="px-context-name.html"/>
         <link rel="import" href="px-card-controls.html"/>
-        <link rel="import" href="px-card-behavior.html"/>
     </head>
 
     <body>
@@ -27,44 +26,38 @@
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
 
-        <!--
-          Steps for creating a Predix card.
-            1. Create a Polymer web component.
-            2. Wrap it in px-card.
-            3. Use the px.cardBehavior
-            4. Compose widgets and ui-elements together to create your custom card.  Implement px.cardBehavior API methods
-                such as refresh and contextChanged, or call methods like getData.  -->
-        <dom-module id="demo-card">
-            <template>
-                <px-card>
-                    <h1>Hello World</h1>
-                    <p>{{context.name}}</p>
-                    <p>This is the bare minimum you need for a Predix Experience card.</p>
-                </px-card>
-            </template>
-        </dom-module>
-        <script>
-            Polymer({
-                is: 'demo-card',
-                behaviors: [px.cardBehavior]
-            });
-        </script>
 
-        <dom-module id="sample-card">
+        <px-card class="a-card">
+          <template is="dom-bind">
+            <h1>Hello World</h1>
+            <p>
+              Context:
+              <span>{{context.name}}</span>
+            </p>
+            <p>This is the bare minimum you need for a Predix Experience card.</p>
+          </template>
+        </px-card>
+
+        <px-card class="another-card">
+          <px-card-controls></px-card-controls>
+          <template is="dom-bind">
+            <px-context-name context-name="[[context.name]]"></px-context-name>
+            <h1>Another Hello World with default controls</h1>
+            <p>
+              Context:
+              <span>{{context.name}}</span>
+            </p>
+          </template>
+        </px-card>
+
+        <dom-module id="custom-card">
             <template>
-                <px-card>
-                    <!-- compose any widgets and ui elements you want for your card -->
-                    <px-card-controls></px-card-controls>
-                    <px-context-name context-name="{{context.name}}"></px-context-name>
-                    <p>This is a more complex Predix Experience card.</p>
-                    <button on-click="getMoreTemperatureData">Get More Temperature Data</button>
-                    <p id="temp">Current Temperature:<span>{{currentTemperature}}</span>F</p>
-                </px-card>
+                <content></content>
             </template>
         </dom-module>
         <script>
             Polymer({
-                is: 'sample-card',
+                is: 'custom-card',
                 ready: function() {
                     this.currentTemperature = 65;
                 },
@@ -77,7 +70,7 @@
                 /**
                  * (optionally) implement this API method to do interesting stuff when the context is changed
                  **/
-                contextChanged: function(newContext, oldContext) {
+                contextChangedHandler: function(newContext, oldContext) {
                     console.log('context changed!');
                 },
                 /**
@@ -98,8 +91,13 @@
             });
         </script>
 
-        <demo-card></demo-card>
-        <sample-card></sample-card>
+        <custom-card>
+          <template is="dom-bind">
+            <p>This is a more complex Predix Experience card.</p>
+            <button on-click="parent.getMoreTemperatureData">Get More Temperature Data</button>
+            <p id="temp">Current Temperature:<span>{{currentTemperature}}</span>F</p>
+          </template>
+        </custom-card>
 
         <script>
             window.deck = {
@@ -113,8 +111,9 @@
             var context = {
                 name: 'My Context'
             };
-            document.querySelector('demo-card').context = context;
-            document.querySelector('sample-card').context = context;
+            document.querySelector('px-card.a-card').set("context", context);
+            document.querySelector('px-card.another-card').set("context", context);
+            document.querySelector('custom-card').set("context", context);
         </script>
     </body>
 </html>

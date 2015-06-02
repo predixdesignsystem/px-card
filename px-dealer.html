@@ -7,45 +7,41 @@
     </template>
 </dom-module>
 <script>
-    window.px = window.px || {};
-
-    px.angularDealer = {
-        getData: function(url) {
-            var $http = angular.element('body').injector().get("$http");
-
-            return new Promise(function(resolve, reject) {
-                $http.get(url).
-                    success(function(data, status, headers, config) {
-                        resolve(data);
-                    }).
-                    error(function(data, status, headers, config) {
-                        reject(data);
-                    });
-            });
-        }
-    };
-
     Polymer({
-        is: 'px-deck',
-        ready: function(){
+      is: 'px-deck',
+      ready: function(){
 
-            var self = this;
-            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
-            this.cards.forEach(function(card) {
-                card.addEventListener('px-card-ready', function(e) {
-                    card._dealer = self;
-                    card.init(self);
-                });
-            });
-        },
-        updateState: function(cardId, state) {
-            this.cards.forEach(function(card) {
-                // only update cards with different ids
-                if (card.id !== cardId) {
-                    card.deckState = state;
-                }
-            });
-        }
+          var self = this;
+          this.cards = Polymer.dom(this).querySelectorAll('.px-card');
+          this.cards.forEach(function(card) {
+              card.addEventListener('px-card-ready', function(e) {
+                  card._dealer = self;
+                  card.init(self);
+              });
+          });
+      },
+      updateState: function(cardId, state) {
+          this.cards.forEach(function(card) {
+              // only update cards with different ids
+              if (card.id !== cardId) {
+                  card.deckState = state;
+              }
+          });
+      },
+
+      getData: function(url) {
+        var $http = angular.element('body').injector().get("$http");
+
+        return new Promise(function(resolve, reject) {
+          $http.get(url).
+              success(function(data, status, headers, config) {
+                resolve(data);
+              }).
+              error(function(data, status, headers, config) {
+                reject(data);
+              });
+        });
+      }
     });
 
 </script>

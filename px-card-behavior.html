@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html"/>
+
 
 <!--
 @blurb px card behavior or card api
@@ -20,33 +20,71 @@
                     observer: '_deckStateChanged'
                 }
             },
+
             _contextChanged: function(newContext, oldContext) {
-                if (this.contextChanged && typeof this.contextChanged === 'function') {
-                    this.contextChanged(newContext, oldContext);
-                }
+
+              if (newContext !== oldContext) {
+                //set context on dom-bind nested templates from light dom, if any
+                this.updateNestedLightDomBindings("context", newContext);
+              }
+
+              //execute callback, if any
+              if (this.contextChanged && typeof this.contextChanged === 'function') {
+                  this.contextChanged(newContext, oldContext);
+              }
             },
+
+
             _deckStateChanged: function(newDealerState, oldDealerState) {
-                this.fromDealer = true;
-                if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
-                    this.deckStateChanged(newDealerState, oldDealerState);
-                }
-                this.fromDealer = false;
+              this.fromDealer = true;
+
+              if (newDealerState !== oldDealerState) {
+                //set deck state on dom-bind nested templates from light dom, if any
+                this.updateNestedLightDomBindings("deckState", newDealerState);
+              }
+
+              //execute callback, if any
+              if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
+                  this.deckStateChanged(newDealerState, oldDealerState);
+              }
+
+              this.fromDealer = false;
             },
+
+
             _refresh: function() {
+              console.log("refresh");
                 if (this.refresh && typeof this.refresh === 'function') {
                     this.refresh();
                 }
             },
+
+
             created: function(){
                 this._type = 'px-card';
             },
+
+
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
                 this.fire('px-card-ready');
             },
+
+
             init: function(){
                 // this default init function is needed in case they don't implement init
             },
+
+          updateNestedLightDomBindings: function(key, value) {
+            var transcludedNodes = Polymer.dom(Polymer.dom(this.root).querySelector("content")).getDistributedNodes();
+            transcludedNodes.forEach(function(node) {
+              if (node.getAttribute && node.getAttribute("is") === "dom-bind") {
+                node.set(key, value);
+              }
+            })
+          },
+
+
             updateDeck: function(value) {
                 if (!this.fromDealer) {
                     if (this._dealer && this._dealer.updateState) {
