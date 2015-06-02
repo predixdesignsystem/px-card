@@ -10,163 +10,89 @@
 <script>
     window.px = window.px || {};
 
-    window.addEventListener('px-dashboard-ready', function () {
+    window.addEventListener('px-dashboard-ready', function() {
         console.log('window received px-dashboard ready');
         document.querySelector('px-dashboard').init();
     });
 
+
     px.angularDealer = {
-        getData: function (url) {
+        getData: function(url) {
             var $http = angular.element('body').injector().get("$http");
 
-            return new Promise(function (resolve, reject) {
+            return new Promise(function(resolve, reject) {
                 $http.get(url).
-                        success(function (data, status, headers, config) {
-                            resolve(data);
-                        }).
-                        error(function (data, status, headers, config) {
-                            reject(data);
-                        });
+                    success(function(data, status, headers, config) {
+                        resolve(data);
+                    }).
+                    error(function(data, status, headers, config) {
+                        reject(data);
+                    });
             });
         }
     };
 
-    Polymer({
-        is: 'px-deck',
+    px.deck = {
         properties: {
             context: {
                 type: Object,
                 observer: 'contextChanged'
             }
         },
-        contextChanged: function (thing) {
+        contextChanged: function(thing) {
             console.log('itchanged', thing);
             var self = this;
-            this.cards.forEach(function (card) {
+            this.cards.forEach(function(card) {
                 console.log('pushing this context', self.context);
                 card.context = self.context;
             });
         },
-        created: function () {
+        created: function() {
             this.cards = [];
             console.log('----> deck-created!!');
             var self = this;
-            this.addEventListener('px-card-ready', function () {
+            this.addEventListener('px-card-ready', function() {
                 console.log('deck received px-card-ready <----');
                 self.fire('px-deck-ready, and deck init');
                 self.init();
             });
         },
-        ready: function () {
+        ready: function() {
             var self = this;
             console.log('----------> deck-ready!!');
         },
-        attached: function () {
+        attached: function() {
             console.log('----> deck-attached!!');
         },
-        init: function () {
+        init: function() {
             var self = this;
             console.log('px-deck init is called');
             this.cards = Polymer.dom(this).querySelectorAll('.px-card');
-            this.cards.forEach(function (card) {
+            this.cards.forEach(function(card) {
                 card._dealer = self;
                 card.init(self);
                 //card.context = self.context;
             });
         },
-        updateState: function (cardId, state) {
-            this.cards.forEach(function (card) {
+        updateState: function(cardId, state) {
+            this.cards.forEach(function(card) {
                 // only update cards with different ids
                 if (card.id !== cardId) {
                     card.deckState = state;
                 }
             });
         },
-        add: function (markup) {
+        add: function(markup) {
             // put markup on page (append to the end of the deck)
         }
-    });
-
-</script>
-
-<!-- DASHBOARD -->
-
-<dom-module id="px-dashboard">
-    <template>
-        <div id="desk"></div>
-    </template>
-</dom-module>
-<script>
-    window.loaded = window.loaded || {};
+    };
 
     Polymer({
-        is: 'px-dashboard',
-        properties: {
-            selectedView: {
-                type: String,
-                observer: "viewSelected"
-            },
-            context: {
-                type: Object,
-                observer: "contextChanged"
-            }
-        },
-        viewSelected: function (newView) {
-            if (newView && newView.substring(0, 2) !== '{{') {
-                console.log('new view switch deck', newView);
-                this.switchDeck(newView);
-            }
-        },
-        contextChanged: function (newContext) {
-            console.log('NEWCONTEXT', newContext);
-            var deck = document.querySelector('px-deck');
-            if (deck) {
-                deck.context = this.context;
-            }
-        },
-        created: function () {
-            console.log('----> dashboard-created!!');
-            this.addEventListener('px-deck-ready', function () {
-                console.log('dashboard received px-deck-ready <----');
-                this.fire('px-dashboard-ready');
-            });
-        },
-        ready: function () {
-            console.log('----------> dashboard-ready!!');
-        },
-        attached: function () {
-            console.log('----> dashboard-attached!!');
-        },
-        init: function () {
-            console.log('px-dashboard init is called (does nothing)');
-//            document.querySelector('px-deck').init();
-        },
-        switchDeck: function (url) {
-
-            var self = this;
-            var container = this.$.desk;
-            if (container) {
-                container.innerHTML = "";
-                if (!loaded[url]) {
-
-                    Polymer.Base.importHref(url, function (e) {
-                        var deck = e.target.import.body;
-                        container.appendChild(deck);
-                        loaded[url] = deck;
-                        document.querySelector('px-deck').context = self.context;
-                    }, function (e) {
-
-                    });
-                }
-                else {
-                    container.appendChild(loaded[url]);
-                    document.querySelector('px-deck').context = this.context;
-                }
-            }
-            else {
-                console.log('there is no container');
-            }
-        }
+        is: 'px-deck',
+        behaviors: [px.deck]
     });
 
 </script>
+
+
+
