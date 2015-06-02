@@ -38,15 +38,21 @@
                 }
             },
             created: function() {
-                this._type = 'px-card';
+                console.log('----> card-created!!');
             },
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
+                //this.fire('px-card-ready');
+                console.log('----------> card-ready!!');
+            },
+            attached: function(){
+                console.log('----> card-attached!!');
                 this.fire('px-card-ready');
             },
             init: function() {
                 // this default init function is needed in case they don't implement init
                 // this is the 'instantiate' requirement
+                console.log('px-card init is called');
             },
             updateDeck: function(value) {
                 if (!this.fromDealer) {

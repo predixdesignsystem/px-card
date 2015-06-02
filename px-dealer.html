@@ -10,18 +10,22 @@
 <script>
     window.px = window.px || {};
 
+    window.addEventListener('px-dashboard-ready', function () {
+        console.log('window received px-dashboard ready');
+        document.querySelector('px-dashboard').init();
+    });
     px.angularDealer = {
-        getData: function(url) {
+        getData: function (url) {
             var $http = angular.element('body').injector().get("$http");
 
-            return new Promise(function(resolve, reject) {
+            return new Promise(function (resolve, reject) {
                 $http.get(url).
-                    success(function(data, status, headers, config) {
-                        resolve(data);
-                    }).
-                    error(function(data, status, headers, config) {
-                        reject(data);
-                    });
+                        success(function (data, status, headers, config) {
+                            resolve(data);
+                        }).
+                        error(function (data, status, headers, config) {
+                            reject(data);
+                        });
             });
         }
     };
@@ -34,39 +38,49 @@
                 observer: 'contextChanged'
             }
         },
-    created: function(){
-        this.cards = [];
-    },
-        contextChanged: function(thing) {
+        contextChanged: function (thing) {
             console.log('itchanged', thing);
             var self = this;
-            this.cards.forEach(function(card) {
+            this.cards.forEach(function (card) {
                 console.log('pushing this context', self.context);
                 card.context = self.context;
-
             });
         },
-        ready: function() {
+        created: function () {
+            this.cards = [];
+            console.log('----> deck-created!!');
             var self = this;
-      debugger;
-            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
-            this.cards.forEach(function(card) {
-                card.addEventListener('px-card-ready', function(e) {
-                    card._dealer = self;
-                    card.init(self);
-                    card.context = self.context;
-                });
+            this.addEventListener('px-card-ready', function () {
+                console.log('deck received px-card-ready <----');
+                self.fire('px-deck-ready');
             });
         },
-        updateState: function(cardId, state) {
-            this.cards.forEach(function(card) {
+        ready: function () {
+            var self = this;
+            console.log('----------> deck-ready!!');
+        },
+        attached: function () {
+            console.log('----> deck-attached!!');
+        },
+        init: function () {
+            var self = this;
+            console.log('px-deck init is called');
+            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
+            this.cards.forEach(function (card) {
+                card._dealer = self;
+                card.init(self);
+                //card.context = self.context;
+            });
+        },
+        updateState: function (cardId, state) {
+            this.cards.forEach(function (card) {
                 // only update cards with different ids
                 if (card.id !== cardId) {
                     card.deckState = state;
                 }
             });
         },
-        add: function(markup) {
+        add: function (markup) {
             // put markup on page (append to the end of the deck)
         }
     });
@@ -95,36 +109,50 @@
                 observer: "contextChanged"
             }
         },
-        viewSelected: function(newView) {
+        viewSelected: function (newView) {
             if (newView && newView.substring(0, 2) !== '{{') {
                 console.log('new view switch deck', newView);
                 this.switchDeck(newView);
             }
-
         },
-        contextChanged: function(newContext) {
+        contextChanged: function (newContext) {
             console.log('NEWCONTEXT', newContext);
-            document.querySelector('px-deck').context = this.context;
-
+            var deck = document.querySelector('px-deck');
+            if (deck) {
+                deck.context = this.context;
+            }
         },
-        ready: function() {
+        created: function () {
+            console.log('----> dashboard-created!!');
+            this.addEventListener('px-deck-ready', function () {
+                console.log('dashboard received px-deck-ready <----');
+                this.fire('px-dashboard-ready');
+            });
         },
-        switchDeck: function(url) {
+        ready: function () {
+            console.log('----------> dashboard-ready!!');
+        },
+        attached: function () {
+            console.log('----> dashboard-attached!!');
+        },
+        init: function () {
+            console.log('px-dashboard init is called');
+            document.querySelector('px-deck').init();
+        },
+        switchDeck: function (url) {
 
             var self = this;
-            console.log('sdfsdf', this.$);
             var container = this.$.desk;
-
             if (container) {
                 container.innerHTML = "";
                 if (!loaded[url]) {
 
-                    Polymer.Base.importHref(url, function(e) {
+                    Polymer.Base.importHref(url, function (e) {
                         var deck = e.target.import.body;
                         container.appendChild(deck);
                         loaded[url] = deck;
                         document.querySelector('px-deck').context = self.context;
-                    }, function(e) {
+                    }, function (e) {
 
                     });
                 }
@@ -134,7 +162,7 @@
                 }
             }
             else {
-                console.log('container', container);
+                console.log('there is no container');
             }
         }
     });
