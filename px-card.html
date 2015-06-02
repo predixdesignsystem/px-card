@@ -32,4 +32,73 @@ Element providing basic styling for card
         is: 'px-card'
     });
 
+    //px-card interface/behavior
+    (function() {
+        window.px = window.px || {};
+
+        window.px.card = {
+            properties: {
+                context: {
+                    type: Object,
+                    observer: '_contextChanged'
+                },
+                deckState: {
+                    type: Object,
+                    observer: '_deckStateChanged'
+                }
+            },
+            _contextChanged: function(newContext, oldContext) {
+                if (this.contextChanged && typeof this.contextChanged === 'function') {
+                    this.contextChanged(newContext, oldContext);
+                }
+            },
+            _deckStateChanged: function(newDealerState, oldDealerState) {
+                this.fromDealer = true;
+                if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
+                    this.deckStateChanged(newDealerState, oldDealerState);
+                }
+                this.fromDealer = false;
+            },
+            _refresh: function() {
+                if (this.refresh && typeof this.refresh === 'function') {
+                    this.refresh();
+                }
+            },
+            created: function() {
+                this._type = 'px-card';
+            },
+            ready: function() {
+                this.addEventListener('px-card-refresh', this._refresh);
+                console.log('px-card firing px-card-ready!');
+                this.fire('px-card-ready');
+            },
+            init: function() {
+                // this default init function is needed in case they don't implement init
+                // this is the 'instantiate' requirement
+            },
+            updateDeck: function(value) {
+                if (!this.fromDealer) {
+                    if (this._dealer && this._dealer.updateState) {
+                        this._dealer.updateState(this.id, value);
+                    }
+                    else {
+                        //console.log('no updatestate');
+                    }
+                }
+                else {
+                    //console.log('KILL this update because from deck');
+                }
+            },
+            showCard: function() {
+                this.hidden = false;
+            },
+            hideCard: function() {
+                this.hidden = true;
+            },
+            getData: function(url) {
+                return px.angularDealer.getData(url);
+            }
+        };
+    })();
+
 </script>
