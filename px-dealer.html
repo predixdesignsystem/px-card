@@ -14,6 +14,7 @@
         console.log('window received px-dashboard ready');
         document.querySelector('px-dashboard').init();
     });
+
     px.angularDealer = {
         getData: function (url) {
             var $http = angular.element('body').injector().get("$http");
@@ -52,7 +53,8 @@
             var self = this;
             this.addEventListener('px-card-ready', function () {
                 console.log('deck received px-card-ready <----');
-                self.fire('px-deck-ready');
+                self.fire('px-deck-ready, and deck init');
+                self.init();
             });
         },
         ready: function () {
@@ -136,8 +138,8 @@
             console.log('----> dashboard-attached!!');
         },
         init: function () {
-            console.log('px-dashboard init is called');
-            document.querySelector('px-deck').init();
+            console.log('px-dashboard init is called (does nothing)');
+//            document.querySelector('px-deck').init();
         },
         switchDeck: function (url) {
 
