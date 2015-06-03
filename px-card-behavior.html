@@ -13,21 +13,18 @@
             properties: {
                 context: {
                     type: Object,
-                    observer: '_contextChanged'
+                    observer: '_contextChanged',
+                  reflectToAttribute: true
                 },
+
                 deckState: {
                     type: Object,
-                    observer: '_deckStateChanged'
+                    observer: '_deckStateChanged',
+                  reflectToAttribute: true
                 }
             },
 
             _contextChanged: function(newContext, oldContext) {
-
-              if (newContext !== oldContext) {
-                //set context on dom-bind nested templates from light dom, if any
-                this.updateNestedLightDomBindings("context", newContext);
-              }
-
               //execute callback, if any
               if (this.contextChanged && typeof this.contextChanged === 'function') {
                   this.contextChanged(newContext, oldContext);
@@ -37,12 +34,6 @@
 
             _deckStateChanged: function(newDealerState, oldDealerState) {
               this.fromDealer = true;
-
-              if (newDealerState !== oldDealerState) {
-                //set deck state on dom-bind nested templates from light dom, if any
-                this.updateNestedLightDomBindings("deckState", newDealerState);
-              }
-
               //execute callback, if any
               if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
                   this.deckStateChanged(newDealerState, oldDealerState);
@@ -59,16 +50,42 @@
                 }
             },
 
-
-            created: function(){
-                this._type = 'px-card';
-            },
+          created: function() {
+            this._type = 'px-card';
+          },
 
 
             ready: function() {
-                this.addEventListener('px-card-refresh', this._refresh);
-                this.fire('px-card-ready');
+              this.addEventListener('px-card-refresh', this._refresh);
+              this.fire('px-card-ready');
+
             },
+
+          attached: function() {
+            var propName;
+
+            if (this.hasAttributes()) {
+              for (var i = 0; i < this.attributes.length; i++) {
+                propName = Polymer.CaseMap.dashToCamelCase(this.attributes[i].name);
+                //var _this = this;
+//                  this[propName + "NestedLightDomBindingObserver"] = function(newValue, oldValue) {
+//                    if (newValue !== oldValue) {
+//                      //set context on dom-bind nested templates from light dom, if any
+//                      _this.updateNestedLightDomBindings(propName, newValue);
+//                    }
+//                  };
+//                  console.log(this.tagName + " " + this.className + " " + propName + "NestedLightDomBindingObserver = " + this[propName + "NestedLightDomBindingObserver"]);
+//                  this._addObserverEffect(propName, propName + "NestedLightDomBindingObserver");
+                this.updateNestedLightDomBindings(propName, this[propName]);
+              }
+            }
+
+          },
+
+          attributeChanged: function(name, type) {
+            var propName = Polymer.CaseMap.dashToCamelCase(name);
+            this.updateNestedLightDomBindings(propName, this[propName]);
+          },
 
 
             init: function(){
@@ -78,7 +95,7 @@
           updateNestedLightDomBindings: function(key, value) {
             var transcludedNodes = Polymer.dom(Polymer.dom(this.root).querySelector("content")).getDistributedNodes();
             transcludedNodes.forEach(function(node) {
-              if (node.getAttribute && node.getAttribute("is") === "dom-bind") {
+              if (node.getAttribute && node.getAttribute("is") === "dom-bind" && node.set) {
                 node.set(key, value);
               }
             })

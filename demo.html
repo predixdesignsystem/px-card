@@ -8,6 +8,7 @@
         <script src="../webcomponentsjs/webcomponents.js"></script>
 
         <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+        <link rel="import" href="../polymer/polymer.html"/>
         <link rel="import" href="px-card.html"/>
         <link rel="import" href="px-context-name.html"/>
         <link rel="import" href="px-card-controls.html"/>
@@ -34,6 +35,7 @@
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
 
+
         <px-card class="a-card">
           <template is="dom-bind">
             <h1>Hello World</h1>
@@ -59,26 +61,34 @@
 
         <!-- <dom-module id="custom-card">
             <template>
+            <div style="border:red 2px solid;">
                 <content></content>
+            </div>
             </template>
         </dom-module> -->
         <script>
+          (function() {
             Polymer({
                 is: 'custom-card',
-                ready: function() {
-                    this.currentTemperature = 65;
+
+                properties : {
+                  currentTemperature: {
+                    type: Number,
+                    reflectToAttribute: true
+                  }
                 },
+
                 /**
                  * (optionally) implement this API method to refresh your card data
                  **/
                 refresh: function() {
-                    console.log('refresh!');
+                    console.log('refresh on custom-card!');
                 },
                 /**
                  * (optionally) implement this API method to do interesting stuff when the context is changed
                  **/
-                contextChangedHandler: function(newContext, oldContext) {
-                    console.log('context changed!');
+                contextChanged: function(newContext, oldContext) {
+                    console.log('context changed on custom-card!');
                 },
                 /**
                  * add your own methods, such as this click handler, to do custom logic.
@@ -96,12 +106,13 @@
                 },
                 behaviors: [px.cardBehavior]
             });
+            })();
         </script>
 
         <custom-card>
           <template is="dom-bind">
             <p>This is a more complex Predix Experience card.</p>
-            <button on-click="parent.getMoreTemperatureData">Get More Temperature Data</button>
+            <button on-click="getMoreTemperatureData">Get More Temperature Data</button>
             <p id="temp">Current Temperature:<span>{{currentTemperature}}</span>F</p>
           </template>
         </custom-card>
@@ -118,9 +129,12 @@
             var context = {
                 name: 'My Context'
             };
+            window.addEventListener("WebComponentsReady", function() {
             document.querySelector('px-card.a-card').set("context", context);
             document.querySelector('px-card.another-card').set("context", context);
-            document.querySelector('custom-card').set("context", context);
+              document.querySelector('custom-card').set("currentTemperature", 65);
+            });
+
         </script>
     </body>
 </html>
