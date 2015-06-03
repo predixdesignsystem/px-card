@@ -81,7 +81,7 @@ Element providing basic styling for card
                 //console.log('px-card init is called');
             },
             updateDeck: function(value) {
-                if (!this.fromDealer) {
+                if (!this.fromDeck) {
                     if (this._deck && this._deck.updateState) {
                         this._deck.updateState(this.id, value);
                     }
