@@ -18,12 +18,12 @@ module.exports = function(config) {
 
             //App Bower components
             {pattern: 'bower_components/webcomponentsjs/webcomponents.js', included: true},
-            {pattern: 'bower_components/polymer/*.html', included: true},
-
-            {pattern: 'bower_components/test/px-*.html', included: true},
+            {pattern: 'bower_components/polymer/*.html', included: false},
+            {pattern: 'bower_components/test/px-*.html', included: false},
 
             //App src files
-            {pattern: 'bower_components/test/*-card.html', included: true},
+            {pattern: 'bower_components/test/demo-card.html', included: true},
+            {pattern: 'bower_components/test/fetch-data-card.html', included: true},
 
             //Tests
             {pattern: 'test/*-spec.js', included: true}

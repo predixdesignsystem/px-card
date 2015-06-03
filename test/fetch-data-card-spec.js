@@ -23,7 +23,6 @@ describe('Fetch Data Card', function () {
             sampleCard = $testContainer.get(0).querySelector('fetch-data-card');
             window.px.dealer = {
                 getData: function () {
-                    console.log('in dealer get data');
                     return new Promise(function (resolve, reject) {
                         resolve({
                             value: 50
