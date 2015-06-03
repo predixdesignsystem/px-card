@@ -14,7 +14,6 @@
 
     <link rel="import" href="demo-card.html"/>
     <link rel="import" href="sample-card.html"/>
-    <!--<link rel="import" href="fetch-data-card.html"/>-->
     <link rel="import" href="time-series-card.html"/>
     <link rel="import" href="widget-to-widget-card.html"/>
 </head>
@@ -33,16 +32,18 @@
     </p>
     <demo-card></demo-card>
     <sample-card></sample-card>
-
     <time-series-card></time-series-card>
 
-    <!--<sample-card></sample-card>-->
-    <!--<sample-card></sample-card>-->
+    <h3>Card to Card communication</h3>
+
+    <px-deck>
+        <sample-card id="sample-card-1" class="px-card"></sample-card>
+        <sample-card id="sample-card-2" class="px-card"></sample-card>
+    </px-deck>
 
     <script>
         px.dealer = {
             getData: function(url) {
-
                 return new Promise(function(resolve, reject) {
                     resolve([
                         {
