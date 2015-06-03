@@ -28,6 +28,7 @@
             }, function(reason) {
                 // on rejection
                 console.error('ERROR', reason);
+                self.currentTemperature = 'error';
             });
         },
         behaviors: [px.card]

@@ -8,7 +8,23 @@ module.exports = function (grunt) {
         clean: {
             css: ['css'],
             bower: ['bower_components'],
-            reports: ['reports']
+            reports: ['reports'],
+            test: ['bower_components/test']
+        },
+
+        copy: {
+            test: {
+                files: [
+                    {
+                        cwd: '',
+                        expand: true,
+                        src: [
+                            '*.html'
+                        ],
+                        dest: 'bower_components/test'
+                    }
+                ]
+            }
         },
 
         sass: {
@@ -75,16 +91,18 @@ module.exports = function (grunt) {
             local: {
                 webdrivers: ['chrome']
             }
+        },
+
+        // Karma Unit configuration
+        karma: {
+            runner: {
+                configFile: 'karma.conf.js',
+                singleRun: false
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-sass');
-    grunt.loadNpmTasks('grunt-shell');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-dep-serve');
-    grunt.loadNpmTasks('webdriver-support');
+    require('load-grunt-tasks')(grunt);
 
     // Default task.
     grunt.registerTask('default', 'Basic build', [
@@ -101,7 +119,9 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask('test', 'Test', [
         'jshint',
-        'webdriver'
+        'clean:test',
+        'copy:test',
+        'karma'
     ]);
 
     grunt.registerTask('release', 'Release', [
