@@ -11,6 +11,14 @@
         <link rel="import" href="px-card.html"/>
         <link rel="import" href="px-context-name.html"/>
         <link rel="import" href="px-card-controls.html"/>
+        <link rel="import" type="css" href="../px-theme/px-app.html"/>
+
+        <style>
+          html{
+            background-color: white !important;
+          }
+        </style>
+
     </head>
 
     <body>
@@ -25,7 +33,6 @@
         <p>
             Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
         </p>
-
 
         <px-card class="a-card">
           <template is="dom-bind">
@@ -50,11 +57,11 @@
           </template>
         </px-card>
 
-        <dom-module id="custom-card">
+        <!-- <dom-module id="custom-card">
             <template>
                 <content></content>
             </template>
-        </dom-module>
+        </dom-module> -->
         <script>
             Polymer({
                 is: 'custom-card',

@@ -22,8 +22,14 @@ common/abstract rules go in px-card-sketch.scss, not in this file.
 @import 'px-card-sketch.scss';
 
 :host {
-    display: block;
-    border: 1px solid blue;
+    // display: block;
+    border: 5px solid $gray7;
     background-color: $white;
     @extend .layout__item;
+
+    .box{
+      color: $gray7;
+      background-color: $white;
+
+    }
 }
