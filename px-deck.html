@@ -53,11 +53,11 @@
             var self = this;
 
             this.addEventListener('px-card-ready', function(e) {
-                //console.log('deck received px-card-ready <----');
+                console.log('deck received px-card-ready <----');
                 self.fire('px-deck-ready');
 
                 var card = e.target;
-                card._dealer = self;
+                card._deck = self;
                 card.init(self);
             });
         },

@@ -31,12 +31,13 @@
         Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
     </p>
     <demo-card></demo-card>
-    <sample-card></sample-card>
+    <sample-card id="my-card"></sample-card>
     <time-series-card></time-series-card>
+    <widget-to-widget-card></widget-to-widget-card>
 
     <h3>Card to Card communication</h3>
 
-    <px-deck>
+    <px-deck id="my-deck">
         <sample-card id="sample-card-1" class="px-card"></sample-card>
         <sample-card id="sample-card-2" class="px-card"></sample-card>
     </px-deck>
@@ -120,6 +121,14 @@
         };
 
         document.querySelector('time-series-card').init();
+
+        document.querySelector('#my-card').context = {
+            name: 'Turbine72384'
+        };
+
+        document.querySelector('#my-deck').context = {
+            name: 'Turbine72384'
+        };
     </script>
 
 </body>
