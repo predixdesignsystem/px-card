@@ -11,7 +11,7 @@
     window.px = window.px || {};
 
     window.addEventListener('px-dashboard-ready', function() {
-        console.log('window received px-dashboard ready');
+        //console.log('window received px-dashboard ready');
         document.querySelector('px-dashboard').init();
     });
 
@@ -40,39 +40,37 @@
             }
         },
         contextChanged: function(thing) {
-            console.log('itchanged', thing);
+            //console.log('itchanged', thing);
             var self = this;
             this.cards.forEach(function(card) {
-                console.log('pushing this context', self.context);
+                //console.log('pushing this context', self.context);
                 card.context = self.context;
             });
         },
         created: function() {
             this.cards = [];
-            console.log('----> deck-created!!');
+            //console.log('----> deck-created!!');
             var self = this;
-            this.addEventListener('px-card-ready', function() {
-                console.log('deck received px-card-ready <----');
-                self.fire('px-deck-ready, and deck init');
-                self.init();
+
+            this.addEventListener('px-card-ready', function(e) {
+                //console.log('deck received px-card-ready <----');
+                self.fire('px-deck-ready');
+
+                var card = e.target;
+                card._dealer = self;
+                card.init(self);
             });
         },
         ready: function() {
             var self = this;
-            console.log('----------> deck-ready!!');
+            //console.log('----------> deck-ready!!');
+            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
         },
         attached: function() {
-            console.log('----> deck-attached!!');
+            //console.log('----> deck-attached!!');
         },
         init: function() {
-            var self = this;
-            console.log('px-deck init is called');
-            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
-            this.cards.forEach(function(card) {
-                card._dealer = self;
-                card.init(self);
-                //card.context = self.context;
-            });
+            //console.log('px-deck init is called');
         },
         updateState: function(cardId, state) {
             this.cards.forEach(function(card) {
