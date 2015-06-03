@@ -3,11 +3,6 @@ describe('Fetch Data Card', function () {
 
     var sampleCard;
 
-    function webComponentWait(fn) {
-        waits(0);
-        runs(fn);
-    }
-
     beforeEach(function () {
         // create a new sandbox
         setFixtures(sandbox({
@@ -19,7 +14,7 @@ describe('Fetch Data Card', function () {
         $testContainer.append('<fetch-data-card></fetch-data-card>');
 
         // once the web component is rendered, initialize it
-        webComponentWait(function () {
+        px.test.webComponentWait(function () {
             sampleCard = $testContainer.get(0).querySelector('fetch-data-card');
             window.px.dealer = {
                 getData: function () {

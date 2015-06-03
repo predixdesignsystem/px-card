@@ -12,6 +12,7 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+            'test/px-test.js',
             'bower_components/jquery/dist/jquery.min.js',
             'test/lib/jasmine-fixture.min.js',
             'test/lib/jasmine-jquery.js',
