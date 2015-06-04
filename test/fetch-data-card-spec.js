@@ -11,7 +11,7 @@ describe('Fetch Data Card', function () {
         var $testContainer = $('#test-container');
 
         // append the web component to test
-        $testContainer.append('<fetch-data-card></fetch-data-card>');
+        $testContainer.append('<fetch-data-card id="my-fetch-data-card"></fetch-data-card>');
 
         // once the web component is rendered, initialize it
         px.test.webComponentWait(function () {

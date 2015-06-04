@@ -12,7 +12,7 @@ describe('Demo Card', function () {
 
         //fake widget container
         $testContainer = $('#test-container');
-        $testContainer.append('<demo-card></demo-card>');
+        $testContainer.append('<demo-card id="my-demo-card"></demo-card>');
 
         px.test.webComponentWait(function() {
             demoCard = $testContainer.get(0).querySelector('demo-card');

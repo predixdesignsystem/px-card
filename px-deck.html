@@ -54,10 +54,7 @@
             this.addEventListener('px-card-ready', function(e) {
                 //console.log('deck received px-card-ready <----');
                 self.fire('px-deck-ready');
-                var card = e.target;
-                card._deck = self;
-                card.init(self);
-                self.cards.push(card);
+                self.registerCardInDeck(e.target);
             });
         },
         ready: function() {
@@ -77,9 +74,18 @@
                 }
             });
         },
-        add: function(markup) {
-            // put markup on page (append to the end of the deck)
-            //TODO: remember to call card.init after adding card to deck
+        registerCardInDeck: function(card){
+            card._deck = this;
+            card.init(this);
+            this.cards.push(card);
+        },
+        add: function(cardName, cardId) {
+            if(!cardName || !cardId) {
+                throw 'Add card must be called with a card name and card id';
+            }
+            var newCard = document.createElement('sample-card');
+            newCard.setAttribute('id', cardId);
+            Polymer.dom(this).appendChild(newCard);
         }
     };
 
