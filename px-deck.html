@@ -16,7 +16,7 @@
     });
 
 
-    px.angularDealer = {
+    px.dealer = {
         getData: function(url) {
             var $http = angular.element('body').injector().get("$http");
 
@@ -51,20 +51,17 @@
             this.cards = [];
             //console.log('----> deck-created!!');
             var self = this;
-
             this.addEventListener('px-card-ready', function(e) {
                 //console.log('deck received px-card-ready <----');
                 self.fire('px-deck-ready');
-
                 var card = e.target;
-                card._dealer = self;
+                card._deck = self;
                 card.init(self);
+                self.cards.push(card);
             });
         },
         ready: function() {
-            var self = this;
             //console.log('----------> deck-ready!!');
-            this.cards = Polymer.dom(this).querySelectorAll('.px-card');
         },
         attached: function() {
             //console.log('----> deck-attached!!');
@@ -82,6 +79,7 @@
         },
         add: function(markup) {
             // put markup on page (append to the end of the deck)
+            //TODO: remember to call card.init after adding card to deck
         }
     };
 
