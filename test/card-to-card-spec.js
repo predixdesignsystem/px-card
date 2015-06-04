@@ -14,8 +14,8 @@ describe('Demo Card', function () {
         $testContainer = $('#test-container');
         $testContainer.append('<px-deck></px-deck>');
         $pxDeck = $('px-deck');
-        $pxDeck.append('<sample-card id="card1" class="px-card"></sample-card>');
-        $pxDeck.append('<sample-card id="card2" class="px-card"></sample-card>');
+        $pxDeck.append('<sample-card id="card1"></sample-card>');
+        $pxDeck.append('<sample-card id="card2"></sample-card>');
 
         px.test.webComponentWait(function() {
             card1 = $testContainer.get(0).querySelector('#card1');
