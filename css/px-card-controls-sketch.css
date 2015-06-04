@@ -276,34 +276,25 @@ td, th {
   padding: 0; }
 
 /*------------------------------------*\
-    #PX-BOX-SIZING-DESIGN
-\*------------------------------------*/
-/*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
 /**
  * Sass functions for Predix Experience
  */
 /**
-   * Set the global `box-sizing` state to `border-box`.
-   *
-   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
-   * paulirish.com/2012/box-sizing-border-box-ftw
-   */
+ * Set the global `box-sizing` state to `border-box`.
+ *
+ * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+ * paulirish.com/2012/box-sizing-border-box-ftw
+ */
 html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 :host {
   /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 *, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
 /*------------------------------------*\
@@ -785,29 +776,6 @@ small {
 /**
      * Dark
      */
-/*------------------------------------*\
-    #PX-MIXINS-DESIGN
-\*------------------------------------*/
-/**
- * Sass mixins for Predix Experience
- */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 .btn {
   display: inline-block;
   overflow: visible;
@@ -864,3 +832,61 @@ small {
 .btn--small {
   font-size: 0.8rem;
   line-height: calc(1.6666666667em - 2px); }
+
+/*------------------------------------*\
+    #PX-LAYOUT-DESIGN
+\*------------------------------------*/
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/**
+ * The Predix Experience layout system uses `box-sizing: border-box;` and
+ * `display: flex;` to create an extremely powerful, flexible
+ * alternative to the traditional grid system. Combine the layout items with
+ * the widths found in `trumps.widths`.
+ */
+/**
+   * Begin a layout group.
+   */
+.layout {
+  display: flex;
+  /* [1] */
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  margin-left: -1rem;
+  padding: 0; }
+
+/**
+       * 1. Space columns apart.
+       * 2. Full-width unless told to behave otherwise.
+       * 3. Required to combine fluid widths and fixed gutters.
+       */
+.layout__item {
+  padding-left: 1rem;
+  /* [1] */
+  flex: 1;
+  /* [2] */
+  flex-basis: 20rem; }
+  .layout__item:nth-last-child(-n+3):first-child, .layout__item:nth-last-child(-n+3):first-child ~ .layout__item {
+    flex-basis: 40rem; }
+    @media screen and (min-width: 80rem) {
+      .layout__item:nth-last-child(-n+3):first-child, .layout__item:nth-last-child(-n+3):first-child ~ .layout__item {
+        flex-basis: 0; } }
+  @media screen and (min-width: 80rem) {
+    .layout__item {
+      flex-basis: 0; } }
