@@ -289,25 +289,34 @@ td, th {
   padding: 0; }
 
 /*------------------------------------*\
+    #PX-BOX-SIZING-DESIGN
+\*------------------------------------*/
+/*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
 /**
  * Sass functions for Predix Experience
  */
 /**
- * Set the global `box-sizing` state to `border-box`.
- *
- * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
- * paulirish.com/2012/box-sizing-border-box-ftw
- */
+   * Set the global `box-sizing` state to `border-box`.
+   *
+   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+   * paulirish.com/2012/box-sizing-border-box-ftw
+   */
 html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 :host {
   /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 *, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
 /*------------------------------------*\
@@ -847,6 +856,29 @@ small {
 /**
      * Dark
      */
+/*------------------------------------*\
+    #PX-MIXINS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass mixins for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
 .btn {
   display: inline-block;
   overflow: visible;
@@ -941,11 +973,6 @@ header {
 /**
  * Sass functions for Predix Experience
  */
-/**
-   * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
-   * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
-   * over and over in your markup.
-   */
 /*------------------------------------*\
     #PX-SPACING-RESPONSIVE-DESIGN
 \*------------------------------------*/
@@ -1689,6 +1716,3 @@ header {
 :host {
   border: 5px solid #7c7c84;
   background-color: white; }
-  :host .box {
-    color: #7c7c84;
-    background-color: white; }
