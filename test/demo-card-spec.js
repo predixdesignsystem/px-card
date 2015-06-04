@@ -28,24 +28,19 @@ describe('Demo Card', function () {
         expect($(demoCard).text()).toContain(stubContext.name);
     });
 
-    function isHidden(el) {
-        var style = window.getComputedStyle(el);
-        return (style.display === 'none')
-    }
-
     it('is initially shown', function(){
-        expect(isHidden(demoCard)).toBe(false);
+        expect(px.test.isHidden(demoCard)).toBe(false);
     });
 
     it('should be able to hide', function(){
         demoCard.hideCard();
-        expect(isHidden(demoCard)).toBe(true);
+        expect(px.test.isHidden(demoCard)).toBe(true);
     });
 
     it('should be able to be shown if it is hidden', function(){
         demoCard.hideCard();
         demoCard.showCard();
-        expect(isHidden(demoCard)).toBe(false);
+        expect(px.test.isHidden(demoCard)).toBe(false);
     });
 
     afterEach(function () {
