@@ -1,141 +1,135 @@
 <!doctype html>
 
 <html>
-    <head>
-        <title>px-card Demo</title>
+<head>
+    <title>px-card Demo</title>
 
-        <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-        <script src="../webcomponentsjs/webcomponents.js"></script>
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+    <script src="../webcomponentsjs/webcomponents.js"></script>
+    <script src="../px/dist/px.min.js"></script>
+    <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
 
-        <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-        <link rel="import" href="../polymer/polymer.html"/>
-        <link rel="import" href="px-card.html"/>
-        <link rel="import" href="px-context-name.html"/>
-        <link rel="import" href="px-card-controls.html"/>
-        <link rel="import" type="css" href="../px-theme/px-app.html"/>
+    <link rel="import" href="px-deck.html"/>
+    <link rel="import" href="px-card.html"/>
 
-        <style>
-          html{
-            background-color: white !important;
-          }
-        </style>
+    <link rel="import" href="demo-card.html"/>
+    <link rel="import" href="sample-card.html"/>
+    <link rel="import" href="time-series-card.html"/>
+    <link rel="import" href="widget-to-widget-card.html"/>
+</head>
 
-    </head>
+<body>
 
-    <body>
+    <h3>Demo</h3>
 
-        <h3>Demo</h3>
+    <p>
+        Although related, examples are /not/ the same as the test fixtures.
+        Tests are tests, examples are examples.
+    </p>
 
-        <p>
-            Although related, examples are /not/ the same as the test fixtures.
-            Tests are tests, examples are examples.</br>
-            <a href="https://devcloud.swcoe.ge.com/devspace/login.action;jsessionid=8563C8B9D5E55DA2A251E088FA930CBC?os_destination=%2Fpages%2Fviewpage.action%3FpageId%3D1034700990">Link to design</a>
-        </p>
+    <p>
+        Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
+    </p>
+    <demo-card></demo-card>
+    <sample-card id="my-card"></sample-card>
+    <time-series-card></time-series-card>
+    <widget-to-widget-card></widget-to-widget-card>
 
-        <p>
-            Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
-        </p>
+    <h3>Card to Card communication</h3>
 
+    <px-deck id="my-deck">
+        <sample-card id="sample-card-1"></sample-card>
+        <sample-card id="sample-card-2"></sample-card>
+    </px-deck>
 
-        <px-card class="a-card">
-          <template is="dom-bind">
-            <h1>Hello World</h1>
-            <p>
-              Context:
-              <span>{{context.name}}</span>
-            </p>
-            <p>This is the bare minimum you need for a Predix Experience card.</p>
-          </template>
-        </px-card>
+    <script>
+        px.dealer = {
+            getData: function(url) {
+                return new Promise(function(resolve, reject) {
+                    resolve([
+                        {
+                            "sample_size": 1071,
+                            "results": [
+                                {
+                                    "name": "Winter 1970-1971",
+                                    "values": [
+                                        [
+                                            25833600000,
+                                            0
+                                        ],
+                                        [
+                                            27043200000,
+                                            0.6
+                                        ],
+                                        [
+                                            27734400000,
+                                            0.7
+                                        ],
+                                        [
+                                            28944000000,
+                                            0.8
+                                        ]
+                                    ]
+                                },
+                                {
+                                    "name": "Winter 1971-1972",
+                                    "values": [
+                                        [
+                                            25833600000,
+                                            2
+                                        ],
+                                        [
+                                            27043200000,
+                                            3
+                                        ],
+                                        [
+                                            27734400000,
+                                            5
+                                        ],
+                                        [
+                                            28944000000,
+                                            2
+                                        ]
+                                    ]
+                                },
+                                {
+                                    "name": "Winter 1973-1974",
+                                    "values": [
+                                        [
+                                            25833600000,
+                                            5
+                                        ],
+                                        [
+                                            27043200000,
+                                            4
+                                        ],
+                                        [
+                                            27734400000,
+                                            2
+                                        ],
+                                        [
+                                            28944000000,
+                                            0
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]);
+                });
+            }
+        };
 
-        <px-card class="another-card">
-          <px-card-controls></px-card-controls>
-          <template is="dom-bind">
-            <px-context-name context-name="[[context.name]]"></px-context-name>
-            <h1>Another Hello World with default controls</h1>
-            <p>
-              Context:
-              <span>{{context.name}}</span>
-            </p>
-          </template>
-        </px-card>
+        document.querySelector('time-series-card').init();
 
-        <!-- <dom-module id="custom-card">
-            <template>
-            <div style="border:red 2px solid;">
-                <content></content>
-            </div>
-            </template>
-        </dom-module> -->
-        <script>
-          (function() {
-            Polymer({
-                is: 'custom-card',
+        document.querySelector('#my-card').context = {
+            name: 'Turbine72384'
+        };
 
-                properties : {
-                  currentTemperature: {
-                    type: Number,
-                    reflectToAttribute: true
-                  }
-                },
+        document.querySelector('#my-deck').context = {
+            name: 'Turbine72384'
+        };
+    </script>
 
-                /**
-                 * (optionally) implement this API method to refresh your card data
-                 **/
-                refresh: function() {
-                    console.log('refresh on custom-card!');
-                },
-                /**
-                 * (optionally) implement this API method to do interesting stuff when the context is changed
-                 **/
-                contextChanged: function(newContext, oldContext) {
-                    console.log('context changed on custom-card!');
-                },
-                /**
-                 * add your own methods, such as this click handler, to do custom logic.
-                 * the px card behaviors include a getData method which will handle fetching the data for you
-                 **/
-                getMoreTemperatureData: function(){
-                    var self = this;
-                    this.getData('/temperature').then(function(currentTemperature) {
-                        // on fulfillment
-                        self.currentTemperature = currentTemperature;
-                    }, function(reason) {
-                        // on rejection
-                        self.currentTemperature = 'ERROR';
-                    });
-                },
-                behaviors: [px.cardBehavior]
-            });
-            })();
-        </script>
-
-        <custom-card>
-          <template is="dom-bind">
-            <p>This is a more complex Predix Experience card.</p>
-            <button on-click="getMoreTemperatureData">Get More Temperature Data</button>
-            <p id="temp">Current Temperature:<span>{{currentTemperature}}</span>F</p>
-          </template>
-        </custom-card>
-
-        <script>
-            window.deck = {
-                getData: function() {
-                    return new Promise(function(resolve, reject) {
-                        resolve(70);
-                    });
-                }
-            };
-
-            var context = {
-                name: 'My Context'
-            };
-            window.addEventListener("WebComponentsReady", function() {
-            document.querySelector('px-card.a-card').set("context", context);
-            document.querySelector('px-card.another-card').set("context", context);
-              document.querySelector('custom-card').set("currentTemperature", 65);
-            });
-
-        </script>
-    </body>
+</body>
 </html>
