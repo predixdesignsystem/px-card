@@ -5,7 +5,6 @@
     See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-card-behavior.html"/>
 <link rel="import" href="px-card-header.html"/>
 
 <!--
@@ -61,15 +60,6 @@ Element providing basic styling and behaviors (API) for card
 </dom-module>
 
 <script type="text/javascript">
-
-    Polymer({
-      is: 'px-card',
-      behaviors: [px.cardBehavior],
-      attached: function(){
-        this.toggleClass('layout');
-        this.toggleClass('m--');
-      }
-    });
 
     (function() {
         window.px = window.px || {};
@@ -137,14 +127,25 @@ Element providing basic styling and behaviors (API) for card
             },
             showCard: function() {
                 this.hidden = false;
+                this.querySelector('px-card').hidden = false;
             },
             hideCard: function() {
                 this.hidden = true;
+                this.querySelector('px-card').hidden = true;
             },
             getData: function(url) {
                 return px.dealer.getData(url);
             }
         };
     })();
+
+    Polymer({
+      is: 'px-card',
+//      behaviors: [px.card],
+      attached: function(){
+        this.toggleClass('layout');
+        this.toggleClass('m--');
+      }
+    });
 
 </script>
