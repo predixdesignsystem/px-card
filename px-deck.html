@@ -79,13 +79,24 @@
             card.init(this);
             this.cards.push(card);
         },
-        add: function(cardName, cardId) {
+        addCard: function(cardName, cardId) {
             if(!cardName || !cardId) {
                 throw 'Add card must be called with a card name and card id';
             }
             var newCard = document.createElement('sample-card');
             newCard.setAttribute('id', cardId);
             Polymer.dom(this).appendChild(newCard);
+        },
+        removeCardById: function(cardId){
+            if(!cardId) {
+                throw 'Remove card by id must be called with a card id';
+            }
+            var card = Polymer.dom(this).querySelector('#'+cardId);
+            if (!card){
+                console.warn('Cannot find card by id '+cardId);
+                return;
+            }
+            Polymer.dom(this).removeChild(card);
         }
     };
 

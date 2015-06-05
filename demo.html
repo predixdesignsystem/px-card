@@ -51,13 +51,18 @@
 
     <h1>API demonstration</h1>
     <button onclick="addCard()">Add sample-card to my-deck</button>
+    <button onclick="removeCard()">Remove card sample-card-1</button>
     <button onclick="showCard()">Show my-card</button>
     <button onclick="hideCard()">Hide my-card</button>
 
     <script>
 
         addCard = function() {
-            document.querySelector('#my-deck').add('sample-card', new Date().getTime());
+            document.querySelector('#my-deck').addCard('sample-card', new Date().getTime());
+        };
+
+        removeCard = function() {
+            document.querySelector('#my-deck').removeCardById('sample-card-1');
         };
 
         showCard = function() {

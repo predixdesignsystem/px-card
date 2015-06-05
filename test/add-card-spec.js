@@ -12,7 +12,7 @@ describe('Add card to deck', function () {
         px.beforeEachAsync(function(){
             $pxDeck = $('px-deck');
             pxDeck = document.querySelector('px-deck');
-            pxDeck.add('sample-card', '123');
+            pxDeck.addCard('sample-card', '123');
         });
 
         it('can be initialized', function() {
@@ -24,19 +24,19 @@ describe('Add card to deck', function () {
 
     it('throws an error if no card name', function () {
         try {
-            pxDeck.add();
+            pxDeck.addCard();
             expect('this should').toBe('throw an error');
         } catch(e) {
-            // expected
+            expect(e).toBe('Add card must be called with a card name and card id');
         }
     });
 
     it('throws an error if no card id', function () {
         try {
-            pxDeck.add('sample-card');
+            pxDeck.addCard('sample-card');
             expect('this should').toBe('throw an error');
         } catch(e) {
-            // expected
+            expect(e).toBe('Add card must be called with a card name and card id');
         }
     });
 
@@ -45,9 +45,9 @@ describe('Add card to deck', function () {
         px.beforeEachAsync(function() {
             $pxDeck = $('px-deck');
             pxDeck = document.querySelector('px-deck');
-            pxDeck.add('sample-card', 'card1');
-            pxDeck.add('sample-card', 'card2');
-            pxDeck.add('sample-card', 'card3');
+            pxDeck.addCard('sample-card', 'card1');
+            pxDeck.addCard('sample-card', 'card2');
+            pxDeck.addCard('sample-card', 'card3');
         });
 
         it('adds all the cards', function() {
