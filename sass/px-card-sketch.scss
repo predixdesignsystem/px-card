@@ -48,6 +48,9 @@ in import paths
 @import "../px-layout-design/_objects.layout";
 @import "../px-buttons-design/objects.buttons";
 
+$inuit-enable-box--tiny               : true;
+@import "../px-box-design/objects.box";
+
 // Component
 header {
   position: relative;
@@ -58,8 +61,9 @@ header {
 // Trumps
 @import "../px-clearfix-design/trumps.clearfix";
 
-$inuit-enable-margins--none           : true;
-$inuit-enable-margins--large          : true;
+$inuit-enable-responsive-margins        : true;
+$inuit-enable-responsive-margins--none  : true;
+$inuit-enable-responsive-margins--large : true;
 
 @import "../px-spacing-responsive-design/trumps.spacing-responsive";
 @import "../px-widths-responsive-design/trumps.widths-responsive";

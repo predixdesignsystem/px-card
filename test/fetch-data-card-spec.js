@@ -1,98 +1,78 @@
 'use strict';
 describe('Fetch Data Card', function () {
 
-    var sampleCard, $testContainer;
+    var sampleCard;
 
-    beforeEach(function (done) {
-        // create a new sandbox
-        setFixtures(sandbox({
-            id: 'test-container'
-        }));
-        $testContainer = $('#test-container');
-
+    px.beforeEachWithFixture(function () {
         // append the web component to test
-        $testContainer.append('<fetch-data-card id="my-fetch-data-card"></fetch-data-card>');
-
-        // once the web component is rendered, initialize it
-        px.test.webComponentWait(done);
+        $fixture.append('<fetch-data-card id="my-fetch-data-card"></fetch-data-card>');
+        sampleCard = $fixture.get(0).querySelector('fetch-data-card');
     });
 
-    describe('should initialize from px.dealer', function () {
-        beforeEach(function (done) {
-
-            sampleCard = $testContainer.get(0).querySelector('fetch-data-card');
-            window.px.dealer = {
-                getData: function () {
-                    return new Promise(function (resolve, reject) {
-                        resolve({
-                            value: 50
-                        });
+    px.beforeEachAsync(function () {
+        window.px.dealer = {
+            getData: function () {
+                return new Promise(function (resolve, reject) {
+                    resolve({
+                        value: 50
                     });
-                }
-            };
+                });
+            }
+        };
 
-            var currentTemp = sampleCard.querySelector('#temp');
-            var tempB4 = $(currentTemp).text();
-            sampleCard.init();
-            px.test.webComponentWait(done);
-        });
-
-        it('!', function () {
-            var currentTemp = sampleCard.querySelector('#temp');
-            expect($(currentTemp).text()).toContain('Current Temperature:50F');
-        });
-
+        var currentTemp = sampleCard.querySelector('#temp');
+        var tempB4 = $(currentTemp).text();
+        sampleCard.init();
     });
 
+    it('should initialize from px.dealer', function () {
+        var currentTemp = sampleCard.querySelector('#temp');
+        expect($(currentTemp).text()).toContain('Current Temperature:50F');
+    });
 
     describe('getMoreTemperatureData sets the current temperature', function () {
 
         var currentTemp;
 
-        describe('from px.dealer', function () {
-
-            beforeEach(function (done) {
-                window.px.dealer = {
-                    getData: function () {
-                        return new Promise(function (resolve, reject) {
-                            resolve({
-                                value: 100
-                            });
+        px.beforeEachAsync(function(){
+            window.px.dealer = {
+                getData: function () {
+                    return new Promise(function (resolve, reject) {
+                        resolve({
+                            value: 100
                         });
-                    }
-                };
+                    });
+                }
+            };
 
-                currentTemp = sampleCard.querySelector('#temp');
-                sampleCard.getMoreTemperatureData();
-
-                px.test.webComponentWait(done);
-            });
-
-            it('!', function () {
-                expect($(currentTemp).text()).toContain('Current Temperature:100F');
-            });
+            currentTemp = sampleCard.querySelector('#temp');
+            sampleCard.getMoreTemperatureData();
         });
 
-        describe('handles the error', function () {
+        it('should return temperature from dealer', function () {
+            expect($(currentTemp).text()).toContain('Current Temperature:100F');
+        });
 
-            beforeEach(function (done) {
-                window.px.dealer = {
-                    getData: function () {
-                        return new Promise(function (resolve, reject) {
-                            reject('error');
-                        });
-                    }
-                };
+    });
 
-                currentTemp = sampleCard.querySelector('#temp');
-                sampleCard.getMoreTemperatureData();
+    describe('handles the error', function () {
+        var currentTemp;
 
-                px.test.webComponentWait(done);
-            });
+        px.beforeEachAsync(function(){
+            window.px.dealer = {
+                getData: function () {
+                    return new Promise(function (resolve, reject) {
+                        reject('error');
+                    });
+                }
+            };
 
-            it('!', function () {
-                expect($(currentTemp).text()).toContain('Current Temperature:errorF');
-            });
+            currentTemp = sampleCard.querySelector('#temp');
+            sampleCard.getMoreTemperatureData();
+        });
+
+        it('should show error on card', function () {
+            expect($(currentTemp).text()).toContain('Current Temperature:errorF');
         });
     });
 });

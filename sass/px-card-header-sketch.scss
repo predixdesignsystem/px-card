@@ -44,10 +44,8 @@ in import paths
 @import "../px-viewport-design/base.viewport";
 @import "../px-typography-design/base.typography";
 
-// Objects
-
-$inuit-enable-btn--small              : true;
-$inuit-enable-btn--primary            : true;
-
-@import "../px-buttons-design/objects.buttons";
 @import "../px-layout-design/_objects.layout";
+
+.card-header {
+  height: 30px;
+}

@@ -42,8 +42,9 @@ module.exports = function (grunt) {
                     'css/px-card-sketch.css': 'sass/px-card-sketch.scss',
                     'css/px-card.css': 'sass/px-card-predix.scss',
                     'css/px-card-controls-sketch.css': 'sass/px-card-controls-sketch.scss',
-                    'css/px-card-controls.css': 'sass/px-card-controls-predix.scss'
-
+                    'css/px-card-controls.css': 'sass/px-card-controls-predix.scss',
+                    'css/px-card-header-sketch.css': 'sass/px-card-header-sketch.scss',
+                    'css/px-card-header.css': 'sass/px-card-header-predix.scss'
                 }
             }
         },

@@ -41,6 +41,10 @@
         //    cards/fetch-data-card.html has an example of using this.getData
         //    cards/widget-to-widget-card.html has an example of binding widgets together
         //    cards/time-series-card.html has an example of the px-ts-chart widget, getData, and init
-        behaviors: [px.card]
+        behaviors: [px.card],
+        attached: function(){
+          this.toggleClass('layout');
+          this.toggleClass('m--');
+        }
     });
 </script>

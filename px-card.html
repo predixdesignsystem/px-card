@@ -5,6 +5,9 @@
     See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-card-behavior.html"/>
+<link rel="import" href="px-card-header.html"/>
+
 <!--
 Element providing basic styling and behaviors (API) for card
 
@@ -48,18 +51,24 @@ Element providing basic styling and behaviors (API) for card
 -->
 
 <dom-module id="px-card">
-    <link rel="import" type="css" href="css/px-card.css"/>
-    <template>
-        <div style="border:black 2px solid;">
-            <content></content>
-        </div>
-    </template>
+  <link rel="import" type="css" href="css/px-card.css"/>
+  <template>
+    <div class="layout__item box box--tiny">
+      <px-card-header header-text="Card Header"></px-card-header>
+      <content></content>
+    </div>
+  </template>
 </dom-module>
 
 <script type="text/javascript">
 
     Polymer({
-        is: 'px-card'
+      is: 'px-card',
+      behaviors: [px.cardBehavior],
+      attached: function(){
+        this.toggleClass('layout');
+        this.toggleClass('m--');
+      }
     });
 
     (function() {

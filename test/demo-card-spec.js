@@ -1,23 +1,14 @@
 'use strict';
 describe('Demo Card', function () {
 
-    var $testContainer;
     var demoCard;
 
-    beforeEach(function (done) {
-        setFixtures(sandbox({
-            id: 'test-container'
-        }));
-
-        //fake widget container
-        $testContainer = $('#test-container');
-        $testContainer.append('<demo-card id="my-demo-card"></demo-card>');
-
-        px.test.webComponentWait(done);
+    px.beforeEachWithFixture(function () {
+        $fixture.append('<demo-card id="my-demo-card"></demo-card>');
+        demoCard = $fixture.get(0).querySelector('demo-card');
     });
 
     it('should display context', function () {
-        demoCard = $testContainer.get(0).querySelector('demo-card');
 
         var stubContext = {
             name: 'Stub Context Name'
@@ -27,21 +18,18 @@ describe('Demo Card', function () {
         expect($(demoCard).text()).toContain(stubContext.name);
     });
 
-    it('is initially shown', function(){
-        demoCard = $testContainer.get(0).querySelector('demo-card');
-        expect(px.test.isHidden(demoCard)).toBe(false);
+    it('is initially shown', function () {
+        expect(px.isHidden(demoCard)).toBe(false);
     });
 
-    it('should be able to hide', function(){
-        demoCard = $testContainer.get(0).querySelector('demo-card');
+    it('should be able to hide', function () {
         demoCard.hideCard();
-        expect(px.test.isHidden(demoCard)).toBe(true);
+        expect(px.isHidden(demoCard)).toBe(true);
     });
 
-    it('should be able to be shown if it is hidden', function(){
-        demoCard = $testContainer.get(0).querySelector('demo-card');
+    it('should be able to be shown if it is hidden', function () {
         demoCard.hideCard();
         demoCard.showCard();
-        expect(px.test.isHidden(demoCard)).toBe(false);
+        expect(px.isHidden(demoCard)).toBe(false);
     });
 });

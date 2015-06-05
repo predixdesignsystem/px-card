@@ -1,28 +1,18 @@
 'use strict';
 describe('Add card to deck', function () {
 
-    var $testContainer, $pxDeck, pxDeck;
+    var $pxDeck, pxDeck;
 
-    beforeEach(function (done) {
-        setFixtures(sandbox({
-            id: 'test-container'
-        }));
-
-        //fake widget container
-        $testContainer = $('#test-container');
-        $testContainer.append('<px-deck></px-deck>');
-
-        px.test.webComponentWait(done);
+    px.beforeEachWithFixture(function () {
+        $fixture.append('<px-deck></px-deck>');
     });
 
     describe('1 card', function () {
 
-        beforeEach(function(done){
+        px.beforeEachAsync(function(){
             $pxDeck = $('px-deck');
             pxDeck = document.querySelector('px-deck');
             pxDeck.add('sample-card', '123');
-
-            px.test.webComponentWait(done);
         });
 
         it('can be initialized', function() {
@@ -52,14 +42,12 @@ describe('Add card to deck', function () {
 
     describe('able to add more cards', function () {
 
-        beforeEach(function(done) {
+        px.beforeEachAsync(function() {
             $pxDeck = $('px-deck');
             pxDeck = document.querySelector('px-deck');
             pxDeck.add('sample-card', 'card1');
             pxDeck.add('sample-card', 'card2');
             pxDeck.add('sample-card', 'card3');
-
-            px.test.webComponentWait(done);
         });
 
         it('adds all the cards', function() {

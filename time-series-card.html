@@ -26,7 +26,10 @@
                 });
             });
         },
-        behaviors: [px.card]
+        behaviors: [px.card],
+        attached: function(){
+          this.toggleClass('layout');
+          this.toggleClass('m--');
+        }
     });
 </script>
-

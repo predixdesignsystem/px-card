@@ -1,0 +1,21 @@
+<link rel="import" href="../polymer/polymer.html"/>
+
+<dom-module id="px-card-header">
+  <link rel="import" type="css" href="css/px-card-header.css">
+  <template>
+    <h3 class="card-header">{{headerText}}</h3>
+  </template>
+</dom-module>
+
+<script type="text/javascript">
+
+    Polymer({
+      is: 'px-card-header',
+      properties:{
+        headerText:{
+          type: String
+        }
+      }
+    });
+
+</script>
