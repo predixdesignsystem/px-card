@@ -16,6 +16,11 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
 in import paths
 */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -28,6 +33,11 @@ in import paths
 /**
  * Sass mixins for Predix Experience
  */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -35,6 +45,11 @@ in import paths
  * Sass functions for Predix Experience
  */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -65,8 +80,8 @@ html {
   /* [1] */
   line-height: 1.3333333333;
   /* [1] */
-  background-color: white;
-  color: black;
+  background-color: #fff;
+  color: #000;
   overflow-y: scroll;
   /* [2] */
   min-height: 100%;
@@ -261,25 +276,34 @@ td, th {
   padding: 0; }
 
 /*------------------------------------*\
+    #PX-BOX-SIZING-DESIGN
+\*------------------------------------*/
+/*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
 /**
  * Sass functions for Predix Experience
  */
 /**
- * Set the global `box-sizing` state to `border-box`.
- *
- * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
- * paulirish.com/2012/box-sizing-border-box-ftw
- */
+   * Set the global `box-sizing` state to `border-box`.
+   *
+   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+   * paulirish.com/2012/box-sizing-border-box-ftw
+   */
 html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 :host {
   /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 *, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
 /*------------------------------------*\
@@ -532,6 +556,11 @@ html {
 /**
 * Define a default max viewport
 */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -566,6 +595,11 @@ html {
 /**
  * Base typographic styles for Predix Experience
  */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -583,6 +617,11 @@ html {
 \*------------------------------------*/
 /**
  * Sass mixins for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
  */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
@@ -696,6 +735,11 @@ small {
   font-size: 0.8rem;
   line-height: 1.6666666667; }
 
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -741,6 +785,29 @@ small {
 /**
      * Dark
      */
+/*------------------------------------*\
+    #PX-MIXINS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass mixins for Predix Experience
+ */
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
+/*------------------------------------*\
+    #PX-FUNCTIONS-DESIGN
+\*------------------------------------*/
+/**
+ * Sass functions for Predix Experience
+ */
 .btn {
   display: inline-block;
   overflow: visible;
@@ -801,6 +868,11 @@ small {
 /*------------------------------------*\
     #PX-LAYOUT-DESIGN
 \*------------------------------------*/
+/*!
+ * inuitcss, by @csswizardry
+ *
+ * github.com/inuitcss | inuitcss.com
+ */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/

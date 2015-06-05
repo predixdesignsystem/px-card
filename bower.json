@@ -1,30 +1,31 @@
 {
-  "name": "px-card",
-  "version": "0.0.1",
-  "main": [
-    "px-card.html"
-  ],
-  "ignore": [
-    ".*",
-    "npm-debug.log",
-    "Gruntfile.js",
-    "sass",
-    "bower_components",
-    "node_modules",
-    "test"
-  ],
-  "dependencies": {
-    "polymer": "~v1.0.2",
-    "px": "git://github.build.ge.com/Predix-Experience/px.git",
-    "es6-promise": "git://github.com/jakearchibald/es6-promise.git"
-  },
-  "devDependencies": {
-    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v1.0.2",
-    "px-starter-kit-design": "git://github.build.ge.com/PXd/px-starter-kit-design.git#~0.1.1",
-    "px-buttons-design": "git://github.build.ge.com/PXd/px-buttons-design.git#~0.2.3",
-    "px-ts-chart": "git://github.build.ge.com/PXc/px-time-series.git#master",
-    "px-layout-design": "https://github.build.ge.com/PXd/px-layout-design.git#~0.1.1",
-    "jquery": "~2.1.4",
-    "px-box-design": "https://github.build.ge.com/PXd/px-box-design.git#~0.1.2"
-  }
+    "name": "px-card",
+    "version": "0.0.1",
+    "main": [
+        "px-card.html"
+    ],
+    "ignore": [
+        ".*",
+        "npm-debug.log",
+        "Gruntfile.js",
+        "sass",
+        "bower_components",
+        "node_modules",
+        "test"
+    ],
+    "dependencies": {
+        "polymer": "~v1.0.2",
+        "px": "git://github.build.ge.com/Predix-Experience/px.git",
+        "es6-promise": "git://github.com/jakearchibald/es6-promise.git"
+    },
+    "devDependencies": {
+        "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v1.0.2",
+        "px-starter-kit-design": "git://github.build.ge.com/PXd/px-starter-kit-design.git#~0.1.1",
+        "px-buttons-design": "git://github.build.ge.com/PXd/px-buttons-design.git#~0.2.3",
+        "px-ts-chart": "git://github.build.ge.com/PXc/px-time-series.git#master",
+        "px-layout-design": "https://github.build.ge.com/PXd/px-layout-design.git#~0.1.1",
+        "jquery": "~2.1.4",
+        "px-box-design": "https://github.build.ge.com/PXd/px-box-design.git#~0.1.2",
+        "jasmine-jquery": "~2.1.0"
+    }
 }

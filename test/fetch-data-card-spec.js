@@ -3,41 +3,26 @@ describe('Fetch Data Card', function () {
 
     var sampleCard;
 
-    beforeEach(function () {
-        // create a new sandbox
-        setFixtures(sandbox({
-            id: 'test-container'
-        }));
-        var $testContainer = $('#test-container');
-
+    px.beforeEachWithFixture(function () {
         // append the web component to test
-        $testContainer.append('<fetch-data-card></fetch-data-card>');
-
-        // once the web component is rendered, initialize it
-        px.test.webComponentWait(function () {
-            sampleCard = $testContainer.get(0).querySelector('fetch-data-card');
-            window.px.dealer = {
-                getData: function () {
-                    return new Promise(function (resolve, reject) {
-                        resolve({
-                            value: 50
-                        });
-                    });
-                }
-            };
-
-            var currentTemp = sampleCard.querySelector('#temp');
-            var tempB4 = $(currentTemp).text();
-            sampleCard.init();
-            waitsFor(function () {
-                var newCurrentTemp = $(currentTemp).text();
-                return newCurrentTemp !== tempB4;
-            }, 50);
-        });
+        $fixture.append('<fetch-data-card id="my-fetch-data-card"></fetch-data-card>');
+        sampleCard = $fixture.get(0).querySelector('fetch-data-card');
     });
 
-    afterEach(function () {
-        $('#test-container').remove();
+    px.beforeEachAsync(function () {
+        window.px.dealer = {
+            getData: function () {
+                return new Promise(function (resolve, reject) {
+                    resolve({
+                        value: 50
+                    });
+                });
+            }
+        };
+
+        var currentTemp = sampleCard.querySelector('#temp');
+        var tempB4 = $(currentTemp).text();
+        sampleCard.init();
     });
 
     it('should initialize from px.dealer', function () {
@@ -47,9 +32,9 @@ describe('Fetch Data Card', function () {
 
     describe('getMoreTemperatureData sets the current temperature', function () {
 
-        it('from px.dealer', function () {
-            var currentTemp = sampleCard.querySelector('#temp');
-            var tempB4 = $(currentTemp).text();
+        var currentTemp;
+
+        px.beforeEachAsync(function(){
             window.px.dealer = {
                 getData: function () {
                     return new Promise(function (resolve, reject) {
@@ -59,17 +44,21 @@ describe('Fetch Data Card', function () {
                     });
                 }
             };
+
+            currentTemp = sampleCard.querySelector('#temp');
             sampleCard.getMoreTemperatureData();
-            waitsFor(function () {
-                var newCurrentTemp = $(currentTemp).text();
-                return newCurrentTemp !== tempB4;
-            }, 50);
-            runs(function () {
-                expect($(currentTemp).text()).toContain('Current Temperature:100F');
-            });
         });
 
-        it('handles the error', function () {
+        it('should return temperature from dealer', function () {
+            expect($(currentTemp).text()).toContain('Current Temperature:100F');
+        });
+
+    });
+
+    describe('handles the error', function () {
+        var currentTemp;
+
+        px.beforeEachAsync(function(){
             window.px.dealer = {
                 getData: function () {
                     return new Promise(function (resolve, reject) {
@@ -77,16 +66,13 @@ describe('Fetch Data Card', function () {
                     });
                 }
             };
-            var currentTemp = sampleCard.querySelector('#temp');
-            var tempB4 = $(currentTemp).text();
+
+            currentTemp = sampleCard.querySelector('#temp');
             sampleCard.getMoreTemperatureData();
-            waitsFor(function () {
-                var newCurrentTemp = $(currentTemp).text();
-                return newCurrentTemp !== tempB4;
-            }, 50);
-            runs(function () {
-                expect($(currentTemp).text()).toContain('Current Temperature:errorF');
-            });
+        });
+
+        it('should show error on card', function () {
+            expect($(currentTemp).text()).toContain('Current Temperature:errorF');
         });
     });
 });

@@ -37,10 +37,10 @@
     <p>
         Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
     </p>
-    <demo-card></demo-card>
+    <demo-card id="my-demo-card"></demo-card>
+    <time-series-card id="my-ts-card"></time-series-card>
+    <widget-to-widget-card id="w2wcard"></widget-to-widget-card>
     <sample-card id="my-card"></sample-card>
-    <time-series-card></time-series-card>
-    <widget-to-widget-card></widget-to-widget-card>
 
     <h3>Card to Card communication</h3>
 
@@ -49,7 +49,25 @@
         <sample-card id="sample-card-2"></sample-card>
     </px-deck>
 
+    <h1>API demonstration</h1>
+    <button onclick="addCard()">Add sample-card to my-deck</button>
+    <button onclick="showCard()">Show my-card</button>
+    <button onclick="hideCard()">Hide my-card</button>
+
     <script>
+
+        addCard = function() {
+            document.querySelector('#my-deck').add('sample-card', new Date().getTime());
+        };
+
+        showCard = function() {
+            document.querySelector('#my-card').showCard();
+        };
+
+        hideCard = function() {
+            document.querySelector('#my-card').hideCard();
+        };
+
         px.dealer = {
             getData: function(url) {
                 return new Promise(function(resolve, reject) {

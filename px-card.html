@@ -108,10 +108,14 @@ Element providing basic styling and behaviors (API) for card
             ready: function() {
                 this.addEventListener('px-card-refresh', this._refresh);
                 //console.log('----------> card-ready!!');
+
             },
             attached: function(){
                 //console.log('----> card-attached!!');
                 this.fire('px-card-ready');
+                if (!this.id){
+                    throw 'Card ' + this.tagName + ' cannot be created without an id!';
+                }
             },
             init: function() {
                 // this default init function is needed in case they don't implement init
