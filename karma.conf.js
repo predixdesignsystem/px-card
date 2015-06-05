@@ -15,7 +15,7 @@ module.exports = function(config) {
             'test/px-test.js',
             'bower_components/jquery/dist/jquery.min.js',
             'test/lib/jasmine-fixture.min.js',
-            'test/lib/jasmine-jquery.js',
+            'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
 
             //App Bower components
             {pattern: 'bower_components/webcomponentsjs/webcomponents.js', included: true},

@@ -4,8 +4,7 @@ describe('Demo Card', function () {
     var $testContainer;
     var demoCard;
 
-    beforeEach(function () {
-
+    beforeEach(function (done) {
         setFixtures(sandbox({
             id: 'test-container'
         }));
@@ -14,12 +13,12 @@ describe('Demo Card', function () {
         $testContainer = $('#test-container');
         $testContainer.append('<demo-card id="my-demo-card"></demo-card>');
 
-        px.test.webComponentWait(function() {
-            demoCard = $testContainer.get(0).querySelector('demo-card');
-        });
+        px.test.webComponentWait(done);
     });
 
     it('should display context', function () {
+        demoCard = $testContainer.get(0).querySelector('demo-card');
+
         var stubContext = {
             name: 'Stub Context Name'
         };
@@ -29,21 +28,20 @@ describe('Demo Card', function () {
     });
 
     it('is initially shown', function(){
+        demoCard = $testContainer.get(0).querySelector('demo-card');
         expect(px.test.isHidden(demoCard)).toBe(false);
     });
 
     it('should be able to hide', function(){
+        demoCard = $testContainer.get(0).querySelector('demo-card');
         demoCard.hideCard();
         expect(px.test.isHidden(demoCard)).toBe(true);
     });
 
     it('should be able to be shown if it is hidden', function(){
+        demoCard = $testContainer.get(0).querySelector('demo-card');
         demoCard.hideCard();
         demoCard.showCard();
         expect(px.test.isHidden(demoCard)).toBe(false);
-    });
-
-    afterEach(function () {
-        $('#test-container').remove();
     });
 });
