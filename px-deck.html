@@ -59,6 +59,7 @@
         },
         ready: function() {
             //console.log('----------> deck-ready!!');
+            this.state = {};
         },
         attached: function() {
             //console.log('----> deck-attached!!');
@@ -67,10 +68,16 @@
             //console.log('px-deck init is called');
         },
         updateState: function(cardId, state) {
+            var newState = {};
+            Polymer.Base.mixin(newState, this.state);
+            Polymer.Base.mixin(newState, state);
+            this.state = newState;
+
+            var self = this;
             this.cards.forEach(function(card) {
                 // only update cards with different ids
                 if (card.id !== cardId) {
-                    card.deckState = state;
+                    card.set('deckState', self.state);
                 }
             });
         },

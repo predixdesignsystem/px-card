@@ -72,4 +72,62 @@ describe('Card to card communication', function () {
 
     });
 
+    describe('with 4 cards with different shared state', function(){
+
+        var card1, card2, card3, card4;
+
+        px.beforeEachAsync(function () {
+            $pxDeck = $('px-deck');
+            $pxDeck.append('<sample-card id="card1"></sample-card>');
+            $pxDeck.append('<sample-card id="card2"></sample-card>');
+            $pxDeck.append('<sample-card2 id="card3"></sample-card2>');
+            $pxDeck.append('<sample-card2 id="card4"></sample-card2>');
+        });
+
+        it('initializes the cards', function(){
+            card1 = $fixture.get(0).querySelector('#card1');
+            card2 = $fixture.get(0).querySelector('#card2');
+            card3 = $fixture.get(0).querySelector('#card3');
+            card4 = $fixture.get(0).querySelector('#card4');
+
+            expect(card1.chartState.min).toBe(0);
+            expect(card2.chartState.min).toBe(0);
+            expect(card1.chartState.max).toBe(100);
+            expect(card2.chartState.max).toBe(100);
+            expect(card3.count).toBe(5);
+            expect(card4.count).toBe(5);
+        });
+
+        it('zoom in one card should change zoom on another card, but not affect ones without zoom', function(){
+            card1 = $fixture.get(0).querySelector('#card1');
+            card2 = $fixture.get(0).querySelector('#card2');
+            card3 = $fixture.get(0).querySelector('#card3');
+            card4 = $fixture.get(0).querySelector('#card4');
+
+            card1.chartState = {min: 12, max: 76};
+            expect(card1.chartState.min).toBe(12);
+            expect(card1.chartState.max).toBe(76);
+            expect(card2.chartState.min).toBe(12);
+            expect(card2.chartState.max).toBe(76);
+            expect(card3.count).toBe(5);
+            expect(card4.count).toBe(5);
+        });
+
+        it('changing count should only affect cards with count', function(){
+            card1 = $fixture.get(0).querySelector('#card1');
+            card2 = $fixture.get(0).querySelector('#card2');
+            card3 = $fixture.get(0).querySelector('#card3');
+            card4 = $fixture.get(0).querySelector('#card4');
+
+            card3.broadcastCount();
+            expect(card1.chartState.min).toBe(0);
+            expect(card2.chartState.min).toBe(0);
+            expect(card1.chartState.max).toBe(100);
+            expect(card2.chartState.max).toBe(100);
+            expect(card3.count).toBe(6);
+            expect(card4.count).toBe(6);
+        });
+
+    });
+
 });

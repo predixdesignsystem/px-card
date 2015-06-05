@@ -27,6 +27,7 @@ module.exports = function(config) {
             {pattern: 'bower_components/test/demo-card.html', included: true},
             {pattern: 'bower_components/test/fetch-data-card.html', included: true},
             {pattern: 'bower_components/test/sample-card.html', included: true},
+            {pattern: 'bower_components/test/sample-card2.html', included: true},
 
             //Tests
             {pattern: 'test/*-spec.js', included: true}
