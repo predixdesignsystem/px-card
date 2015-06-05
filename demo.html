@@ -14,6 +14,7 @@
 
     <link rel="import" href="demo-card.html"/>
     <link rel="import" href="sample-card.html"/>
+    <link rel="import" href="sample-card2.html"/>
     <link rel="import" href="time-series-card.html"/>
     <link rel="import" href="widget-to-widget-card.html"/>
     <link rel="import" type="css" href="../px-theme/px-app.html"/>
@@ -59,6 +60,14 @@
         <button onclick="showCard()">Show demo card</button>
         <button onclick="hideCard()">Hide demo card</button>
     </div>
+
+    <h3>Another example of card to Card communication</h3>
+    <px-deck id="decka">
+        <sample-card id="a1"></sample-card>
+        <sample-card id="a2"></sample-card>
+        <sample-card2 id="a3"></sample-card2>
+        <sample-card2 id="a4"></sample-card2>
+    </px-deck>
 
     <script>
 
