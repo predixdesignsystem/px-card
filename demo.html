@@ -2,27 +2,27 @@
 
 <html>
 <head>
-  <title>px-card Demo</title>
+    <title>px-card Demo</title>
 
-  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <script src="../webcomponentsjs/webcomponents.js"></script>
-  <script src="../px/dist/px.min.js"></script>
-  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+    <script src="../webcomponentsjs/webcomponents.js"></script>
+    <script src="../px/dist/px.min.js"></script>
+    <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
 
-  <link rel="import" href="px-deck.html"/>
-  <link rel="import" href="px-card.html"/>
+    <link rel="import" href="px-deck.html"/>
+    <link rel="import" href="px-card.html"/>
 
-  <link rel="import" href="demo-card.html"/>
-  <link rel="import" href="sample-card.html"/>
-  <link rel="import" href="time-series-card.html"/>
-  <link rel="import" href="widget-to-widget-card.html"/>
-  <link rel="import" type="css" href="../px-theme/px-app.html"/>
+    <link rel="import" href="demo-card.html"/>
+    <link rel="import" href="sample-card.html"/>
+    <link rel="import" href="time-series-card.html"/>
+    <link rel="import" href="widget-to-widget-card.html"/>
+    <link rel="import" type="css" href="../px-theme/px-app.html"/>
 
-  <style>
-    html{
-    background-color: white !important;
-    }
-  </style>
+    <style>
+        html {
+            background-color: white !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,45 +37,50 @@
     <p>
         Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
     </p>
-    <demo-card id="my-demo-card"></demo-card>
     <time-series-card id="my-ts-card"></time-series-card>
     <widget-to-widget-card id="w2wcard"></widget-to-widget-card>
     <sample-card id="my-card"></sample-card>
 
-    <h3>Card to Card communication</h3>
+    <div>
+        <h3>Card to Card communication</h3>
+        <px-deck id="my-deck">
+            <sample-card id="sample-card-1"></sample-card>
+            <sample-card id="sample-card-2"></sample-card>
+        </px-deck>
 
-    <px-deck id="my-deck">
-        <sample-card id="sample-card-1"></sample-card>
-        <sample-card id="sample-card-2"></sample-card>
-    </px-deck>
+        <h3>Add/Remove cards from deck</h3>
+        <button onclick="addCard()">Add sample-card to my-deck</button>
+        <button onclick="removeCard()">Remove card sample-card-1</button>
+    </div>
 
-    <h1>API demonstration</h1>
-    <button onclick="addCard()">Add sample-card to my-deck</button>
-    <button onclick="removeCard()">Remove card sample-card-1</button>
-    <button onclick="showCard()">Show my-card</button>
-    <button onclick="hideCard()">Hide my-card</button>
+    <div>
+        <h3>Show/Hide card</h3>
+        <demo-card id="my-demo-card"></demo-card>
+        <button onclick="showCard()">Show demo card</button>
+        <button onclick="hideCard()">Hide demo card</button>
+    </div>
 
     <script>
 
-        addCard = function() {
+        addCard = function () {
             document.querySelector('#my-deck').addCard('sample-card', new Date().getTime());
         };
 
-        removeCard = function() {
+        removeCard = function () {
             document.querySelector('#my-deck').removeCardById('sample-card-1');
         };
 
-        showCard = function() {
-            document.querySelector('#my-card').showCard();
+        showCard = function () {
+            document.querySelector('#my-demo-card').showCard();
         };
 
-        hideCard = function() {
-            document.querySelector('#my-card').hideCard();
+        hideCard = function () {
+            document.querySelector('#my-demo-card').hideCard();
         };
 
         px.dealer = {
-            getData: function(url) {
-                return new Promise(function(resolve, reject) {
+            getData: function (url) {
+                return new Promise(function (resolve, reject) {
                     resolve([
                         {
                             "sample_size": 1071,
