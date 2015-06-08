@@ -52,10 +52,10 @@ Element providing basic styling and behaviors (API) for card
 <dom-module id="px-card">
   <link rel="import" type="css" href="css/px-card.css"/>
   <template>
-    <div class="layout__item box box--tiny">
+    <!-- <div class="layout__item box box--tiny"> -->
       <px-card-header header-text="Card Header"></px-card-header>
       <content></content>
-    </div>
+    <!-- </div> -->
   </template>
 </dom-module>
 
@@ -140,12 +140,8 @@ Element providing basic styling and behaviors (API) for card
     })();
 
     Polymer({
-      is: 'px-card',
-//      behaviors: [px.card],
-      attached: function(){
-        this.toggleClass('layout');
-        this.toggleClass('m--');
-      }
+      is: 'px-card'
+    }
     });
 
 </script>

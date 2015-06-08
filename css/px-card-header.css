@@ -29,11 +29,6 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
 in import paths
 */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -46,11 +41,6 @@ in import paths
 /**
  * Sass mixins for Predix Experience
  */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -58,11 +48,6 @@ in import paths
  * Sass functions for Predix Experience
  */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -93,8 +78,8 @@ html {
   /* [1] */
   line-height: 1.3333333333;
   /* [1] */
-  background-color: #fff;
-  color: #000;
+  background-color: white;
+  color: black;
   overflow-y: scroll;
   /* [2] */
   min-height: 100%;
@@ -289,34 +274,25 @@ td, th {
   padding: 0; }
 
 /*------------------------------------*\
-    #PX-BOX-SIZING-DESIGN
-\*------------------------------------*/
-/*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
 /**
  * Sass functions for Predix Experience
  */
 /**
-   * Set the global `box-sizing` state to `border-box`.
-   *
-   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
-   * paulirish.com/2012/box-sizing-border-box-ftw
-   */
+ * Set the global `box-sizing` state to `border-box`.
+ *
+ * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+ * paulirish.com/2012/box-sizing-border-box-ftw
+ */
 html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 :host {
   /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 *, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
   box-sizing: inherit; }
 
 /*------------------------------------*\
@@ -569,11 +545,6 @@ html {
 /**
 * Define a default max viewport
 */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -608,11 +579,6 @@ html {
 /**
  * Base typographic styles for Predix Experience
  */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -630,11 +596,6 @@ html {
 \*------------------------------------*/
 /**
  * Sass mixins for Predix Experience
- */
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
  */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
@@ -751,11 +712,6 @@ small {
 /*------------------------------------*\
     #PX-LAYOUT-DESIGN
 \*------------------------------------*/
-/*!
- * inuitcss, by @csswizardry
- *
- * github.com/inuitcss | inuitcss.com
- */
 /*------------------------------------*\
     #PX-FUNCTIONS-DESIGN
 \*------------------------------------*/
@@ -791,23 +747,23 @@ small {
        * 2. Full-width unless told to behave otherwise.
        * 3. Required to combine fluid widths and fixed gutters.
        */
-.layout__item {
+.layout__item, :host {
   padding-left: 1rem;
   /* [1] */
   flex: 1;
   /* [2] */
   flex-basis: 20rem; }
-  .layout__item:nth-last-child(-n+3):first-child, .layout__item:nth-last-child(-n+3):first-child ~ .layout__item {
+  .layout__item:nth-last-child(-n+3):first-child, :nth-last-child(-n+3):first-child:host, .layout__item:nth-last-child(-n+3):first-child ~ .layout__item, :nth-last-child(-n+3):first-child:host ~ .layout__item, .layout__item:nth-last-child(-n+3):first-child ~ :host, :nth-last-child(-n+3):first-child:host ~ :host {
     flex-basis: 40rem; }
     @media screen and (min-width: 80rem) {
-      .layout__item:nth-last-child(-n+3):first-child, .layout__item:nth-last-child(-n+3):first-child ~ .layout__item {
+      .layout__item:nth-last-child(-n+3):first-child, :nth-last-child(-n+3):first-child:host, .layout__item:nth-last-child(-n+3):first-child ~ .layout__item, :nth-last-child(-n+3):first-child:host ~ .layout__item, .layout__item:nth-last-child(-n+3):first-child ~ :host, :nth-last-child(-n+3):first-child:host ~ :host {
         flex-basis: 0; } }
   @media screen and (min-width: 80rem) {
-    .layout__item {
+    .layout__item, :host {
       flex-basis: 0; } }
 
-.card-header {
-  height: 30px; }
+:host {
+  height: 60px; }
 
 .card-header {
   border-bottom: 1px solid gray; }

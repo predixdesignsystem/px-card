@@ -53,10 +53,6 @@
             chartState: {
                 type: Object
             }
-        },
-        attached: function(){
-          this.toggleClass('layout');
-          this.toggleClass('m--');
         }
     });
 </script>
@@ -80,10 +76,6 @@
         tagsChanged: function(newTags, oldTags) {
             this.chartState = {series: newTags.base};
         },
-        behaviors: [px.card],
-        attached: function(){
-          this.toggleClass('layout');
-          this.toggleClass('m--');
-        }
+        behaviors: [px.card]
     });
 </script>

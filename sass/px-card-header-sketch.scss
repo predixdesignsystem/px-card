@@ -46,6 +46,7 @@ in import paths
 
 @import "../px-layout-design/_objects.layout";
 
-.card-header {
-  height: 30px;
+:host {
+  height: 60px;
+  @extend .layout__item;
 }
