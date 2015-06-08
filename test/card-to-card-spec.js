@@ -151,6 +151,14 @@ describe('Card to card communication', function () {
             expect(card1.chartState.max).toBe(55);
             expect(card2.chartState.min).toBe(5);
             expect(card2.chartState.max).toBe(55);
+
+            card2.showCard();
+
+            card1.chartState = {min: 6, max: 54};
+            expect(card1.chartState.min).toBe(6);
+            expect(card1.chartState.max).toBe(54);
+            expect(card2.chartState.min).toBe(6);
+            expect(card2.chartState.max).toBe(54);
         });
 
     });
