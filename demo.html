@@ -6,9 +6,12 @@
 
     <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
     <script src="../webcomponentsjs/webcomponents.js"></script>
+    <script src="../es6-promise/dist/es6-promise.min.js"></script>
     <script src="../px/dist/px.min.js"></script>
     <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
 
+    <!--Comment out angular implementation of dealer below-->
+    <!--<link rel="import" href="px-dealer.html">-->
     <link rel="import" href="px-deck.html"/>
     <link rel="import" href="px-card.html"/>
 
@@ -21,7 +24,7 @@
 
     <style>
         html {
-            background-color: #E8E8E8 !important;
+          background-color: #E8E8E8 !important;
         }
     </style>
 </head>
@@ -87,7 +90,8 @@
             document.querySelector('#my-demo-card').hideCard();
         };
 
-        px.dealer = {
+        //px dealer implementation without angular
+        window.px.dealer = {
             getData: function (url) {
                 return new Promise(function (resolve, reject) {
                     resolve([
@@ -164,15 +168,18 @@
             }
         };
 
-        document.querySelector('time-series-card').init();
+        document.addEventListener('WebComponentsReady', function(){
+          document.querySelector('time-series-card').init();
 
-        document.querySelector('#my-card').context = {
+          document.querySelector('#my-card').context = {
             name: 'Turbine72384'
-        };
+          };
 
-        document.querySelector('#my-deck').context = {
+          document.querySelector('#my-deck').context = {
             name: 'Turbine72384'
-        };
+          };
+        });
+
     </script>
 
 </body>

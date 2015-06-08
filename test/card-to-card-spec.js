@@ -130,4 +130,37 @@ describe('Card to card communication', function () {
 
     });
 
+    describe('with a hidden card', function(){
+
+        var card1, card2;
+
+        px.beforeEachAsync(function () {
+            $pxDeck = $('px-deck');
+            $pxDeck.append('<sample-card id="card1"></sample-card>');
+            $pxDeck.append('<sample-card id="card2"></sample-card>');
+        });
+
+        it('changes in one card should still affect the hidden card', function(){
+            card1 = $fixture.get(0).querySelector('#card1');
+            card2 = $fixture.get(0).querySelector('#card2');
+
+            card2.hideCard();
+
+            card1.chartState = {min: 5, max: 55};
+            expect(card1.chartState.min).toBe(5);
+            expect(card1.chartState.max).toBe(55);
+            expect(card2.chartState.min).toBe(5);
+            expect(card2.chartState.max).toBe(55);
+
+            card2.showCard();
+
+            card1.chartState = {min: 6, max: 54};
+            expect(card1.chartState.min).toBe(6);
+            expect(card1.chartState.max).toBe(54);
+            expect(card2.chartState.min).toBe(6);
+            expect(card2.chartState.max).toBe(54);
+        });
+
+    });
+
 });
