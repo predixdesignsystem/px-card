@@ -17,36 +17,12 @@ See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import
 in import paths
 */
 /*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
     #PX-MIXINS-DESIGN
 \*------------------------------------*/
 /**
  * Sass mixins for Predix Experience
  */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /**
    *
    * 1. Set the default `font-size` and `line-height` for the entire project,
@@ -260,12 +236,6 @@ table {
 td, th {
   padding: 0; }
 
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /**
  * Set the global `box-sizing` state to `border-box`.
  *
@@ -293,12 +263,6 @@ html {
  *
  * A lot of these classes carry `!important` as you will always want them to win
  * out over other selectors.
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
  */
 /**
    * Add/remove floats
@@ -466,12 +430,6 @@ html {
 /**
 * Flexbox for Predix Experience
 */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 .flex {
   display: flex; }
 
@@ -532,18 +490,6 @@ html {
 /**
 * Define a default max viewport
 */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 .viewport {
   width: 98%;
   max-width: 80rem;
@@ -567,28 +513,10 @@ html {
  * Base typographic styles for Predix Experience
  */
 /*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
     #PX-MIXINS-DESIGN
 \*------------------------------------*/
 /**
  * Sass mixins for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
  */
 @font-face {
   font-family: 'GE Inspira';
@@ -699,18 +627,6 @@ small {
 /*------------------------------------*\
     #PX-LAYOUT-DESIGN
 \*------------------------------------*/
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /**
  * The Predix Experience layout system uses `box-sizing: border-box;` and
  * `display: flex;` to create an extremely powerful, flexible
@@ -749,12 +665,6 @@ small {
     .layout__item {
       flex-basis: 0; } }
 
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /*------------------------------------*\
     #PX-COLORS-DESIGN
 \*------------------------------------*/
@@ -829,20 +739,8 @@ small {
   margin-left: 0.6666666667rem; }
 
 /*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
     #PX-CLEARFIX-DESIGN
 \*------------------------------------*/
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /**
    * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
    * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
@@ -872,12 +770,6 @@ small {
 /*------------------------------------*\
     #PX-CLEARFIX-DESIGN
 \*------------------------------------*/
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
 /**
    * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
    * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
@@ -893,18 +785,6 @@ small {
  * `.(m|p)(t|r|b|l|h|v)(-|+|0) {}` = margin/padding top/right/bottom/left/horizontal/vertical less/more/none
  */
 /*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
     #PX-SPACING-DESIGN
 \*------------------------------------*/
 /**
@@ -912,18 +792,6 @@ small {
  * level.
  *
  * `.(m|p)(t|r|b|l|h|v)(-|+|0) {}` = margin/padding top/right/bottom/left/horizontal/vertical less/more/none
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
  */
 /**
        * Margin helper classes.
@@ -1295,24 +1163,6 @@ small {
  * Responsive width classes based on your responsive settings.
  */
 /*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
     #WIDTHS
 \*------------------------------------*/
 /**
@@ -1321,24 +1171,6 @@ small {
  * word format (e.g. `.u-2-of-3`). Use these in your markup:
  *
  * <div class="u-7/12">
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
- */
-/*------------------------------------*\
-    #PX-FUNCTIONS-DESIGN
-\*------------------------------------*/
-/**
- * Sass functions for Predix Experience
  */
 .u-1\/1 {
   width: 100% !important; }

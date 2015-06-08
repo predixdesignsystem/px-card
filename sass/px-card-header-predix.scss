@@ -21,6 +21,6 @@ common/abstract rules go in px-card-sketch.scss, not in this file.
 
 @import 'px-card-header-sketch.scss';
 
-.card-header {
+:host{
   border-bottom: 1px solid gray;
 }
