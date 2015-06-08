@@ -12,7 +12,84 @@
 
     <!--Comment out angular implementation of dealer below-->
     <!--<link rel="import" href="px-dealer.html">-->
+    <link rel="import" href="px-deck.html"/>
+    <link rel="import" href="px-card.html"/>
+
+    <link rel="import" href="demo-card.html"/>
+    <link rel="import" href="sample-card.html"/>
+    <link rel="import" href="sample-card2.html"/>
+    <link rel="import" href="time-series-card.html"/>
+    <link rel="import" href="widget-to-widget-card.html"/>
+    <link rel="import" type="css" href="../px-theme/px-app.html"/>
+
+    <style>
+        html {
+          background-color: #E8E8E8 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Demo</h3>
+
+    <p>
+        Although related, examples are /not/ the same as the test fixtures.
+        Tests are tests, examples are examples.
+    </p>
+
+    <p>
+        Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
+    </p>
+    <time-series-card id="my-ts-card"></time-series-card>
+    <widget-to-widget-card id="w2wcard"></widget-to-widget-card>
+    <sample-card id="my-card"></sample-card>
+
+    <div>
+        <h3>Card to Card communication</h3>
+        <px-deck id="my-deck">
+            <sample-card id="sample-card-1"></sample-card>
+            <sample-card id="sample-card-2"></sample-card>
+        </px-deck>
+
+        <h3>Add/Remove cards from deck</h3>
+        <button onclick="addCard()">Add sample-card to my-deck</button>
+        <button onclick="removeCard()">Remove card sample-card-1</button>
+    </div>
+
+    <div>
+        <h3>Show/Hide card</h3>
+        <demo-card id="my-demo-card"></demo-card>
+        <button onclick="showCard()">Show demo card</button>
+        <button onclick="hideCard()">Hide demo card</button>
+    </div>
+
+    <h3>Another example of card to Card communication</h3>
+    <px-deck id="decka">
+        <sample-card id="a1"></sample-card>
+        <sample-card id="a2"></sample-card>
+        <sample-card2 id="a3"></sample-card2>
+        <sample-card2 id="a4"></sample-card2>
+    </px-deck>
+
     <script>
+
+        addCard = function () {
+            document.querySelector('#my-deck').addCard('sample-card', new Date().getTime());
+        };
+
+        removeCard = function () {
+            document.querySelector('#my-deck').removeCardById('sample-card-1');
+        };
+
+        showCard = function () {
+            document.querySelector('#my-demo-card').showCard();
+        };
+
+        hideCard = function () {
+            document.querySelector('#my-demo-card').hideCard();
+        };
+
         //px dealer implementation without angular
         window.px.dealer = {
             getData: function (url) {
@@ -91,93 +168,16 @@
             }
         };
 
-    </script>
-    <link rel="import" href="px-deck.html"/>
-    <link rel="import" href="px-card.html"/>
-    <link rel="import" href="demo-card.html"/>
-    <link rel="import" href="sample-card.html"/>
-    <link rel="import" href="sample-card2.html"/>
-    <link rel="import" href="time-series-card.html"/>
-    <link rel="import" href="widget-to-widget-card.html"/>
-    <link rel="import" type="css" href="../px-theme/px-app.html"/>
-    <style>
-        html {
-            background-color: white !important;
-        }
-    </style>
-</head>
-
-<body>
-
-    <h3>Demo</h3>
-
-    <p>
-        Although related, examples are /not/ the same as the test fixtures.
-        Tests are tests, examples are examples.
-    </p>
-
-    <p>
-        Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
-    </p>
-    <time-series-card id="my-ts-card"></time-series-card>
-    <widget-to-widget-card id="w2wcard"></widget-to-widget-card>
-    <sample-card id="my-card"></sample-card>
-
-    <div>
-        <h3>Card to Card communication</h3>
-        <px-deck id="my-deck">
-            <sample-card id="sample-card-1"></sample-card>
-            <sample-card id="sample-card-2"></sample-card>
-        </px-deck>
-
-        <h3>Add/Remove cards from deck</h3>
-        <button onclick="addCard()">Add sample-card to my-deck</button>
-        <button onclick="removeCard()">Remove card sample-card-1</button>
-    </div>
-
-    <div>
-        <h3>Show/Hide card</h3>
-        <demo-card id="my-demo-card"></demo-card>
-        <button onclick="showCard()">Show demo card</button>
-        <button onclick="hideCard()">Hide demo card</button>
-    </div>
-
-    <h3>Another example of card to Card communication</h3>
-    <px-deck id="decka">
-        <sample-card id="a1"></sample-card>
-        <sample-card id="a2"></sample-card>
-        <sample-card2 id="a3"></sample-card2>
-        <sample-card2 id="a4"></sample-card2>
-    </px-deck>
-
-    <script>
-
-        addCard = function () {
-            document.querySelector('#my-deck').addCard('sample-card', new Date().getTime());
-        };
-
-        removeCard = function () {
-            document.querySelector('#my-deck').removeCardById('sample-card-1');
-        };
-
-        showCard = function () {
-            document.querySelector('#my-demo-card').showCard();
-        };
-
-        hideCard = function () {
-            document.querySelector('#my-demo-card').hideCard();
-        };
-
         document.addEventListener('WebComponentsReady', function(){
-            document.querySelector('time-series-card').init();
+          document.querySelector('time-series-card').init();
 
-            document.querySelector('#my-card').context = {
-                name: 'Turbine72384'
-            };
+          document.querySelector('#my-card').context = {
+            name: 'Turbine72384'
+          };
 
-            document.querySelector('#my-deck').context = {
-                name: 'Turbine72384'
-            };
+          document.querySelector('#my-deck').context = {
+            name: 'Turbine72384'
+          };
         });
 
     </script>

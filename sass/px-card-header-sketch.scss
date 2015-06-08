@@ -44,9 +44,24 @@ in import paths
 @import "../px-viewport-design/base.viewport";
 @import "../px-typography-design/base.typography";
 
+$fa-font-path : "../font-awesome/fonts";
+
+@import "../px-iconography-design/base.iconography";
+
+$inuit-enable-layout--middle            : true;
+$inuit-enable-layout--center            : true;
+
 @import "../px-layout-design/_objects.layout";
+
+$inuit-enable-responsive-margins        : true;
+$inuit-enable-margins                   : true;
+
+@import "../px-spacing-responsive-design/trumps.spacing-responsive";
 
 :host {
   height: 60px;
-  @extend .layout__item;
+  @extend .layout;
+  @extend .m;
+  @extend .box;
+  @extend .box--tiny;
 }
