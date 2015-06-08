@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    (function(){
+        window.px = window.px || {};
+        //angular implementatio pf px-dealer
+        window.px.dealer = {
+            getData: function(url) {
+                if (window.angular) {
+                    //throw 'angular is missing';
+                    var $http = angular.element('body').injector().get("$http");
+
+                    return new Promise(function(resolve, reject) {
+                        $http.get(url).
+                                success(function(data, status, headers, config) {
+                                    resolve(data);
+                                }).
+                                error(function(data, status, headers, config) {
+                                    reject(data);
+                                });
+                    });
+                }
+            }
+        };
+    })();
+</script>
