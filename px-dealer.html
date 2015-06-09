@@ -18,6 +18,35 @@
                                 });
                     });
                 }
+            },
+            init: function() {
+                this.deckDefinitions = {
+                    'sample-cards': {
+                        name: 'SampleCards',
+                        url: 'views/sample-cards.html'
+                    },
+                    'fetch-data': {
+                        name: 'FetchData',
+                        url: 'views/fetch-data.html'
+                    },
+                    'card-to-card': {
+                        name: 'CardToCard',
+                        url: 'views/card-to-card.html'
+                    }
+                };
+
+                this.decksByClassification = {
+                    'farmEquipment': ['sample-cards', 'fetch-data'],
+                    'turbine': ['card-to-card']
+                };
+            },
+            getDecksByClassification: function(classification) {
+                var decks = [];
+                var self = this;
+                this.decksByClassification[classification].forEach(function(deckId){
+                    decks.push(self.deckDefinitions[deckId]);
+                });
+                return decks;
             }
         };
     })();
