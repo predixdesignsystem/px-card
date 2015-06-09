@@ -1,7 +1,14 @@
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../iron-ajax/iron-ajax.html"/>
+
 <dom-module id="px-dashboard">
     <template>
         <div id="container"></div>
+        <iron-ajax
+            auto
+            url="{{deckUrl}}"
+            handle-as="text"
+            on-response="handleResponse"></iron-ajax>
     </template>
 </dom-module>
 <script>
@@ -48,51 +55,30 @@
         },
         init: function() {
 //            console.log('px-dashboard init is called (does nothing)');
-//            document.querySelector('px-deck').init();
-
-
-
-
-//
-//          $scope.getViewList = function(classification){
-//            $scope.decks = [];
-//
-//            decksByClassification[classification].forEach(function(deckId){
-//              $scope.decks.push(viewDefinitions[deckId]);
-//            });
-//
-//            $scope.selectedDeck = $scope.decks[0].url;
-//          };
-//
-//          $scope.getViewList($scope.context.classification);
-
-
         },
         switchDeck: function(url) {
 
-            var self = this;
             var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
-                if (!px.dealer.loadedDecks[url]) {
-
-                    Polymer.Base.importHref(url, function(e) {
-                        var deck = e.target.import.body;
-                        container.appendChild(deck);
-                        px.dealer.loadedDecks[url] = deck;
-                        document.querySelector('px-deck').context = self.context;
-                    }, function(e) {
-
-                    });
-                }
-                else {
-                    container.appendChild(px.dealer.loadedDecks[url]);
-                    document.querySelector('px-deck').context = this.context;
-                }
+//                if (!px.dealer.loadedDecks[url]) {
+                    this.deckUrl = url;
+//                }
+//                else {
+//                    container.innerHTML = px.dealer.loadedDecks[url];
+//                    document.querySelector('px-deck').context = this.context;
+//                }
             }
             else {
                 console.log('there is no container');
             }
+        },
+        handleResponse: function(e) {
+            var deck = e.detail.response;
+            var container = this.$.container;
+            container.innerHTML = deck;
+            px.dealer.loadedDecks[url] = deck;
+            container.querySelector('px-deck').context = this.context;
         }
     };
 
