@@ -14,12 +14,12 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "~v1.0.2",
+    "polymer": "~v1.0.3",
     "px": "git://github.build.ge.com/Predix-Experience/px.git",
     "es6-promise": "git://github.com/jakearchibald/es6-promise.git"
   },
   "devDependencies": {
-    "iron-doc-viewer": "PolymerElements/iron-doc-viewer#~v1.0.2",
+    "iron-component-page": "PolymerElements/iron-component-page#~v1.0.4",
     "px-starter-kit-design": "git://github.build.ge.com/PXd/px-starter-kit-design.git#~0.1.1",
     "px-buttons-design": "git://github.build.ge.com/PXd/px-buttons-design.git#~0.2.3",
     "px-ts-chart": "git://github.build.ge.com/PXc/px-time-series.git#master",
