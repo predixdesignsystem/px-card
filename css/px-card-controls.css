@@ -29,12 +29,6 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
 in import paths
 */
-/*------------------------------------*\
-    #PX-MIXINS-DESIGN
-\*------------------------------------*/
-/**
- * Sass mixins for Predix Experience
- */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
    *
@@ -265,9 +259,6 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
-/*------------------------------------*\
-    #PX-HELPERS-DESIGN
-\*------------------------------------*/
 /**
  * A series of helper classes to use arbitrarily. Only use a helper class if an
  * element/component doesn’t already have a class to which you could apply this
@@ -318,8 +309,7 @@ html {
    * Mute an object by reducing its opacity.
    */
 .muted {
-  opacity: 0.5 !important;
-  filter: alpha(opacity=50) !important; }
+  opacity: 0.5 !important; }
 
 /**
    * Align items to the right where they imply progression/movement forward, e.g.:
@@ -435,7 +425,7 @@ html {
    * Hide visually and from screen readers, but maintain layout
    */
 .invisible {
-  visibility: hidden; }
+  visibility: hidden !important; }
 
 /*------------------------------------*\
     #PX-FLEXBOX-DESIGN
@@ -524,12 +514,6 @@ html {
 \*------------------------------------*/
 /**
  * Base typographic styles for Predix Experience
- */
-/*------------------------------------*\
-    #PX-MIXINS-DESIGN
-\*------------------------------------*/
-/**
- * Sass mixins for Predix Experience
  */
 @font-face {
   font-family: 'GE Inspira';

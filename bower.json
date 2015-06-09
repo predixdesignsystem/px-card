@@ -27,6 +27,6 @@
     "jquery": "~2.1.4",
     "px-box-design": "git://github.build.ge.com/PXd/px-box-design.git#~0.1.2",
     "jasmine-jquery": "~2.1.0",
-    "px-iconography-design": "git://github.build.ge.com/PXd/px-iconography-design.git#~0.1.3"
+    "px-iconography-design": "git://github.build.ge.com/PXd/px-iconography-design.git#~0.1.4"
   }
 }
