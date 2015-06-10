@@ -7,6 +7,11 @@ describe('remove card from deck', function () {
         $fixture.append('<px-deck><sample-card id="card1"></sample-card></px-deck>');
     });
 
+    it('is there initially', function() {
+        var card1 = document.querySelector('sample-card');
+        expect(card1.chartState.min).toBe(0);
+    });
+
     describe('remove a card', function () {
 
         px.beforeEachAsync(function () {

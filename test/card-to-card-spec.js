@@ -1,23 +1,21 @@
 'use strict';
-describe('Card to card communication', function () {
+describe('Card to card communication', function() {
 
     var $pxDeck;
 
-    px.beforeEachWithFixture(function(){
-        $fixture.append('<px-deck></px-deck>');
-    });
-
-    describe('with 2 cards', function(){
+    describe('with 2 cards', function() {
 
         var card1, card2;
 
-        px.beforeEachAsync(function () {
+        px.beforeEachWithFixture(function() {
+            $fixture.append('<px-deck>' +
+            '<sample-card id="card1"></sample-card>' +
+            '<sample-card id="card2"></sample-card>' +
+            '</px-deck>');
             $pxDeck = $('px-deck');
-            $pxDeck.append('<sample-card id="card1"></sample-card>');
-            $pxDeck.append('<sample-card id="card2"></sample-card>');
         });
 
-        it('initializes the chart states to 0 and 100', function(){
+        it('initializes the chart states to 0 and 100', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
 
@@ -27,7 +25,7 @@ describe('Card to card communication', function () {
             expect(card2.chartState.max).toBe(100);
         });
 
-        it('zoom in one card should change zoom on another card', function(){
+        it('zoom in one card should change zoom on another card', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
 
@@ -41,19 +39,21 @@ describe('Card to card communication', function () {
     });
 
 
-    describe('with 4 cards', function(){
+    describe('with 4 cards', function() {
 
         var card1, card2, card3, card4;
 
-        px.beforeEachAsync(function () {
+        px.beforeEachWithFixture(function() {
+            $fixture.append('<px-deck>' +
+            '<sample-card id="card1"></sample-card>' +
+            '<sample-card id="card2"></sample-card>' +
+            '<sample-card id="card3"></sample-card>' +
+            '<sample-card id="card4"></sample-card>' +
+            '</px-deck>');
             $pxDeck = $('px-deck');
-            $pxDeck.append('<sample-card id="card1"></sample-card>');
-            $pxDeck.append('<sample-card id="card2"></sample-card>');
-            $pxDeck.append('<sample-card id="card3"></sample-card>');
-            $pxDeck.append('<sample-card id="card4"></sample-card>');
         });
 
-        it('zoom in one card should change zoom on another card', function(){
+        it('zoom in one card should change zoom on another card', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
             card3 = $fixture.get(0).querySelector('#card3');
@@ -72,19 +72,21 @@ describe('Card to card communication', function () {
 
     });
 
-    describe('with 4 cards with different shared state', function(){
+    describe('with 4 cards with different shared state', function() {
 
         var card1, card2, card3, card4;
 
-        px.beforeEachAsync(function () {
+        px.beforeEachWithFixture(function() {
+            $fixture.append('<px-deck>' +
+            '<sample-card id="card1"></sample-card>' +
+            '<sample-card id="card2"></sample-card>' +
+            '<sample-card2 id="card3"></sample-card2>' +
+            '<sample-card2 id="card4"></sample-card2>' +
+            '</px-deck>');
             $pxDeck = $('px-deck');
-            $pxDeck.append('<sample-card id="card1"></sample-card>');
-            $pxDeck.append('<sample-card id="card2"></sample-card>');
-            $pxDeck.append('<sample-card2 id="card3"></sample-card2>');
-            $pxDeck.append('<sample-card2 id="card4"></sample-card2>');
         });
 
-        it('initializes the cards', function(){
+        it('initializes the cards', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
             card3 = $fixture.get(0).querySelector('#card3');
@@ -98,7 +100,7 @@ describe('Card to card communication', function () {
             expect(card4.count).toBe(5);
         });
 
-        it('zoom in one card should change zoom on another card, but not affect ones without zoom', function(){
+        it('zoom in one card should change zoom on another card, but not affect ones without zoom', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
             card3 = $fixture.get(0).querySelector('#card3');
@@ -113,7 +115,7 @@ describe('Card to card communication', function () {
             expect(card4.count).toBe(5);
         });
 
-        it('changing count should only affect cards with count', function(){
+        it('changing count should only affect cards with count', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
             card3 = $fixture.get(0).querySelector('#card3');
@@ -130,17 +132,19 @@ describe('Card to card communication', function () {
 
     });
 
-    describe('with a hidden card', function(){
+    describe('with a hidden card', function() {
 
         var card1, card2;
 
-        px.beforeEachAsync(function () {
+        px.beforeEachWithFixture(function() {
+            $fixture.append('<px-deck>' +
+            '<sample-card id="card1"></sample-card>' +
+            '<sample-card id="card2"></sample-card>' +
+            '</px-deck>');
             $pxDeck = $('px-deck');
-            $pxDeck.append('<sample-card id="card1"></sample-card>');
-            $pxDeck.append('<sample-card id="card2"></sample-card>');
         });
 
-        it('changes in one card should still affect the hidden card', function(){
+        it('changes in one card should still affect the hidden card', function() {
             card1 = $fixture.get(0).querySelector('#card1');
             card2 = $fixture.get(0).querySelector('#card2');
 
@@ -159,6 +163,45 @@ describe('Card to card communication', function () {
             expect(card1.chartState.max).toBe(54);
             expect(card2.chartState.min).toBe(6);
             expect(card2.chartState.max).toBe(54);
+        });
+
+    });
+
+    describe('when delete one card', function() {
+
+        var card1, card3, pxDeck;
+
+        px.beforeEachWithFixture(function() {
+            $fixture.append('<px-deck>' +
+            '<sample-card id="card1"></sample-card>' +
+            '<sample-card id="card2"></sample-card>' +
+            '<sample-card id="card3"></sample-card>' +
+            '</px-deck>');
+            $pxDeck = $('px-deck');
+        });
+
+        describe('when deleted', function() {
+            px.beforeEachAsync(function() {
+                pxDeck = $fixture.get(0).querySelector('px-deck');
+                card1 = $fixture.get(0).querySelector('#card1');
+                card3 = $fixture.get(0).querySelector('#card3');
+                pxDeck.removeCardById('card2');
+            });
+
+            it('card to card communication continues to work', function() {
+                card1.chartState = {min: 1, max: 99};
+
+                expect(card1.chartState.min).toBe(1);
+                expect(card1.chartState.max).toBe(99);
+                expect(card3.chartState.min).toBe(1);
+                expect(card3.chartState.max).toBe(99);
+            });
+
+            it('deck only knows 2 cards now', function() {
+                expect(Object.keys(pxDeck.cards).length).toBe(2);
+                expect(Object.keys(pxDeck.cards)[0]).toBe('card1');
+                expect(Object.keys(pxDeck.cards)[1]).toBe('card3');
+            });
         });
 
     });

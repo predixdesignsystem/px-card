@@ -25,13 +25,13 @@
         contextChanged: function(thing) {
             //console.log('itchanged', thing);
             var self = this;
-            this.cards.forEach(function(card) {
+            Object.keys(this.cards).forEach(function(cardId) {
                 //console.log('pushing this context', self.context);
-                card.context = self.context;
+                self.cards[cardId].context = self.context;
             });
         },
         created: function() {
-            this.cards = [];
+            this.cards = {};
             //console.log('----> deck-created!!');
             var self = this;
 
@@ -43,7 +43,7 @@
                 //console.log('deck received px-card-ready <----');
 
                 self.registerCardInDeck(e.target);
-                
+
                 numCheckedIn++;
                 if(numCheckedIn === numExpectedCards) {
                     self.fire('px-deck-ready');
@@ -60,24 +60,25 @@
         init: function() {
             //console.log('px-deck init is called');
         },
-        updateState: function(cardId, state) {
+        updateState: function(cardIdSentFrom, state) {
             var newState = {};
             Polymer.Base.mixin(newState, this.state);
             Polymer.Base.mixin(newState, state);
             this.state = newState;
 
             var self = this;
-            this.cards.forEach(function(card) {
+
+            Object.keys(this.cards).forEach(function(cardId) {
                 // only update cards with different ids
-                if (card.id !== cardId) {
-                    card.set('deckState', self.state);
+                if (cardId !== cardIdSentFrom) {
+                    self.cards[cardId].set('deckState', self.state);
                 }
             });
         },
         registerCardInDeck: function(card){
             card._deck = this;
             card.init(this);
-            this.cards.push(card);
+            this.cards[card.id] = card;
         },
         addCard: function(cardName, cardId) {
             if(!cardName || !cardId) {
@@ -91,11 +92,16 @@
             if(!cardId) {
                 throw 'Remove card by id must be called with a card id';
             }
+
             var card = Polymer.dom(this).querySelector('#'+cardId);
+
             if (!card){
                 console.warn('Cannot find card by id '+cardId);
                 return;
             }
+
+            delete this.cards[cardId];
+
             Polymer.dom(this).removeChild(card);
         }
     };
