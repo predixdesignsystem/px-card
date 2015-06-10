@@ -29,45 +29,33 @@
         },
         viewSelected: function(newView) {
             if (newView && newView.substring(0, 2) !== '{{') {
-                //console.log('new view switch deck', newView);
                 this.switchDeck(newView);
             }
         },
         contextChanged: function(newContext) {
-            //console.log('NEWCONTEXT', newContext);
-            var deck = document.querySelector('px-deck');
+            var deck = this.$.container.querySelector('px-deck');
             if (deck) {
                 deck.context = this.context;
             }
         },
         created: function() {
             //console.log('----> dashboard-created!!');
+            var self = this;
+
             this.addEventListener('px-deck-ready', function() {
                 //console.log('dashboard received px-deck-ready <----');
-                this.fire('px-dashboard-ready');
+
+                var container = self.$.container;
+                container.querySelector('px-deck').context = self.context;
+
+                //this.fire('px-dashboard-ready');
             });
         },
-        ready: function() {
-            //console.log('----------> dashboard-ready!!');
-        },
-        attached: function() {
-            //console.log('----> dashboard-attached!!');
-        },
-        init: function() {
-//            console.log('px-dashboard init is called (does nothing)');
-        },
         switchDeck: function(url) {
-
             var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
-//                if (!px.dealer.loadedDecks[url]) {
-                    this.deckUrl = url;
-//                }
-//                else {
-//                    container.innerHTML = px.dealer.loadedDecks[url];
-//                    document.querySelector('px-deck').context = this.context;
-//                }
+                this.deckUrl = url;
             }
             else {
                 console.log('there is no container');
@@ -77,8 +65,6 @@
             var deck = e.detail.response;
             var container = this.$.container;
             container.innerHTML = deck;
-            px.dealer.loadedDecks[url] = deck;
-            container.querySelector('px-deck').context = this.context;
         }
     };
 

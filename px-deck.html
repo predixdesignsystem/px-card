@@ -34,10 +34,20 @@
             this.cards = [];
             //console.log('----> deck-created!!');
             var self = this;
+
+            // count # of expected cards on initial load
+            var numExpectedCards = Polymer.dom(this).querySelectorAll('.px-card').length;
+            var numCheckedIn = 0;
+
             this.addEventListener('px-card-ready', function(e) {
                 //console.log('deck received px-card-ready <----');
-                self.fire('px-deck-ready');
+
                 self.registerCardInDeck(e.target);
+                
+                numCheckedIn++;
+                if(numCheckedIn === numExpectedCards) {
+                    self.fire('px-deck-ready');
+                }
             });
         },
         ready: function() {
@@ -45,7 +55,7 @@
             this.state = {};
         },
         attached: function() {
-            //console.log('----> deck-attached!!');
+//            console.log('----> deck-attached!!');
         },
         init: function() {
             //console.log('px-deck init is called');

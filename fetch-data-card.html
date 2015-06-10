@@ -5,6 +5,7 @@
     <template>
         <px-card>
             <h1>Fetch data</h1>
+            <div>Context Name: <span>{{context.name}}</span></div>
             <button on-click="getMoreTemperatureData">Get Different Data</button>
             <p id="temp">Current Temperature:<span>{{currentTemperature}}</span>F</p>
         </px-card>
