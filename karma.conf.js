@@ -23,6 +23,7 @@ module.exports = function(config) {
             {pattern: 'bower_components/test/px-card.html', included: false},
 
             //App src files
+            {pattern: 'bower_components/test/px-dashboard.html', included: true},
             {pattern: 'bower_components/test/px-deck.html', included: true},
             {pattern: 'bower_components/test/demo-card.html', included: true},
             {pattern: 'bower_components/test/fetch-data-card.html', included: true},

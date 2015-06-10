@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"/>
+
 <dom-module id="px-dashboard">
     <template>
         <div id="container"></div>
@@ -6,8 +7,8 @@
 </dom-module>
 <script>
     window.px = window.px || {};
-
-    px.loadedDecks = px.loadedDecks || {};
+    px.dealer = px.dealer || {};
+    px.dealer.loadedDecks = px.dealer.loadedDecks || {};
 
     px.dashboard = {
         properties: {
@@ -22,55 +23,39 @@
         },
         viewSelected: function(newView) {
             if (newView && newView.substring(0, 2) !== '{{') {
-                //console.log('new view switch deck', newView);
                 this.switchDeck(newView);
             }
         },
         contextChanged: function(newContext) {
-            //console.log('NEWCONTEXT', newContext);
-            var deck = document.querySelector('px-deck');
+            var deck = this.$.container.querySelector('px-deck');
             if (deck) {
                 deck.context = this.context;
             }
         },
         created: function() {
             //console.log('----> dashboard-created!!');
+            var self = this;
+
             this.addEventListener('px-deck-ready', function() {
                 //console.log('dashboard received px-deck-ready <----');
-                this.fire('px-dashboard-ready');
+
+                var container = self.$.container;
+                container.querySelector('px-deck').context = self.context;
+
+                //this.fire('px-dashboard-ready');
             });
         },
-        ready: function() {
-            //console.log('----------> dashboard-ready!!');
-        },
-        attached: function() {
-            //console.log('----> dashboard-attached!!');
-        },
-        init: function() {
-            //console.log('px-dashboard init is called (does nothing)');
-//            document.querySelector('px-deck').init();
-        },
         switchDeck: function(url) {
-
-            var self = this;
             var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
-                if (!px.loadedDecks[url]) {
-
-                    Polymer.Base.importHref(url, function(e) {
-                        var deck = e.target.import.body;
-                        container.appendChild(deck);
-                        px.loadedDecks[url] = deck;
-                        document.querySelector('px-deck').context = self.context;
-                    }, function(e) {
-
-                    });
-                }
-                else {
-                    container.appendChild(px.loadedDecks[url]);
-                    document.querySelector('px-deck').context = this.context;
-                }
+                this.deckUrl = url;
+                px.dealer.getDeck(url).then(function(deck){
+                    container.innerHTML = deck;
+                }, function(){
+                    // TODO - need better error handling here
+                    console.error('fail to load the deck with url '+url);
+                });
             }
             else {
                 console.log('there is no container');
