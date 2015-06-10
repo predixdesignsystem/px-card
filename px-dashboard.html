@@ -1,14 +1,8 @@
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../iron-ajax/iron-ajax.html"/>
 
 <dom-module id="px-dashboard">
     <template>
         <div id="container"></div>
-        <iron-ajax
-            auto
-            url="{{deckUrl}}"
-            handle-as="text"
-            on-response="handleResponse"></iron-ajax>
     </template>
 </dom-module>
 <script>
@@ -56,15 +50,16 @@
             if (container) {
                 container.innerHTML = "";
                 this.deckUrl = url;
+                px.dealer.getDeck(url).then(function(deck){
+                    container.innerHTML = deck;
+                }, function(){
+                    // TODO - need better error handling here
+                    console.error('fail to load the deck with url '+url);
+                });
             }
             else {
                 console.log('there is no container');
             }
-        },
-        handleResponse: function(e) {
-            var deck = e.detail.response;
-            var container = this.$.container;
-            container.innerHTML = deck;
         }
     };
 

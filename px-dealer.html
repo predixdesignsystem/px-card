@@ -48,6 +48,9 @@
                     decks.push(self.deckDefinitions[deckId]);
                 });
                 return decks;
+            },
+            getDeck: function(url){
+                return this.getData(url);
             }
         };
     })();
