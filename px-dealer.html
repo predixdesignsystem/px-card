@@ -19,35 +19,28 @@
                     });
                 }
             },
-            init: function() {
-                this.deckDefinitions = {
-                    'sample-cards': {
-                        name: 'SampleCards',
-                        url: 'views/sample-cards.html'
-                    },
-                    'fetch-data': {
-                        name: 'FetchData',
-                        url: 'views/fetch-data.html'
-                    },
-                    'card-to-card': {
-                        name: 'CardToCard',
-                        url: 'views/card-to-card.html'
-                    }
-                };
-
-                this.decksByClassification = {
-                    'farmEquipment': ['sample-cards', 'fetch-data'],
-                    'turbine': ['card-to-card'],
-                    'plane': ['sample-cards', 'card-to-card', 'fetch-data']
-                };
+            init: function(deckDefintions, decksByClassifications) {
+                this.deckDefinitions = deckDefintions;
+                this.decksByClassification = decksByClassifications;
             },
-            getDecksByClassification: function(classification) {
+            getDecksByClassification: function(dashboardId, classification) {
                 var decks = [];
                 var self = this;
-                this.decksByClassification[classification].forEach(function(deckId){
-                    decks.push(self.deckDefinitions[deckId]);
+                if (dashboardId && dashboardId in this.decksByClassification){
+                    var decksInDashboard = this.decksByClassification[dashboardId];
+
+                    if (classification in decksInDashboard){
+                        decksInDashboard[classification].forEach(function(deckId){
+                            if (self.deckDefinitions[deckId]){
+                                decks.push(self.deckDefinitions[deckId]);
+                            }
+                        });
+                    }
+                }
+
+                return new Promise(function(resolve, reject) {
+                    resolve(decks);
                 });
-                return decks;
             },
             getDeck: function(url){
                 return this.getData(url);
