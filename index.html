@@ -6,15 +6,50 @@
         <title>px-card API</title>
 
       <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
-      <link rel="import" href="../iron-component-page/iron-component-page.html"/>
-        
+        <link rel="import" href="../../polymer/polymer.html">
+        <link rel="import" href="../iron-doc-viewer/iron-doc-viewer.html">
+        <link rel="import" href="../hydrolysis/hydrolysis-analyzer.html">
     </head>
     <body>
 
     <!--
     API docs for component are generated from the JSDoc comments in the component's *.html at runtime via <iron-component-page>
     -->
-    <iron-component-page src="px-card.html" active="px-card"></iron-component-page>
+        <h1>px-card</h1>
+        <hydrolysis-analyzer id="px-card-analysis" src="px-card.html"></hydrolysis-analyzer>
+        <!-- You can also bake documentation into the doc viewer: -->
+        <iron-doc-viewer id="px-card-doc"></iron-doc-viewer>
+        <script>
+            document.querySelector('#px-card-analysis').addEventListener('analyzer-changed', function (e) {
+                document.querySelector('#px-card-doc').descriptor = e.detail.value.elementsByTagName['px-card'];
+                console.log('analyzer', e.detail.value.elementsByTagName['px-card'])
+            });
+        </script>
+
+        <h1>px-deck</h1>
+        <hydrolysis-analyzer id="px-deck-analysis" src="px-deck.html"></hydrolysis-analyzer>
+        <!-- You can also bake documentation into the doc viewer: -->
+        <iron-doc-viewer id="px-deck-doc"></iron-doc-viewer>
+        <script>
+            document.querySelector('#px-deck-analysis').addEventListener('analyzer-changed', function (e) {
+                document.querySelector('#px-deck-doc').descriptor = e.detail.value.elementsByTagName['px-deck'];
+                console.log('analyzer', e.detail.value.elementsByTagName['px-deck'])
+            });
+        </script>
+
+        <h1>px-dashboard</h1>
+        <hydrolysis-analyzer id="px-dashboard-analysis" src="px-dashboard.html"></hydrolysis-analyzer>
+        <!-- You can also bake documentation into the doc viewer: -->
+        <iron-doc-viewer id="px-dashboard-doc"></iron-doc-viewer>
+        <script>
+            document.querySelector('#px-dashboard-analysis').addEventListener('analyzer-changed', function (e) {
+                document.querySelector('#px-dashboard-doc').descriptor = e.detail.value.elementsByTagName['px-dashboard'];
+                console.log('analyzer', e.detail.value.elementsByTagName['px-dashboard'])
+            });
+        </script>
+
+        <h1>px-dealer</h1>
+        <p>See px</p>
 
     </body>
 </html>

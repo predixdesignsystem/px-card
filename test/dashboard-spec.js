@@ -5,12 +5,12 @@ describe('Dashboard', function() {
 
 
     px.beforeEachWithFixture(function() {
-        $fixture.append('<px-dashboard selected-view="{{selectedDeck}}" context="{{context}}"></px-dashboard>');
+        $fixture.append('<px-dashboard selected-deck="{{selectedDeck}}" context="{{context}}"></px-dashboard>');
         dashboard = $fixture.get(0).querySelector('px-dashboard');
     });
 
 
-    describe('when passed a selected-view url', function() {
+    describe('when passed a selected-deck url', function() {
         var deckWithSampleCardMarkup = '<px-deck><sample-card class="px-card" id="card1"></sample-card></px-deck>';
         var deckWithDemoCardMarkup = '<px-deck><demo-card class="px-card" id="card1"></demo-card></px-deck>';
 
@@ -29,7 +29,7 @@ describe('Dashboard', function() {
                     }
                 };
 
-                dashboard.selectedView = "url1";
+                dashboard.selectedDeck = "url1";
             });
 
             it('should render the deck (fetched from dealer)', function() {
@@ -60,10 +60,10 @@ describe('Dashboard', function() {
 
             });
 
-            describe('when selected-view changes', function() {
+            describe('when selected-deck changes', function() {
 
                 px.beforeEachAsync(function() {
-                    dashboard.selectedView = "url2";
+                    dashboard.selectedDeck = "url2";
                 });
 
                 it('does not render the sample-card deck', function() {
@@ -95,7 +95,7 @@ describe('Dashboard', function() {
                     }
                 };
 
-                dashboard.selectedView = "url";
+                dashboard.selectedDeck = "url";
             });
 
             it('does not return the deck', function() { // TODO - need better error handling here
@@ -107,7 +107,7 @@ describe('Dashboard', function() {
 
     });
 
-    describe('when passed a {{selectedView}}', function() {
+    describe('when passed a {{selectedDeck}}', function() {
         px.beforeEachAsync(function() {
             px.dealer = {
                 getDeck: function(url) {
@@ -115,7 +115,7 @@ describe('Dashboard', function() {
                 }
             };
 
-            dashboard.selectedView = "{{selectedView}}";
+            dashboard.selectedDeck = "{{selectedDeck}}";
         });
 
         it('it should not bother calling px.dealer.getDeck', function() {

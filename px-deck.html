@@ -1,4 +1,47 @@
 <link rel="import" href="../polymer/polymer.html"/>
+<!--
+A set of cards (aka view) which has an API
+
+#### Usage
+```
+<px-deck>
+    <vibration-card id="card2" class="px-class"></vibration-card>
+    <temperature-card id="card3" class="px-class"></temperature-card>
+</px-deck>
+```
+
+#### px.deck behavior api
+
+##### properties
+
+context object which will then be passed into the deck's cards
+```
+context: {
+    type: Object
+}
+```
+
+##### methods
+
+```
+addCard: function(cardName, cardId) {
+//add card to the deck by passing card name (the element name) and card id
+}
+```
+
+```
+removeCardById: function(cardId){
+//remove card from the deck by card id
+}
+```
+
+##### events
+
+px-deck-ready -  event will be fired when the deck is attached to the dom and all its cards are ready
+
+
+-->
+
 <dom-module id="px-deck">
     <template>
         <div style="border:blue 3px solid;">
