@@ -118,7 +118,7 @@ Example:
 <dom-module id="px-card">
     <link rel="import" type="css" href="css/px-card.css"/>
     <template>
-        <px-card-header icon="fa-suitcase" header-text="{{headerText}}"></px-card-header>
+        <px-card-header icon="{{icon}}" header-text="{{headerText}}"></px-card-header>
         <div class="m">
             <content></content>
         </div>
@@ -233,9 +233,18 @@ Example:
     Polymer({
         is: 'px-card',
         properties: {
+            /**
+             * px-card header text
+             */
             headerText: {
                 type: String,
                 value: 'Card Header'
+            },
+            /**
+             * px-card icon
+             */
+            icon: {
+                type: String
             }
         }
     });
