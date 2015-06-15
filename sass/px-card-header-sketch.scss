@@ -59,7 +59,9 @@ $inuit-enable-margins                   : true;
 :host {
   height: 60px;
   @extend .layout;
-  @extend .m;
+  @extend .mb;
+  @extend .ml;
+  @extend .mr;
   @extend .box;
   @extend .box--tiny;
 }

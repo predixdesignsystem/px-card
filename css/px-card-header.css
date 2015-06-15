@@ -2417,19 +2417,19 @@ small {
        *
        * Add margins.
        */
-.m, :host {
+.m {
   margin: 1rem !important; }
 
 .mt {
   margin-top: 1rem !important; }
 
-.mr {
+.mr, :host {
   margin-right: 1rem !important; }
 
-.mb {
+.mb, :host {
   margin-bottom: 1rem !important; }
 
-.ml {
+.ml, :host {
   margin-left: 1rem !important; }
 
 .mh {
