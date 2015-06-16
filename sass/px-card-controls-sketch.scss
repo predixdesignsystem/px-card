@@ -19,35 +19,25 @@ THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PRE
 Predix branding rules go in px-card-predix.scss, not in this file.
 */
 
-$imported-once-files: ();
-
-/*
-See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
-in import paths
-*/
-
 // Settings
-@import "../px-defaults-design/settings.defaults";
-@import "../inuit-responsive-settings/settings.responsive";
+@import "px-defaults-design/_settings.defaults.scss";
 
 // Tools
-@import "../px-mixins-design/tools.mixins";
-@import "../inuit-responsive-tools/tools.responsive";
+@import "px-mixins-design/_tools.mixins.scss";
 
 // Generic
-@import "../px-normalize-design/generic.normalize";
-@import "../px-box-sizing-design/generic.box-sizing";
-@import "../px-helpers-design/generic.helpers";
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+@import "px-helpers-design/_generic.helpers.scss";
 
 // Base
-@import "../px-flexbox-design/base.flexbox";
-@import "../px-viewport-design/base.viewport";
-@import "../px-typography-design/base.typography";
+@import "px-flexbox-design/_base.flexbox.scss";
+@import "px-viewport-design/_base.viewport.scss";
+@import "px-typography-design/_base.typography.scss";
 
 // Objects
-
 $inuit-enable-btn--small              : true;
 $inuit-enable-btn--primary            : true;
 
-@import "../px-buttons-design/objects.buttons";
-@import "../px-layout-design/_objects.layout";
+@import "px-buttons-design/_objects.buttons.scss";
+@import "px-layout-design/_objects.layout.scss";

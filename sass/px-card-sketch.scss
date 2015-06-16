@@ -19,37 +19,23 @@ THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PRE
 Predix branding rules go in px-card-predix.scss, not in this file.
 */
 
-$imported-once-files: ();
-
-/*
-See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation of the `../`
-in import paths
-*/
-
-// Settings
-@import "../px-defaults-design/settings.defaults";
-@import "../inuit-responsive-settings/settings.responsive";
-
-// Tools
-@import "../px-mixins-design/tools.mixins";
-@import "../inuit-responsive-tools/tools.responsive";
-
 // Generic
-@import "../px-normalize-design/generic.normalize";
-@import "../px-box-sizing-design/generic.box-sizing";
-@import "../px-helpers-design/generic.helpers";
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+@import "px-helpers-design/_generic.helpers.scss";
 
 // Base
-@import "../px-flexbox-design/base.flexbox";
-@import "../px-viewport-design/base.viewport";
-@import "../px-typography-design/base.typography";
+@import "px-flexbox-design/_base.flexbox.scss";
+@import "px-viewport-design/_base.viewport.scss";
+@import "px-typography-design/_base.typography.scss";
 
 // Objects
-@import "../px-layout-design/_objects.layout";
-@import "../px-buttons-design/objects.buttons";
+@import "px-layout-design/_objects.layout.scss";
+@import "px-buttons-design/_objects.buttons.scss";
 
 $inuit-enable-box--tiny               : true;
-@import "../px-box-design/objects.box";
+
+@import "px-box-design/_objects.box.scss";
 
 // Component
 // header {
@@ -59,19 +45,15 @@ $inuit-enable-box--tiny               : true;
 // }
 
 // Trumps
-@import "../px-clearfix-design/trumps.clearfix";
+@import "px-clearfix-design/_trumps.clearfix.scss";
 
-$inuit-enable-responsive-margins        : true;
-$inuit-enable-responsive-margins--none  : true;
-$inuit-enable-responsive-margins--large : true;
 $inuit-enable-margins                   : true;
 
-@import "../px-spacing-responsive-design/trumps.spacing-responsive";
-@import "../px-widths-responsive-design/trumps.widths-responsive";
+@import "px-spacing-design/_trumps.spacing.scss";
 
 :host {
-  @extend .layout;
-  @extend .box;
-  @extend .box--tiny;
-  @extend .m;
+  @extend %layout;
+  @extend %box;
+  @extend %box--tiny;
+  @extend .u-m;
 }
