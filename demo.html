@@ -10,8 +10,8 @@
     <script src="../px/dist/px.min.js"></script>
     <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
 
-   <link rel="import" href="px-deck.html"/>
-   <link rel="import" href="px-card.html"/>
+    <link rel="import" href="px-deck.html"/>
+    <link rel="import" href="px-card.html"/>
 
     <link rel="import" href="demo-card.html"/>
     <link rel="import" href="sample-card.html"/>
@@ -23,7 +23,7 @@
 
     <style>
         html {
-          background-color: #E8E8E8 !important;
+            background-color: #E8E8E8 !important;
         }
     </style>
 </head>
@@ -72,6 +72,7 @@
     </px-deck>
 
     <h3>Temperature Conversion Card</h3>
+
     <div>
         <temperature-card id="temp-conv-card"></temperature-card>
     </div>
@@ -172,16 +173,16 @@
             }
         };
 
-        document.addEventListener('WebComponentsReady', function(){
-          document.querySelector('time-series-card').init();
+        document.addEventListener('WebComponentsReady', function () {
+            document.querySelector('time-series-card').init();
 
-          document.querySelector('#my-card').context = {
-            name: 'Turbine72384'
-          };
+            document.querySelector('#my-card').context = {
+                name: 'Turbine72384'
+            };
 
-          document.querySelector('#my-deck').context = {
-            name: 'Turbine72384'
-          };
+            document.querySelector('#my-deck').context = {
+                name: 'Turbine72384'
+            };
         });
 
     </script>
