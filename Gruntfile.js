@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function (grunt) {
+  
+  var importOnce = require('node-sass-import-once');
 
     // Project configuration.
     grunt.initConfig({
@@ -30,23 +32,42 @@ module.exports = function (grunt) {
         sass: {
             options: {
                 sourceMap: false, //no source maps b/c web-components inline css anyway...
-
-                 /*
-                  See https://github.sw.ge.com/pxc/px-getting-started#a-note-about-relative-import-paths for an explanation
-                  of the contents of the includePaths option for Sass
-                 */
-                includePaths: ['bower_components/*']
+                importer: importOnce,
+                importOnce: {
+                  index: true,
+                  bower: true
+                }
             },
-            dist: {
+            card: {
                 files: {
-                    'css/px-card-sketch.css': 'sass/px-card-sketch.scss',
-                    'css/px-card.css': 'sass/px-card-predix.scss',
-                    'css/px-card-controls-sketch.css': 'sass/px-card-controls-sketch.scss',
-                    'css/px-card-controls.css': 'sass/px-card-controls-predix.scss',
-                    'css/px-card-header-sketch.css': 'sass/px-card-header-sketch.scss',
-                    'css/px-card-header.css': 'sass/px-card-header-predix.scss'
+                    'css/noprefix/px-card-sketch.css': 'sass/px-card-sketch.scss',
+                    'css/noprefix/px-card.css': 'sass/px-card-predix.scss'
+                }
+            },
+            controls: {
+                files: {           
+                    'css/noprefix/px-card-controls-sketch.css': 'sass/px-card-controls-sketch.scss',
+                    'css/noprefix/px-card-controls.css': 'sass/px-card-controls-predix.scss'
+                }
+            },
+            header: {
+                files: {
+                    'css/noprefix/px-card-header-sketch.css': 'sass/px-card-header-sketch.scss',
+                    'css/noprefix/px-card-header.css': 'sass/px-card-header-predix.scss'
                 }
             }
+        },
+        
+        autoprefixer: {
+          options: {
+            browsers: ['last 2 version']
+          },
+          multiple_files: {
+            expand: true,
+            flatten: true,
+            src: 'css/noprefix/*.css',
+            dest: 'css'
+          }
         },
 
         shell: {
@@ -72,7 +93,7 @@ module.exports = function (grunt) {
         watch: {
             sass: {
                 files: ['sass/**/*.scss'],
-                tasks: ['sass'],
+                tasks: ['sass', 'autoprefixer'],
                 options: {
                     interrupt: true
                 }
@@ -107,7 +128,7 @@ module.exports = function (grunt) {
 
     // Default task.
     grunt.registerTask('default', 'Basic build', [
-        'sass'
+        'sass', 'autoprefixer'
     ]);
 
     // First run task.

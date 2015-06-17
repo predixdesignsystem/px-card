@@ -4,7 +4,8 @@
 
 <dom-module id="time-series-card">
     <template>
-        <px-card>
+        <px-card icon="fa-suitcase" header-text="Time Series Card">
+            <div>Context Name: <span>{{context.name}}</span></div>
             <px-ts-chart id="tsChart">
                 <px-ts-chart-controls data-controls></px-ts-chart-controls>
             </px-ts-chart>
@@ -26,10 +27,6 @@
                 });
             });
         },
-        behaviors: [px.card],
-        attached: function(){
-          this.toggleClass('layout');
-          this.toggleClass('m--');
-        }
+        behaviors: [px.card]
     });
 </script>

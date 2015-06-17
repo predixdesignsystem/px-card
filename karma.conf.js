@@ -15,7 +15,7 @@ module.exports = function(config) {
             'test/px-test.js',
             'bower_components/jquery/dist/jquery.min.js',
             'test/lib/jasmine-fixture.min.js',
-            'test/lib/jasmine-jquery.js',
+            'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
 
             //App Bower components
             {pattern: 'bower_components/webcomponentsjs/webcomponents.js', included: true},
@@ -23,10 +23,12 @@ module.exports = function(config) {
             {pattern: 'bower_components/test/px-card.html', included: false},
 
             //App src files
+            {pattern: 'bower_components/test/px-dashboard.html', included: true},
             {pattern: 'bower_components/test/px-deck.html', included: true},
             {pattern: 'bower_components/test/demo-card.html', included: true},
             {pattern: 'bower_components/test/fetch-data-card.html', included: true},
             {pattern: 'bower_components/test/sample-card.html', included: true},
+            {pattern: 'bower_components/test/sample-card2.html', included: true},
 
             //Tests
             {pattern: 'test/*-spec.js', included: true}

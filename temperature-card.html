@@ -3,7 +3,7 @@
 
 <dom-module id="temperature-card">
     <template>
-        <px-card>
+        <px-card header-text="Convert Fahrenheit to Celsius">
             <label>Fahrenheit</label><input type="text" value="{{fahrenheit::input}}">
             <button on-click="fahrenheitChanged">go</button>
             <label>Celsius</label><input type="text" value="{{celsius::input}}">
@@ -30,10 +30,6 @@
         },
         fahrenheitChanged: function (e) {
             this.celsius = this.convertFtoC(this.fahrenheit);
-        },
-        attached: function () {
-            this.toggleClass('layout');
-            this.toggleClass('m--');
         },
         behaviors: [px.card]
     });

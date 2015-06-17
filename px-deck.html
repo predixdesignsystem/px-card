@@ -1,10 +1,53 @@
 <link rel="import" href="../polymer/polymer.html"/>
+<!--
+A set of cards (aka view) which has an API
+
+#### Usage
+```
+<px-deck>
+    <vibration-card id="card2" class="px-class"></vibration-card>
+    <temperature-card id="card3" class="px-class"></temperature-card>
+</px-deck>
+```
+
+#### px.deck behavior api
+
+##### properties
+
+context object which will then be passed into the deck's cards
+```
+context: {
+    type: Object
+}
+```
+
+##### methods
+
+```
+addCard: function(cardName, cardId) {
+//add card to the deck by passing card name (the element name) and card id
+}
+```
+
+```
+removeCardById: function(cardId){
+//remove card from the deck by card id
+}
+```
+
+##### events
+
+px-deck-ready -  event will be fired when the deck is attached to the dom and all its cards are ready
+
+
+-->
+
 <dom-module id="px-deck">
     <template>
-        <div style="border:blue 3px solid;">
-            <h1>Deck:<span>{{context.name}}</span></h1>
+        <!--<div style="border:blue 3px solid;">-->
+            <!--<h1>Deck:<span>{{context.name}}</span></h1>-->
             <content></content>
-        </div>
+        <!--</div>-->
     </template>
 </dom-module>
 <script>
@@ -14,23 +57,6 @@
         //console.log('window received px-dashboard ready');
         document.querySelector('px-dashboard').init();
     });
-
-
-    px.dealer = {
-        getData: function(url) {
-            var $http = angular.element('body').injector().get("$http");
-
-            return new Promise(function(resolve, reject) {
-                $http.get(url).
-                    success(function(data, status, headers, config) {
-                        resolve(data);
-                    }).
-                    error(function(data, status, headers, config) {
-                        reject(data);
-                    });
-            });
-        }
-    };
 
     px.deck = {
         properties: {
@@ -42,44 +68,84 @@
         contextChanged: function(thing) {
             //console.log('itchanged', thing);
             var self = this;
-            this.cards.forEach(function(card) {
+            Object.keys(this.cards).forEach(function(cardId) {
                 //console.log('pushing this context', self.context);
-                card.context = self.context;
+                self.cards[cardId].context = self.context;
             });
         },
         created: function() {
-            this.cards = [];
+            this.cards = {};
             //console.log('----> deck-created!!');
             var self = this;
+
+            // count # of expected cards on initial load
+            var numExpectedCards = Polymer.dom(this).querySelectorAll('.px-card').length;
+            var numCheckedIn = 0;
+
             this.addEventListener('px-card-ready', function(e) {
                 //console.log('deck received px-card-ready <----');
-                self.fire('px-deck-ready');
-                var card = e.target;
-                card._deck = self;
-                card.init(self);
-                self.cards.push(card);
+
+                self.registerCardInDeck(e.target);
+
+                numCheckedIn++;
+                if(numCheckedIn === numExpectedCards) {
+                    self.fire('px-deck-ready');
+                }
             });
         },
         ready: function() {
             //console.log('----------> deck-ready!!');
+            this.state = {};
         },
         attached: function() {
-            //console.log('----> deck-attached!!');
+//            console.log('----> deck-attached!!');
         },
         init: function() {
             //console.log('px-deck init is called');
         },
-        updateState: function(cardId, state) {
-            this.cards.forEach(function(card) {
+        updateState: function(cardIdSentFrom, state) {
+            var newState = {};
+            Polymer.Base.mixin(newState, this.state);
+            Polymer.Base.mixin(newState, state);
+            this.state = newState;
+
+            var self = this;
+
+            Object.keys(this.cards).forEach(function(cardId) {
                 // only update cards with different ids
-                if (card.id !== cardId) {
-                    card.deckState = state;
+                if (cardId !== cardIdSentFrom) {
+                    self.cards[cardId].set('deckState', self.state);
                 }
             });
         },
-        add: function(markup) {
-            // put markup on page (append to the end of the deck)
-            //TODO: remember to call card.init after adding card to deck
+        registerCardInDeck: function(card){
+            card._deck = this;
+            card.init(this);
+            this.cards[card.id] = card;
+        },
+        addCard: function(cardName, cardId) {
+            if(!cardName || !cardId) {
+                throw 'Add card must be called with a card name and card id';
+            }
+            var newCard = document.createElement('sample-card');
+            newCard.setAttribute('id', cardId);
+            Polymer.dom(this).appendChild(newCard);
+        },
+        removeCardById: function(cardId){
+            if(!cardId) {
+                throw 'Remove card by id must be called with a card id';
+            }
+
+            var card = Polymer.dom(this).querySelector('#'+cardId);
+
+            if (!card){
+                console.warn('Cannot find card by id '+cardId);
+                return;
+            }
+
+            delete this.cards[cardId];
+
+            Polymer.dom(this).removeChild(card);
         }
     };
 

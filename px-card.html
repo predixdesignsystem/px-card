@@ -5,14 +5,13 @@
     See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-card-behavior.html"/>
 <link rel="import" href="px-card-header.html"/>
 
 <!--
 Element providing basic styling and behaviors (API) for card
 
-##### Usage
-
+#### Usage
+```
 <dom-module id="demo-card">
     <template>
         <px-card>
@@ -34,91 +33,168 @@ Element providing basic styling and behaviors (API) for card
         deckStateChanged: function(newDeckState, oldDeckState){
             // this is where you will receive updates from other cards
         },
-        // you can add additional functionality here
-        // you may want to use api methods like this.getData, this.updateDeck, this.showCard, this.hideCard
-        //    cards/sample-card.html has an example of using updateDeck & deckStateChanged
-        //    cards/sample-card.html also has an example of showing the context.name using data binding
-        //    cards/fetch-data-card.html has an example of using this.getData
-        //    cards/widget-to-widget-card.html has an example of binding widgets together
-        //    cards/time-series-card.html has an example of the px-ts-chart widget, getData, and init
         behaviors: [px.card]
     });
+
 </script>
+```
+
+#### px.card behavior api
+
+##### properties
+
+_context object being passed into the card from deck/dashboard_
+```
+context: {
+    type: Object
+}
+```
+_deck state object being passed from the deck, deck state object is a shared object between all cards within a deck_
+```
+deckState: {
+    type: Object
+}
+```
+
+##### methods
+
+```
+init: function () {
+//instantiate your card here, you can safely use this.context or fetch data with this.getData method here
+}
+```
+
+```
+updateDeck: function (object) {
+//broadcast an object to other cards within the deck
+},
+```
+
+```
+showCard: function () {
+//show this card
+},
+```
+
+```
+hideCard: function () {
+//hide this card
+},
+```
+
+```
+getData: function (url) {
+//getData from web resources with url
+}
+```
+
+##### events
+
+px-card-ready -  event will be fired when the card is attached to the dom and ready
+
+Example:
+```
+    document.querySelector('demo-card').addEventListener('px-card-ready', function(e){
+        //when card is ready set context
+        var demoCard = e.target;
+        demoCard.context = {
+            name: 'Turbine 123'
+        };
+    });
+
+```
+
+
+
+
+
 
 @element px-card
 @blurb Element containing basic styling and behaviors (API) for card
+@demo demo.html
 @homepage index.html
 -->
 
 <dom-module id="px-card">
-  <link rel="import" type="css" href="css/px-card.css"/>
-  <template>
-    <div class="layout__item box box--tiny">
-      <px-card-header header-text="Card Header"></px-card-header>
-      <content></content>
-    </div>
-  </template>
+    <link rel="import" type="css" href="css/px-card.css"/>
+    <template>
+        <px-card-header icon="{{icon}}" header-text="{{headerText}}"></px-card-header>
+        <div class="u-m">
+            <content></content>
+        </div>
+    </template>
 </dom-module>
 
 <script type="text/javascript">
 
-    Polymer({
-      is: 'px-card',
-      behaviors: [px.cardBehavior],
-      attached: function(){
-        this.toggleClass('layout');
-        this.toggleClass('m--');
-      }
-    });
-
-    (function() {
+    (function () {
         window.px = window.px || {};
 
         window.px.card = {
             properties: {
+                 // context object being pass into the card from deck/dashboard
                 context: {
                     type: Object,
                     observer: '_contextChanged'
                 },
+                /**
+                 * deck state object being pass from the deck, deck state object is a shared object between all cards within a deck
+                 */
                 deckState: {
                     type: Object,
                     observer: '_deckStateChanged'
                 }
             },
-            _contextChanged: function(newContext, oldContext) {
+            /**
+             * context change handler to be called when context is changed. This private method will call public contextChanged method which will be implemented by developer
+             */
+            _contextChanged: function (newContext, oldContext) {
                 if (this.contextChanged && typeof this.contextChanged === 'function') {
                     this.contextChanged(newContext, oldContext);
                 }
             },
-            _deckStateChanged: function(newDealerState, oldDealerState) {
+            /**
+             * deck state change handler to be called when deck state is changed in deck by other cards. This private method will call public deckStateChanged method which will be implemented by developer
+             */
+            _deckStateChanged: function (newDealerState, oldDealerState) {
                 this.fromDeck = true;
                 if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
                     this.deckStateChanged(newDealerState, oldDealerState);
                 }
                 this.fromDeck = false;
             },
-            _refresh: function() {
+            _refresh: function () {
                 if (this.refresh && typeof this.refresh === 'function') {
                     this.refresh();
                 }
             },
-            created: function() {
-                //console.log('----> card-created!!');
-            },
-            ready: function() {
+            /**
+             * web component ready callback to be called by the browser when the web component is ready to listen to handle property changes
+             */
+            ready: function () {
                 this.addEventListener('px-card-refresh', this._refresh);
                 //console.log('----------> card-ready!!');
+
             },
-            attached: function(){
+            attached: function () {
                 //console.log('----> card-attached!!');
                 this.fire('px-card-ready');
+                if (!this.id) {
+                    throw 'Card ' + this.tagName + ' cannot be created without an id!';
+                }
             },
-            init: function() {
+            /**
+             * init method to be called when card is ready
+             */
+            init: function () {
                 // this default init function is needed in case they don't implement init
                 // this is the 'instantiate' requirement
                 //console.log('px-card init is called');
             },
-            updateDeck: function(value) {
+            /**
+             * call this method with an object that the card wants to share with other cards wthin the deck
+             */
+            updateDeck: function (value) {
                 if (!this.fromDeck) {
                     if (this._deck && this._deck.updateState) {
                         this._deck.updateState(this.id, value);
@@ -131,16 +207,46 @@ Element providing basic styling and behaviors (API) for card
                     //console.log('KILL this update because from deck');
                 }
             },
-            showCard: function() {
+            /**
+             * this method can be call to show a card from dom
+             */
+            showCard: function () {
                 this.hidden = false;
+                this.querySelector('px-card').hidden = false;
             },
-            hideCard: function() {
+            /**
+             * this method can be call to hide a card from dom
+             */
+            hideCard: function () {
                 this.hidden = true;
+                this.querySelector('px-card').hidden = true;
             },
-            getData: function(url) {
-                return px.dealer.getData(url);
+            /**
+             * getData from web resources with url
+             */
+            getData: function (url) {
+                return window.px.dealer.getData(url);
             }
         };
     })();
+
+    Polymer({
+        is: 'px-card',
+        properties: {
+            /**
+             * px-card header text
+             */
+            headerText: {
+                type: String,
+                value: 'Card Header'
+            },
+            /**
+             * px-card icon
+             */
+            icon: {
+                type: String
+            }
+        }
+    });
 
 </script>
