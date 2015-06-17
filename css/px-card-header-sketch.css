@@ -2690,5 +2690,31 @@ sub {
   margin-top: 1rem !important;
   margin-bottom: 1rem !important; }
 
+/**
+     * Negative margins.
+     */
+.u--m {
+  margin: -1rem !important; }
+
+.u--mt {
+  margin-top: -1rem !important; }
+
+.u--mr {
+  margin-right: -1rem !important; }
+
+.u--mb {
+  margin-bottom: -1rem !important; }
+
+.u--ml {
+  margin-left: -1rem !important; }
+
+.u--mh {
+  margin-right: -1rem !important;
+  margin-left: -1rem !important; }
+
+.u--mv {
+  margin-top: -1rem !important;
+  margin-bottom: -1rem !important; }
+
 :host {
   height: 4rem; }

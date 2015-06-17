@@ -42,6 +42,7 @@ $inuit-enable-layout--center            : true;
 
 //Trumps
 $inuit-enable-margins                   : true;
+$inuit-enable-margins--negative         : true;
 
 @import "px-spacing-design/_trumps.spacing.scss";
 
