@@ -10,8 +10,6 @@
     <script src="../px/dist/px.min.js"></script>
     <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
 
-    <!--Comment out angular implementation of dealer below-->
-    <!--<link rel="import" href="px-dealer.html">-->
     <link rel="import" href="px-deck.html"/>
     <link rel="import" href="px-card.html"/>
 
@@ -20,11 +18,12 @@
     <link rel="import" href="sample-card2.html"/>
     <link rel="import" href="time-series-card.html"/>
     <link rel="import" href="widget-to-widget-card.html"/>
+    <link rel="import" href="temperature-card.html"/>
     <link rel="import" type="css" href="../px-theme/px-app.html"/>
 
     <style>
         html {
-          background-color: #E8E8E8 !important;
+            background-color: #E8E8E8 !important;
         }
     </style>
 </head>
@@ -71,6 +70,12 @@
         <sample-card2 id="a3"></sample-card2>
         <sample-card2 id="a4"></sample-card2>
     </px-deck>
+
+    <h3>Temperature Conversion Card</h3>
+
+    <div>
+        <temperature-card id="temp-conv-card"></temperature-card>
+    </div>
 
     <script>
 
@@ -168,16 +173,16 @@
             }
         };
 
-        document.addEventListener('WebComponentsReady', function(){
-          document.querySelector('time-series-card').init();
+        document.addEventListener('WebComponentsReady', function () {
+            document.querySelector('time-series-card').init();
 
-          document.querySelector('#my-card').context = {
-            name: 'Turbine72384'
-          };
+            document.querySelector('#my-card').context = {
+                name: 'Turbine72384'
+            };
 
-          document.querySelector('#my-deck').context = {
-            name: 'Turbine72384'
-          };
+            document.querySelector('#my-deck').context = {
+                name: 'Turbine72384'
+            };
         });
 
     </script>

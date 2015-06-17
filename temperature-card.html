@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="px-card.html"/>
+
+<dom-module id="temperature-card">
+    <template>
+        <px-card header-text="Convert Fahrenheit to Celsius">
+            <label>Fahrenheit</label><input type="text" value="{{fahrenheit::input}}">
+            <button on-click="fahrenheitChanged">go</button>
+            <label>Celsius</label><input type="text" value="{{celsius::input}}">
+            <button on-click="celsiusChanged">go</button>
+        </px-card>
+    </template>
+</dom-module>
+<script>
+
+    Polymer({
+        is: 'temperature-card',
+        ready: function () {
+            this.fahrenheit = 50;
+            this.celsius = this.convertFtoC(this.fahrenheit);
+        },
+        convertCtoF: function (c) {
+            return (c * 1.8 + 32).toFixed(1);
+        },
+        convertFtoC: function (f) {
+            return ((f - 32) / 1.8).toFixed(1);
+        },
+        celsiusChanged: function (e) {
+            this.fahrenheit = this.convertCtoF(this.celsius);
+        },
+        fahrenheitChanged: function (e) {
+            this.celsius = this.convertFtoC(this.fahrenheit);
+        },
+        behaviors: [px.card]
+    });
+</script>
