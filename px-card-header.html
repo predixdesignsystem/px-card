@@ -3,7 +3,7 @@
 <dom-module id="px-card-header">
   <link rel="import" type="css" href="css/px-card-header.css">
   <template>
-    <h3 id="headertext"><i id="headericon"></i>{{headerText}}</h3>
+    <h3 class=u-m0 id="headertext"><i id="headericon"></i>{{headerText}}</h3>
   </template>
 </dom-module>
 
@@ -22,13 +22,9 @@
       attached: function(){
         if(this.icon){
           var iconObj = this.$.headericon;
-          this.toggleClass('u--ml', true, iconObj);
           this.toggleClass(this.icon, true, iconObj);
-          this.toggleClass("u-mr", true, iconObj);
           this.toggleClass("fa", true, iconObj);
-        }
-        else{
-          this.toggleClass('u--ml', true, this.$.headertext);
+          this.toggleClass("u-mr--", true, iconObj);
         }
       }
     });
