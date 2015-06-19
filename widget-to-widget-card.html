@@ -4,7 +4,8 @@
 <!-- this is a tag list widget -->
 <dom-module id="px-tag-list">
     <template>
-        <ul>Tags:
+        <h4>Tags:</h4>
+        <ul>
             <template is="dom-repeat" items="{{tags}}">
                 <li>{{item}}</li>
             </template>
@@ -39,10 +40,9 @@
 <!-- this is a super simplified time series widget -->
 <dom-module id="px-fake-timeseries">
     <template>
-        <div>Fake timeseries</div>
-        <ul>Series displayed:
-            <div>{{chartState.series}}</div>
-        </ul>
+        <h4>Fake timeseries</h4>
+        <h5>Series displayed:</h5>
+        <p>{{chartState.series}}</p>
     </template>
 
 </dom-module>
@@ -61,7 +61,7 @@
 <dom-module id="widget-to-widget-card">
     <template>
         <px-card icon="fa-suitcase" header-text="Widget to Widget Card">
-            <h1>Widget to Widget communication</h1>
+            <h4>Widget to Widget communication</h4>
             <px-tag-list tags="{{tags}}" style="float: right; border:black 1px dashed"></px-tag-list>
             <px-fake-timeseries chart-state="{{chartState}}"
                                 style="border:black 1px dashed; float: left"></px-fake-timeseries>

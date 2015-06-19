@@ -5,9 +5,11 @@
 <!--    it is used in the card below -->
 <dom-module id="my-widget">
     <template>
-        <div>Dummy Timeseries</div>
-        <div>Min: <span>{{chartState.min}}</span></div>
-        <div>Max: <span>{{chartState.max}}</span></div>
+        <h4>Dummy Timeseries</h4>
+        <ul>
+          <li>Min: <span>{{chartState.min}}</span></li>
+          <li>Max: <span>{{chartState.max}}</span></li>
+        </ul>
         <button on-click="zoom">Zoom</button>
     </template>
 </dom-module>
@@ -44,7 +46,7 @@
 <dom-module id="sample-card">
     <template>
         <px-card icon="fa-suitcase" header-text="Sample Card">
-            <div>Context Name: <span>{{context.name}}</span></div>
+            <h4>Context Name: <span>{{context.name}}</span></h4>
             <my-widget chart-state="{{chartState}}"></my-widget>
         </px-card>
     </template>
