@@ -1,0 +1,102 @@
+<link rel="import" href="../polymer/polymer.html"/>
+<!--
+Deck renderer with an API
+
+#### Usage
+```
+<px-dashboard selected-view="{{selectedDeck}}" context="{{context}}"></px-dashboard>
+```
+
+#### px.dashboard behavior api
+
+##### properties
+
+context object being passed into the deck & cards from dashboard
+```
+context: {
+    type: Object
+}
+```
+
+deck id to pass to dashboard which will be used to load the deck that should be displayed
+currently, this is just a url
+```
+selectedDeck: {
+    type: String
+}
+```
+
+
+@element px-dashboard
+@blurb Element containing basic styling and behaviors (API) for dashboard
+@demo demo.html
+@homepage index.html
+-->
+<dom-module id="px-dashboard">
+    <template>
+        <div id="container"></div>
+    </template>
+</dom-module>
+<script>
+    window.px = window.px || {};
+    px.dealer = px.dealer || {};
+
+    px.dashboard = {
+        properties: {
+            selectedDeck: {
+                type: String,
+                observer: "deckSelected"
+            },
+            context: {
+                type: Object,
+                observer: "contextChanged"
+            }
+        },
+        deckSelected: function(newDeck) {
+            if (newDeck && newDeck.substring(0, 2) !== '{{') {
+                this.switchDeck(newDeck);
+            }
+        },
+        contextChanged: function(newContext) {
+            var deck = this.$.container.querySelector('px-deck');
+            if (deck) {
+                deck.context = this.context;
+            }
+        },
+        created: function() {
+            //console.log('----> dashboard-created!!');
+            var self = this;
+
+            this.addEventListener('px-deck-ready', function() {
+                //console.log('dashboard received px-deck-ready <----');
+
+                var container = self.$.container;
+                container.querySelector('px-deck').context = self.context;
+
+                //this.fire('px-dashboard-ready');
+            });
+        },
+        switchDeck: function(url) {
+            var container = this.$.container;
+            if (container) {
+                container.innerHTML = "";
+                this.deckUrl = url;
+                px.dealer.getDeck(url).then(function(deck){
+                    container.innerHTML = deck;
+                }, function(){
+                    // TODO - need better error handling here
+                    console.error('fail to load the deck with url '+url);
+                });
+            }
+            else {
+                console.log('there is no container');
+            }
+        }
+    };
+
+    Polymer({
+        is: 'px-dashboard',
+        behaviors: [px.dashboard]
+    });
+
+</script>
