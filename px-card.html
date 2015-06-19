@@ -116,13 +116,15 @@ Example:
 -->
 
 <dom-module id="px-card">
-    <link rel="import" type="css" href="css/px-card.css"/>
-    <template>
-        <px-card-header icon="{{icon}}" header-text="{{headerText}}"></px-card-header>
-        <div class="u-m">
-            <content></content>
-        </div>
+  <link rel="import" type="css" href="css/px-card.css"/>
+  <template>
+    <template is="dom-if" if="{{headerText}}">
+      <px-card-header icon="{{icon}}" header-text="{{headerText}}"></px-card-header>
     </template>
+    <div class="u-m">
+        <content></content>
+    </div>
+  </template>
 </dom-module>
 
 <script type="text/javascript">
