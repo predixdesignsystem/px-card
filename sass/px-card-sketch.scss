@@ -37,6 +37,14 @@ $inuit-enable-box--flush               : true;
   @extend %box--flush;
   margin-bottom: $inuit-base-spacing-unit--tiny;
   padding: 0 $inuit-base-spacing-unit--large $inuit-base-spacing-unit--huge;
+  :host {
+    margin-right: -$inuit-base-spacing-unit--large;
+    margin-bottom: 0;
+    margin-left: -$inuit-base-spacing-unit--large;
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+  }
 }
 
 // Trumps

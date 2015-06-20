@@ -437,6 +437,12 @@ sub {
 :host {
   margin-bottom: 0.3333333333rem;
   padding: 0 1.3333333333rem 2rem; }
+  :host :host {
+    margin-right: -1.3333333333rem;
+    margin-bottom: 0;
+    margin-left: -1.3333333333rem; }
+    :host :host:last-of-type {
+      padding-bottom: 0; }
 
 /**
  * Margin and padding helper classes. Use these to tweak layout on a micro

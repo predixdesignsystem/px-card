@@ -23,4 +23,10 @@ common/abstract rules go in px-card-sketch.scss, not in this file.
 
 :host {
   background-color: $white;
+  :host {
+    border-bottom: $inuit-base-spacing-unit--tiny solid $graybg;
+    &:last-of-type {
+      border-bottom: 0;
+    }
+  }
 }
