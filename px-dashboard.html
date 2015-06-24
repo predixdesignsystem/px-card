@@ -71,9 +71,8 @@ selectedDeck: {
                 //console.log('dashboard received px-deck-ready <----');
                 //stop event from reaching dealer
                 e.stopPropagation();
-                var container = self.$.container;
                 //since deck is loaded dynamically, context is already ready
-                container.querySelector('px-deck').context = self.context;
+                e.target.context = self.context;
                 e.target.init();
             });
         },
