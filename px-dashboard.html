@@ -67,13 +67,13 @@ selectedDeck: {
             //console.log('----> dashboard-created!!');
             var self = this;
 
-            this.addEventListener('px-deck-ready', function() {
+            this.addEventListener('px-deck-ready', function(e) {
                 //console.log('dashboard received px-deck-ready <----');
-
-                var container = self.$.container;
-                container.querySelector('px-deck').context = self.context;
-
-                //this.fire('px-dashboard-ready');
+                //stop event from reaching dealer
+                e.stopPropagation();
+                //since deck is loaded dynamically, context is already ready
+                e.target.context = self.context;
+                e.target.init();
             });
         },
         switchDeck: function(url) {

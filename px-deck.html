@@ -78,19 +78,16 @@ px-deck-ready -  event will be fired when the deck is attached to the dom and al
             //console.log('----> deck-created!!');
             var self = this;
 
-            // count # of expected cards on initial load
-            var numExpectedCards = Polymer.dom(this).querySelectorAll('.px-card').length;
-            var numCheckedIn = 0;
-
             this.addEventListener('px-card-ready', function(e) {
                 //console.log('deck received px-card-ready <----');
 
                 self.registerCardInDeck(e.target);
 
-                numCheckedIn++;
-                if(numCheckedIn === numExpectedCards) {
-                    self.fire('px-deck-ready');
-                }
+                //fire px-deck-ready when no more px-card-ready after 250ms
+                self.debounce('px-deck-ready', function(){
+                    self.fire('px-deck-ready', null, {cancelable: true});
+                }, 250);
+
             });
         },
         ready: function() {
@@ -102,6 +99,11 @@ px-deck-ready -  event will be fired when the deck is attached to the dom and al
         },
         init: function() {
             //console.log('px-deck init is called');
+            var self = this;
+            Object.keys(this.cards).forEach(function(cardId) {
+                self.cards[cardId].context = self.context;
+                self.cards[cardId].init();
+            });
         },
         updateState: function(cardIdSentFrom, state) {
             var newState = {};
@@ -120,7 +122,6 @@ px-deck-ready -  event will be fired when the deck is attached to the dom and al
         },
         registerCardInDeck: function(card){
             card._deck = this;
-            card.init(this);
             this.cards[card.id] = card;
         },
         addCard: function(cardName, cardId) {
