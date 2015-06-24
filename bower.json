@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": [
     "px-card.html"
   ],
@@ -16,6 +16,7 @@
   "dependencies": {
     "polymer": "~v1.0.3",
     "px": "https://github.build.ge.com/Predix-Experience/px.git",
+    "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git#~0.2.0",
     "es6-promise": "git://github.com/jakearchibald/es6-promise.git"
   },
   "devDependencies": {
@@ -24,7 +25,6 @@
     "jquery": "~2.1.4",
     "px-box-design": "https://github.build.ge.com/PXd/px-box-design.git#~0.2.0",
     "px-buttons-design": "https://github.build.ge.com/PXd/px-buttons-design.git#~0.4.0",
-    "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git#~0.2.0",
     "px-layout-design": "https://github.build.ge.com/PXd/px-layout-design.git#~0.3.0",
     "px-starter-kit-design": "https://github.build.ge.com/PXd/px-starter-kit-design.git#~0.3.0",
     "px-ts-chart": "https://github.build.ge.com/PXc/px-time-series.git#master",
