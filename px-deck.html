@@ -1,13 +1,14 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <!--
-A set of cards (aka view) which has an API
+A collection of cards which has an API
 
 #### Usage
 ```
-<px-deck>
-    <vibration-card id="card2" class="px-class"></vibration-card>
-    <temperature-card id="card3" class="px-class"></temperature-card>
+<px-deck context="{{context}}">
+    <vibration-card id="card2"></vibration-card>
+    <temperature-card id="card3"></temperature-card>
 </px-deck>
+
 ```
 
 #### px.deck behavior api
@@ -27,18 +28,19 @@ context: {
 addCard: function(cardName, cardId) {
 //add card to the deck by passing card name (the element name) and card id
 }
+
+// Example:
+document.querySelector('#my-deck').addCard('sample-card', new Date().getTime());
 ```
 
 ```
 removeCardById: function(cardId){
 //remove card from the deck by card id
+
+// Example:
+document.querySelector('#my-deck').removeCardById('sample-card-1');
 }
 ```
-
-##### events
-
-px-deck-ready -  event will be fired when the deck is attached to the dom and all its cards are ready
-
 
 -->
 
