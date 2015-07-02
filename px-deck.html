@@ -79,17 +79,27 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
             this.cards = {};
             //console.log('----> deck-created!!');
             var self = this;
+            var deckReadyFired = false;
+            this.deckInitialized = false;
 
             this.addEventListener('px-card-ready', function(e) {
                 //console.log('deck received px-card-ready <----');
-
                 self.registerCardInDeck(e.target);
 
-                //fire px-deck-ready when no more px-card-ready after 250ms
-                self.debounce('px-deck-ready', function(){
-                    self.fire('px-deck-ready', null, {cancelable: true});
-                }, 250);
-
+                //if deck initialized, just initialized the card
+                if (self.deckInitialized){
+                    self.initializeCard(e.target);
+                }
+                else{
+                    //fire px-deck-ready when no more px-card-ready after 250ms
+                    self.debounce('px-deck-ready', function(){
+                        //do not fire deck ready twice,
+                        if (!deckReadyFired){
+                            self.fire('px-deck-ready', null, {cancelable: true});
+                            deckReadyFired = true;
+                        }
+                    }, 250);
+                }
             });
         },
         ready: function() {
@@ -103,9 +113,14 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
             //console.log('px-deck init is called');
             var self = this;
             Object.keys(this.cards).forEach(function(cardId) {
-                self.cards[cardId].context = self.context;
-                self.cards[cardId].init();
+                self.initializeCard(self.cards[cardId]);
             });
+
+            this.deckInitialized = true;
+        },
+        initializeCard: function(card){
+            card.context = this.context;
+            card.init();
         },
         updateState: function(cardIdSentFrom, state) {
             var newState = {};
