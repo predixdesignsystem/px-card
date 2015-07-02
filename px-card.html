@@ -256,8 +256,8 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
             /**
              * getData from web resources with url
              */
-            getData: function (url) {
-                return window.px.dealer.getData(url);
+            getData: function () {
+                return window.px.dealer.getData.apply(this, arguments);
             }
         };
     })();
