@@ -7,7 +7,10 @@ window.px = {
         var style = window.getComputedStyle(el);
         return (style.display === 'none')
     },
-    beforeEachWithFixture: function(fn){
+    beforeEachWithFixture: function(fn, wait){
+        if (isNaN(wait)){
+            wait = 0;
+        }
 
         beforeEach(function (done) {
             // create a new sandbox
@@ -20,16 +23,22 @@ window.px = {
             fn();
             setTimeout(function () {
                 done();
-            }, 0)
+            }, wait)
         });
 
     },
-    beforeEachAsync: function(fn){
+    beforeEachAsync: function(fn, wait){
+        if (isNaN(wait)){
+            wait = 0;
+        }
+
         beforeEach(function (done) {
             fn();
             setTimeout(function () {
                 done();
-            }, 0)
+            }, wait)
         });
     }
 };
+
+

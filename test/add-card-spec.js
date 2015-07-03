@@ -45,10 +45,12 @@ describe('Add card to deck', function () {
         px.beforeEachAsync(function() {
             $pxDeck = $('px-deck');
             pxDeck = document.querySelector('px-deck');
+            spyOn(pxDeck, 'init').and.callThrough();
             pxDeck.addCard('sample-card', 'card1');
             pxDeck.addCard('sample-card', 'card2');
             pxDeck.addCard('sample-card', 'card3');
-        });
+            pxDeck.addCard('sample-card2', 'card4');
+        },350);
 
         it('adds all the cards', function() {
             var cards = document.querySelectorAll('sample-card');
@@ -57,12 +59,14 @@ describe('Add card to deck', function () {
 
         it('calls init on each new card', function() {
             var cards = document.querySelectorAll('sample-card');
+            var sampleCard2 = document.querySelector('sample-card2');
             expect(cards[0].chartState.min).toBe(0);
             expect(cards[0].chartState.max).toBe(100);
             expect(cards[1].chartState.min).toBe(0);
             expect(cards[1].chartState.max).toBe(100);
             expect(cards[2].chartState.min).toBe(0);
             expect(cards[2].chartState.max).toBe(100);
+            expect(sampleCard2.count).toBe(5);
         });
 
         it('allows card to card communication to work', function() {
@@ -76,6 +80,30 @@ describe('Add card to deck', function () {
             expect(cards[2].chartState.max).toBe(33);
         });
 
-    });
+        it('deck to be initialized only once', function(){
+            expect(pxDeck.init.calls.count()).toBe(1);
+        });
 
+        describe('add more card after deck initialized', function(){
+            var card5;
+            px.beforeEachAsync(function() {
+                var card4 = document.querySelector('#card4');
+                card4.count = 10;
+                pxDeck.addCard('sample-card2', 'card5');
+            }, 500);
+
+            it('deck will not be initialized again', function(){
+               expect(pxDeck.init.calls.count()).toBe(1);
+               expect(card4.count).toBe(10);
+            });
+
+            it('card 5 will be initialized', function(){
+                var card5 = document.querySelector('#card5');
+                expect(card5.count).toBe(5);
+            });
+
+        });
+
+
+    });
 });
