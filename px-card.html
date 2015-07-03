@@ -109,20 +109,43 @@ document.querySelector('demo-card').hideCard();
 ```
 
 ```
-getData: function (url) {
-//getData from web resources with url
+getData: function (url, httpConfig) {
+//getData from web resources with url, config is optional
 }
 
 // Example:
-this.getData('http://weather.com/phoenix').then(function(data) {
+this.getData('http://weather.com/sanramon').then(function(data) {
     // on fulfillment
     self.currentTemperature = data.value;
 }, function(reason) {
     // on rejection
     console.error('ERROR', reason);
 });
-```
 
+//getData with httpConfig
+this.getData('http://weather.com/sanramon', {headers: {'my-header-name': 'my-header-value'}}).then(function(data) {
+    // on fulfillment
+    self.currentTemperature = data.value;
+}, function(reason) {
+    // on rejection
+    console.error('ERROR', reason);
+});
+
+px card's getData method is a handly method for http GET call. If you need more than http GET, you can call a lower level method px.dealer.httpRequest in px.dealer.
+px.dealer.httpRequest method is a low level method that takes a httpConfig object and returns a promise
+For details about the httpConfigObject, please reference angular $http method config
+
+//Example
+px.dealer.httpRequest({
+    url: 'http://weather.com/sanramon,
+    method: 'JSONP',
+    headers: {'my-header-name': 'my-header-value'},
+}).then(function(data){
+    // on fulfillment
+    self.currentTemperature = data.value;
+});;
+
+```
 
 ##### initialization
 
