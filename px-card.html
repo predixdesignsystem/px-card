@@ -6,7 +6,6 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="px-card-header.html"/>
-
 <!--
 Element providing basic styling and behaviors (API) for card
 
@@ -280,7 +279,7 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
              * getData from web resources with url
              */
             getData: function () {
-                return window.px.dealer.getData.apply(this, arguments);
+                return window.px.dealer.getData.apply(window.px.dealer, arguments);
             }
         };
     })();
