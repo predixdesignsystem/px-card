@@ -84,7 +84,7 @@ describe('Card to card communication', function() {
             '<sample-card2 id="card4"></sample-card2>' +
             '</px-deck>');
             $pxDeck = $('px-deck');
-        });
+        }, 275);
 
         it('initializes the cards', function() {
             card1 = $fixture.get(0).querySelector('#card1');
@@ -96,6 +96,7 @@ describe('Card to card communication', function() {
             expect(card2.chartState.min).toBe(0);
             expect(card1.chartState.max).toBe(100);
             expect(card2.chartState.max).toBe(100);
+
             expect(card3.count).toBe(5);
             expect(card4.count).toBe(5);
         });
@@ -205,5 +206,4 @@ describe('Card to card communication', function() {
         });
 
     });
-
 });

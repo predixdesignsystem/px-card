@@ -145,7 +145,7 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
             if(!cardName || !cardId) {
                 throw 'Add card must be called with a card name and card id';
             }
-            var newCard = document.createElement('sample-card');
+            var newCard = document.createElement(cardName);
             newCard.setAttribute('id', cardId);
             Polymer.dom(this).appendChild(newCard);
         },
