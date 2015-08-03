@@ -427,9 +427,10 @@ sub {
   text-align: center;
   text-decoration: none;
   text-transform: none;
-  background-color: #e4e4ea;
-  -webkit-appearance: button; }
+  white-space: nowrap;
+  background-color: #e4e4ea; }
   .btn,
+  .btn:link,
   .btn:visited,
   .btn:hover,
   .btn:focus,
@@ -445,6 +446,9 @@ sub {
     box-shadow: none;
     background-color: #9999a3; }
 
+button.btn {
+  -webkit-appearance: button; }
+
 /**
 * Establish default space between adjacent buttons
 */
@@ -459,6 +463,7 @@ sub {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
   background-color: #3e87e8; }
   .btn--primary,
+  .btn--primary:link,
   .btn--primary:visited,
   .btn--primary:hover,
   .btn--primary:focus,
