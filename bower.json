@@ -20,7 +20,7 @@
     "es6-promise": "git://github.com/jakearchibald/es6-promise.git#~2.3.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#~v1.0.4",
+    "iron-component-page": "PolymerElements/iron-component-page#~v1.0.5",
     "jasmine-jquery": "~2.1.0",
     "jquery": "~2.1.4",
     "px-box-design": "https://github.build.ge.com/PXd/px-box-design.git#~0.2.0",

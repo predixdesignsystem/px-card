@@ -150,9 +150,10 @@ ul, ol, dd {
 /* Embedded content
    ========================================================================== */
 /**
- * Remove border when inside `a` element in IE 8/9/10.
+ * Remove border when inside `a` element in IE 8/9/10. Make images shrink from their largest size.
  */
 img {
+  max-width: 100%;
   border: 0; }
 
 /**
