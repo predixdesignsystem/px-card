@@ -23,9 +23,6 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 @import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
-// Base
-@import "px-typography-design/_base.typography.scss";
-
 // Objects
 $inuit-enable-btn--small              : true;
 $inuit-enable-btn--primary            : true;
