@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (grunt) {
-  
+
   var importOnce = require('node-sass-import-once');
 
     // Project configuration.
@@ -31,7 +31,6 @@ module.exports = function (grunt) {
 
         sass: {
             options: {
-                sourceMap: false, //no source maps b/c web-components inline css anyway...
                 importer: importOnce,
                 importOnce: {
                   index: true,
@@ -45,7 +44,7 @@ module.exports = function (grunt) {
                 }
             },
             controls: {
-                files: {           
+                files: {
                     'css/noprefix/px-card-controls-sketch.css': 'sass/px-card-controls-sketch.scss',
                     'css/noprefix/px-card-controls.css': 'sass/px-card-controls-predix.scss'
                 }
@@ -57,7 +56,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        
+
         autoprefixer: {
           options: {
             browsers: ['last 2 version']
@@ -95,7 +94,15 @@ module.exports = function (grunt) {
                 files: ['sass/**/*.scss'],
                 tasks: ['sass', 'autoprefixer'],
                 options: {
-                    interrupt: true
+                    interrupt: true,
+                    livereload: true
+                }
+            },
+            htmljs: {
+                files: ['*.html', '*.js'],
+                options: {
+                    interrupt: true,
+                    livereload: true
                 }
             }
         },
@@ -105,7 +112,6 @@ module.exports = function (grunt) {
                 open: '<%= depserveOpenUrl %>'
             }
         },
-
         webdriver: {
             options: {
                 specFiles: ['test/*spec.js']
@@ -114,21 +120,34 @@ module.exports = function (grunt) {
                 webdrivers: ['chrome']
             }
         },
-
-        // Karma Unit configuration
-        karma: {
-            runner: {
-                configFile: 'karma.conf.js',
-                singleRun: true
+        concurrent: {
+            devmode: {
+                tasks: ['watch', 'depserve'],
+                options: {
+                    logConcurrentOutput: true
+                }
             }
         }
     });
 
-    require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-dep-serve');
+    grunt.loadNpmTasks('webdriver-support');
+    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     // Default task.
     grunt.registerTask('default', 'Basic build', [
-        'sass', 'autoprefixer'
+        'sass',
+        'autoprefixer'
+    ]);
+
+    grunt.registerTask('devmode', 'Development Mode', [
+        'concurrent:devmode'
     ]);
 
     // First run task.
@@ -141,9 +160,7 @@ module.exports = function (grunt) {
     // Default task.
     grunt.registerTask('test', 'Test', [
         'jshint',
-        'clean:test',
-        'copy:test',
-        'karma'
+        'webdriver'
     ]);
 
     grunt.registerTask('release', 'Release', [
