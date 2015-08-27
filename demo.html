@@ -1,4 +1,4 @@
-<link rel="import" href="../polymer/polymer.html"/>
+<script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
 <link rel="import" href="px-card.html"/>
 <link rel="import" href="../px-theme/px-theme.html"/>
 
@@ -24,6 +24,7 @@
     </template>
 </dom-module>
 <script>
+  window.addEventListener('WebComponentsReady', function(e) {
     Polymer({
         is: 'demo-card',
         init: function(){
@@ -44,9 +45,10 @@
         //    cards/time-series-card.html has an example of the px-ts-chart widget, getData, and init
         behaviors: [px.card]
     });
+  });
 </script>
 
-<body style="background: gray;">
+<body unresolved style="background: gray;">
 
   <demo-card id="demo-card"></demo-card>
 </body>
