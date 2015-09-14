@@ -226,13 +226,13 @@ html {
 *:after {
   box-sizing: inherit; }
 
-/*------------------------------------*    #PX-CLEARFIX-DESIGN
+/*------------------------------------*    #CLEARFIX
 \*------------------------------------*/
 /**
-   * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
-   * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
-   * over and over in your markup.
-   */
+ * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
+ * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
+ * over and over in your markup.
+ */
 .clearfix:after,
 .box:after,
 :host:after {
