@@ -81,8 +81,17 @@ selectedDeck: {
             if (container) {
                 container.innerHTML = "";
                 this.deckUrl = url;
-                px.dealer.getDeck(url).then(function(deck){
-                    container.innerHTML = deck;
+                var self = this;
+
+                px.dealer.getDeck(url).then(function(res) {
+                    //if the result is from view service then insert element / backward compatible of loading deck as html mark up
+                    if (typeof res === 'object') {
+                        container.appendChild(self._buildDeck(res));
+                    }
+                    else {
+                        container.innerHTML = res;
+                    }
+
                 }, function(){
                     // TODO - need better error handling here
                     console.error('fail to load the deck with url '+url);
@@ -91,6 +100,13 @@ selectedDeck: {
             else {
                 console.log('there is no container');
             }
+        },
+        _buildDeck : function (cards) {
+            var deckElement = document.createElement('px-deck');
+            cards.forEach(function (card) {
+                deckElement.addCard(card.tagName, card.id, card.title, card.attributes);
+            });
+            return deckElement;
         }
     };
 
