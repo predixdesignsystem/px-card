@@ -52,22 +52,22 @@ selectedDeck: {
                 observer: "contextChanged"
             }
         },
-        deckSelected: function(newDeck) {
+        deckSelected: function (newDeck) {
             if (newDeck && newDeck.substring(0, 2) !== '{{') {
                 this.switchDeck(newDeck);
             }
         },
-        contextChanged: function(newContext) {
+        contextChanged: function (newContext) {
             var deck = this.$.container.querySelector('px-deck');
             if (deck) {
                 deck.context = this.context;
             }
         },
-        created: function() {
+        created: function () {
             //console.log('----> dashboard-created!!');
             var self = this;
 
-            this.addEventListener('px-deck-ready', function(e) {
+            this.addEventListener('px-deck-ready', function (e) {
                 //console.log('dashboard received px-deck-ready <----');
                 //stop event from reaching dealer
                 e.stopPropagation();
@@ -76,14 +76,14 @@ selectedDeck: {
                 e.target.init();
             });
         },
-        switchDeck: function(url) {
+        switchDeck: function (url) {
             var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
                 this.deckUrl = url;
                 var self = this;
 
-                px.dealer.getDeck(url).then(function(res) {
+                px.dealer.getDeck(url).then(function (res) {
                     //if the result is from view service then insert element / backward compatible of loading deck as html mark up
                     if (typeof res === 'object') {
                         container.appendChild(self._buildDeck(res));
@@ -92,20 +92,23 @@ selectedDeck: {
                         container.innerHTML = res;
                     }
 
-                }, function(){
+                }, function () {
                     // TODO - need better error handling here
-                    console.error('fail to load the deck with url '+url);
+                    console.error('fail to load the deck with url ' + url);
                 });
             }
             else {
                 console.log('there is no container');
             }
         },
-        _buildDeck : function (cards) {
-            var deckElement = document.createElement('px-deck');
-            cards.forEach(function (card) {
-                deckElement.addCard(card.tagName, card.id, card.title, card.attributes);
-            });
+        _buildDeck: function (deck) {
+            var deckElement = document.createElement(deck.tagName);
+            deckElement.setAttribute('id', deck.id);
+            if (deck.cards.constructor == Array) {
+                deck.cards.forEach(function (card) {
+                    deckElement.addCard(card.tagName, card.id, card.title, card.attributes);
+                });
+            }
             return deckElement;
         }
     };
