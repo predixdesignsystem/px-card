@@ -150,12 +150,15 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
             newCard.setAttribute('id', 'card-'+cardId);
             newCard.setAttribute('headerText', title);
             newCard.setAttribute('context', '{{context}}');
-            for (var attrName in attributes) {
-                if (typeof attributes[attrName] !== 'object') {
-                    newCard.setAttribute(attrName, attributes[attrName]);
-                }
-                else {
-                    newCard.setAttribute(attrName, JSON.stringify(attributes[attrName]));
+
+            if (attributes && typeof attributes === 'object'){
+                for (var attrName in attributes) {
+                    if (typeof attributes[attrName] !== 'object') {
+                        newCard.setAttribute(attrName, attributes[attrName]);
+                    }
+                    else {
+                        newCard.setAttribute(attrName, JSON.stringify(attributes[attrName]));
+                    }
                 }
             }
 
