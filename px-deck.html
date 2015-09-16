@@ -148,7 +148,7 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
 
             var newCard = document.createElement(cardName);
             newCard.setAttribute('id', 'card-'+cardId);
-            newCard.setAttribute('headerText', title);
+            newCard.setAttribute('title', title);
             newCard.setAttribute('context', '{{context}}');
 
             if (attributes && typeof attributes === 'object'){
