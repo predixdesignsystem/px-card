@@ -47,15 +47,15 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
 <dom-module id="px-deck">
     <template>
         <!--<div style="border:blue 3px solid;">-->
-            <!--<h1>Deck:<span>{{context.name}}</span></h1>-->
-            <content></content>
+        <!--<h1>Deck:<span>{{context.name}}</span></h1>-->
+        <content></content>
         <!--</div>-->
     </template>
 </dom-module>
 <script>
     window.px = window.px || {};
 
-    window.addEventListener('px-dashboard-ready', function() {
+    window.addEventListener('px-dashboard-ready', function () {
         //console.log('window received px-dashboard ready');
         document.querySelector('px-dashboard').init();
     });
@@ -67,34 +67,34 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
                 observer: 'contextChanged'
             }
         },
-        contextChanged: function(thing) {
+        contextChanged: function (thing) {
             //console.log('itchanged', thing);
             var self = this;
-            Object.keys(this.cards).forEach(function(cardId) {
+            Object.keys(this.cards).forEach(function (cardId) {
                 //console.log('pushing this context', self.context);
                 self.cards[cardId].context = self.context;
             });
         },
-        created: function() {
+        created: function () {
             this.cards = {};
             //console.log('----> deck-created!!');
             var self = this;
             var deckReadyFired = false;
             this.deckInitialized = false;
 
-            this.addEventListener('px-card-ready', function(e) {
+            this.addEventListener('px-card-ready', function (e) {
                 //console.log('deck received px-card-ready <----');
                 self.registerCardInDeck(e.target);
 
                 //if deck initialized, just initialized the card
-                if (self.deckInitialized){
+                if (self.deckInitialized) {
                     self.initializeCard(e.target);
                 }
-                else{
+                else {
                     //fire px-deck-ready when no more px-card-ready after 250ms
-                    self.debounce('px-deck-ready', function(){
+                    self.debounce('px-deck-ready', function () {
                         //do not fire deck ready twice,
-                        if (!deckReadyFired){
+                        if (!deckReadyFired) {
                             self.fire('px-deck-ready', null, {cancelable: true});
                             deckReadyFired = true;
                         }
@@ -102,27 +102,27 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
                 }
             });
         },
-        ready: function() {
+        ready: function () {
             //console.log('----------> deck-ready!!');
             this.state = {};
         },
-        attached: function() {
+        attached: function () {
 //            console.log('----> deck-attached!!');
         },
-        init: function() {
+        init: function () {
             //console.log('px-deck init is called');
             var self = this;
-            Object.keys(this.cards).forEach(function(cardId) {
+            Object.keys(this.cards).forEach(function (cardId) {
                 self.initializeCard(self.cards[cardId]);
             });
 
             this.deckInitialized = true;
         },
-        initializeCard: function(card){
+        initializeCard: function (card) {
             card.context = this.context;
             card.init();
         },
-        updateState: function(cardIdSentFrom, state) {
+        updateState: function (cardIdSentFrom, state) {
             var newState = {};
             Polymer.Base.mixin(newState, this.state);
             Polymer.Base.mixin(newState, state);
@@ -130,34 +130,49 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
 
             var self = this;
 
-            Object.keys(this.cards).forEach(function(cardId) {
+            Object.keys(this.cards).forEach(function (cardId) {
                 // only update cards with different ids
                 if (cardId !== cardIdSentFrom) {
                     self.cards[cardId].set('deckState', self.state);
                 }
             });
         },
-        registerCardInDeck: function(card){
+        registerCardInDeck: function (card) {
             card._deck = this;
             this.cards[card.id] = card;
         },
-        addCard: function(cardName, cardId) {
-            if(!cardName || !cardId) {
+        addCard: function (cardName, cardId, title, attributes) {
+            if (!cardName || !cardId) {
                 throw 'Add card must be called with a card name and card id';
             }
+
             var newCard = document.createElement(cardName);
-            newCard.setAttribute('id', cardId);
+            newCard.setAttribute('id', 'card-'+cardId);
+            newCard.setAttribute('title', title);
+            newCard.setAttribute('context', '{{context}}');
+
+            if (attributes && typeof attributes === 'object'){
+                for (var attrName in attributes) {
+                    if (typeof attributes[attrName] !== 'object') {
+                        newCard.setAttribute(attrName, attributes[attrName]);
+                    }
+                    else {
+                        newCard.setAttribute(attrName, JSON.stringify(attributes[attrName]));
+                    }
+                }
+            }
+
             Polymer.dom(this).appendChild(newCard);
         },
-        removeCardById: function(cardId){
-            if(!cardId) {
+        removeCardById: function (cardId) {
+            if (!cardId) {
                 throw 'Remove card by id must be called with a card id';
             }
 
-            var card = Polymer.dom(this).querySelector('#'+cardId);
+            var card = Polymer.dom(this).querySelector('#' + cardId);
 
-            if (!card){
-                console.warn('Cannot find card by id '+cardId);
+            if (!card) {
+                console.warn('Cannot find card by id ' + cardId);
                 return;
             }
 
