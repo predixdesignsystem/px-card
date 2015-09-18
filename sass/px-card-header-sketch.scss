@@ -30,10 +30,20 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 @import "px-helpers-design/_generic.helpers.scss";
 
 // Base
+@import "px-flexbox-design/_base.flexbox.scss";
+
+// Objects
+$inuit-enable-btn--bare    : true;
+
+@import "px-buttons-design/_objects.buttons.scss";
 
 // Components
+header {
+  height: calculateRem(60px);
+}
+
 h3 {
-  @include inuit-font-size(15px,60px);
+  @include inuit-font-size(15px,false);
 }
 
 // Trumps

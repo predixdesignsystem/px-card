@@ -13,7 +13,7 @@ Element providing basic styling and behaviors (API) for card
 ```
 <dom-module id="demo-card">
     <template>
-        <px-card icon='demo-icon' header-text='Demo Card'>
+        <px-card icon='demo-icon' header-text='Demo Card' chevron>
             <h1>Hello World</h1>
             <p>{{context.name}}</p>
             <p>This is the bare minimum you need for a Predix Experience card.</p>
@@ -173,7 +173,7 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
   <link rel="import" type="css" href="css/px-card.css"/>
   <template>
     <template is="dom-if" if="{{headerText}}">
-      <px-card-header icon="{{icon}}" header-text="{{headerText}}"></px-card-header>
+      <px-card-header icon="{{icon}}" header-text="{{headerText}}" chevron="{{chevron}}"></px-card-header>
     </template>
     <content></content>
   </template>
@@ -300,6 +300,12 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
              */
             icon: {
                 type: String
+            },
+            /**
+             * px-card chevron
+             */
+            chevron: {
+                type: Boolean
             }
         }
     });
