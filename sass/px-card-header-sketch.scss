@@ -1,0 +1,53 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+//
+// Sass for the "sketch" notion of the px-card-controls component
+//
+// @author
+//
+
+/*
+THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PREDIX BRANDING
+Predix branding rules go in px-card-predix.scss, not in this file.
+*/
+
+// Settings
+@import "px-defaults-design/_settings.defaults.scss";
+@import "px-colors-design/_settings.colors.scss";
+@import "px-mixins-design/_tools.mixins.scss";
+
+// Generic
+@import "px-normalize-design/_generic.normalize.scss";
+@import "px-box-sizing-design/_generic.box-sizing.scss";
+@import "px-helpers-design/_generic.helpers.scss";
+
+// Base
+@import "px-flexbox-design/_base.flexbox.scss";
+
+// Objects
+$inuit-enable-btn--bare    : true;
+
+@import "px-buttons-design/_objects.buttons.scss";
+
+// Components
+header {
+  height: calculateRem(60px);
+}
+
+h3 {
+  @include inuit-font-size(15px,false);
+}
+
+// Trumps
+$inuit-enable-margins--tiny : true;
+$inuit-enable-margins--none : true;
+
+@import "px-spacing-design/_trumps.spacing.scss";
