@@ -235,6 +235,30 @@ html {
  * A lot of these classes carry `!important` as you will always want them to win
  * out over other selectors.
  */
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+a {
+  background-color: transparent;
+  /**
+ * Default link colors
+ */
+  /**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */ }
+  a:link,
+  a:visited {
+    color: #3e87e8; }
+  a:hover {
+    color: #3573c5; }
+  a:active {
+    color: #2b5ea2; }
+  a:active,
+  a:hover {
+    outline: 0; }
+
 /**
  * Add/remove floats
  */
@@ -551,6 +575,7 @@ html {
 .btn {
   display: inline-block;
   overflow: visible;
+  height: 2em;
   margin: 0;
   border: 1px solid #b1b1bc;
   border-radius: 3px;
@@ -595,6 +620,7 @@ button.btn {
    * Buttons with no styles (good a11y practice to use <button> for actions rather than <a>).
    */
 .btn--bare {
+  height: auto;
   border: 0;
   border-radius: 0;
   padding: 0;
@@ -621,6 +647,34 @@ h3 {
  *
  * `.u-(m|p)(t|r|b|l|h|v)(-|+|0) {}` = utility - margin/padding top/right/bottom/left/horizontal/vertical less/more/none
  */
+/**
+     * Margin helper classes.
+     *
+     * Add margins.
+     */
+.u-m {
+  margin: 1rem !important; }
+
+.u-mt {
+  margin-top: 1rem !important; }
+
+.u-mr {
+  margin-right: 1rem !important; }
+
+.u-mb {
+  margin-bottom: 1rem !important; }
+
+.u-ml {
+  margin-left: 1rem !important; }
+
+.u-mh {
+  margin-right: 1rem !important;
+  margin-left: 1rem !important; }
+
+.u-mv {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important; }
+
 /**
      * Add tiny margins.
      */

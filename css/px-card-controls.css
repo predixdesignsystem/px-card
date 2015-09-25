@@ -242,6 +242,7 @@ html {
 .btn {
   display: inline-block;
   overflow: visible;
+  height: 2em;
   margin: 0;
   border: 1px solid #b1b1bc;
   border-radius: 3px;
@@ -306,5 +307,6 @@ button.btn {
    * Small buttons.
    */
 .btn--small {
+  height: 1.6666666667em;
   font-size: 0.8rem;
   line-height: calc(1.6666666667em - 2px); }
