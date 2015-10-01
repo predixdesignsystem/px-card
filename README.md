@@ -19,7 +19,9 @@ Deck is a collection of cards.
 * initialize Cards after the deck is initialized
 * enable card-to-card communication through the deck state object
 
-Dashboard is a deck renderer, which renders a deck with the given url.
+Dashboard is a deck renderer, which renders a deck with the given url.  That url can either be to a file with a ```<px-deck>``` and cards or to a deck in the [Views service](https://www.predix.io/catalog/service.html?id=1186).  
+
+In the [Dashboard Seed](https://github.com/PredixDev/predix-seed), there is an example of using the [Views service](https://www.predix.io/catalog/service.html?id=1186), px-dashboard, [px-context-browser](https://github.com/PredixDev/px-context-browser), and [px-deck-selector](https://github.com/PredixDev/px-deck-selector) to build a dynamically-rendering dashboard application.
 
 ## Usage
 
