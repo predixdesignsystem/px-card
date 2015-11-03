@@ -43,18 +43,21 @@ selectedDeck: {
 
     px.dashboard = {
         properties: {
-            selectedDeck: {
+            viewServiceBaseUrl: {
+                type: String
+            },
+            selectedDeckId: {
                 type: String,
-                observer: "deckSelected"
+                observer: "deckIdChanged"
             },
             context: {
                 type: Object,
                 observer: "contextChanged"
             }
         },
-        deckSelected: function (newDeck) {
-            if (newDeck && newDeck.substring(0, 2) !== '{{') {
-                this.switchDeck(newDeck);
+        deckIdChanged: function (newDeckId) {
+            if (newDeckId && newDeckId.substring(0, 2) !== '{{') {
+                this.switchDeck(newDeckId);
             }
         },
         contextChanged: function (newContext) {
@@ -76,11 +79,11 @@ selectedDeck: {
                 e.target.init();
             });
         },
-        switchDeck: function (url) {
+        switchDeck: function (newDeckId) {
             var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
-                this.deckUrl = url;
+                var url = this._getBaseUrl() + '/decks/' + newDeckId + '?filter[include][cards]';
                 var self = this;
 
                 px.dealer.getDeck(url).then(function (res) {
@@ -104,12 +107,20 @@ selectedDeck: {
         _buildDeck: function (deck) {
             var deckElement = document.createElement(deck.slug);
             deckElement.setAttribute('id', 'deck-'+deck.id);
+            var self = this;
             if (deck.cards.constructor == Array) {
                 deck.cards.forEach(function (card) {
+                    card.attributes.url = self._getBaseUrl() + '/cards/'+card.id;
                     deckElement.addCard(card.slug, card.id, card.title, card.attributes);
                 });
             }
             return deckElement;
+        },
+        _getBaseUrl: function(){
+            if (this.viewServiceBaseUrl && this.viewServiceBaseUrl.charAt(this.viewServiceBaseUrl.length) !=="/"){
+                return this.viewServiceBaseUrl + "/";
+            }
+            return this.viewServiceBaseUrl;
         }
     };
 
