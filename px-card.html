@@ -229,7 +229,7 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
          * context change handler to be called when context is changed. This private method will call public contextChanged method which will be implemented by developer
          */
         _contextChanged: function (newContext, oldContext) {
-            if (this.contextChanged && typeof this.contextChanged === 'function') {
+            if (this.contextChanged && typeof this.contextChanged === 'function' && this.isInit === true) {
                 this.contextChanged(newContext, oldContext);
             }
         },
@@ -257,6 +257,7 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
 
         },
         attached: function () {
+            this.isInit = false;
             //console.log('----> card-attached!!');
             this.fire('px-card-ready');
             if (!this.id) {
@@ -319,18 +320,18 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
 
             cardBehaviors.forEach(function (behavior) {
                 for (prop in behavior.properties) {
-                    cardState[px.convertPropertyToAttributeName(prop)] = cardElement[prop];
+                    cardState[px.slugify(prop)] = cardElement[prop];
                 }
             });
 
             for (var prop in cardElement.properties) {
-                cardState[px.convertPropertyToAttributeName(prop)] = cardElement[prop];
+                cardState[px.slugify(prop)] = cardElement[prop];
             }
 
             return cardState;
         },
         /**
-         * save card in view service when a url is provided
+         * save card in view service when a card url is provided
          */
         save: function () {
             var state = this.getCardAttributes();
