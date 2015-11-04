@@ -155,7 +155,7 @@ getAttributes : function(){
 
 ```
 save: function() {
-    //retrive card properties values and persist the attributes in card service if url attribute is set on card
+   //retrive card properties values and persist the attributes in card service if url attribute is set on card
 }
 
 ```
@@ -332,22 +332,29 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
         },
         /**
          * save card in view service when a card url is provided
+         * If you render a deck and card using px-dashboard with view-service-base-url attribute set, card url will be set by the px-dashboard component behind the scene
          */
         save: function () {
             var state = this.getCardAttributes();
 
             var url = this.url;
-            var serializedCard = {};
-
-            serializedCard.title = state.title;
-
-            delete state.id;
-            delete state.title;
-            delete state.url;
-
-            serializedCard.attributes = state;
 
             if (url) {
+                var serializedCard = {};
+
+                if (state.title){
+                    serializedCard.title = state.title;
+                    delete state.title;
+                }
+
+                if (state.url){
+                    delete state.url;
+                }
+
+                delete state.id;
+
+                serializedCard.attributes = state;
+
                 return window.px.dealer.httpRequest({
                     method: 'PUT',
                     url: url,

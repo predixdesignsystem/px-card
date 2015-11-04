@@ -14,8 +14,8 @@
     "test"
   ],
   "dependencies": {
-    "polymer": "~v1.0.4",
-    "px": "https://github.com/PredixDev/px.git#~1.1.1",
+    "polymer": "^v1.1.0",
+    "px": "https://github.com/PredixDev/px.git#~1.2.0",
     "es6-promise": "https://github.com/jakearchibald/es6-promise.git#~2.3.0",
     "px-theme": "https://github.com/PredixDev/px-theme.git#~0.3.3"
   },
@@ -28,7 +28,6 @@
     "px-layout-design": "https://github.com/PredixDev/px-layout-design.git#~0.3.0",
     "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.5",
     "px-chart": "https://github.com/PredixDev/px-chart.git#~1.0.0",
-    "px-sample-cards": "https://github.com/PredixDev/px-sample-cards.git#~0.1.1",
     "px-defaults-design": "https://github.com/PredixDev/px-defaults-design.git#~0.2.4"
   }
 }
