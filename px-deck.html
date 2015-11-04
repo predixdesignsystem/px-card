@@ -121,6 +121,7 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
         initializeCard: function (card) {
             card.context = this.context;
             card.init();
+            card.isInit = true;
         },
         updateState: function (cardIdSentFrom, state) {
             var newState = {};
