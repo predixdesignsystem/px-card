@@ -188,6 +188,19 @@ px.dealer.httpRequest({
 
 ```
 
+```
+getAttributes : function(){
+    // get all properties values of a card and return a property key : value map
+}
+```
+
+```
+save: function() {
+   //retrive card properties values and persist the attributes in card service if url attribute is set on card
+}
+
+```
+
 ##### initialization
 
 If you are not using px-deck, you will need to initialize your card yourself.  Example:
@@ -249,7 +262,11 @@ Deck renderer with an API
 
 #### Usage
 ```
-<px-dashboard selected-deck="{{selectedDeck}}" context="{{context}}"></px-dashboard>
+//if using with predix view service
+<px-dashboard view-service-base-url="{{viewServiceBaseUrl}}" selected-deck-id="{{selectedDeck.id}}" context="{{context}}"></px-dashboard>
+
+//if you would like to render your deck from html file. you can put the url of the deck html in selected-deck-url attribute
+<px-dashboard selected-deck-url="{{selectedDeck}}" context="{{context}}"></px-dashboard>
 ```
 
 ##### properties
@@ -264,8 +281,23 @@ context: {
 deck id to pass to dashboard which will be used to load the deck that should be displayed
 currently, this is just a url
 ```
-selectedDeck: {
+selectedDeckUrl: {
     type: String
+}
+```
+
+if using with view service, you can put view service base url here
+```
+viewServiceBaseUrl: {
+    type: String
+}
+```
+
+deck id in view service
+```
+selectedDeckId: {
+    type: String,
+    observer: "deckIdChanged"
 }
 ```
 
