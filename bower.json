@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.0.20",
+  "version": "0.1.0",
   "main": [
     "px-card.html"
   ],
@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "polymer": "~v1.0.4",
-    "px": "https://github.com/PredixDev/px.git#~1.0.3",
+    "px": "https://github.com/PredixDev/px.git#~1.1.1",
     "es6-promise": "https://github.com/jakearchibald/es6-promise.git#~2.3.0",
     "px-theme": "https://github.com/PredixDev/px-theme.git#~0.3.3"
   },
