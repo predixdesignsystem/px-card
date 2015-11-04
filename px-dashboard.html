@@ -43,6 +43,10 @@ selectedDeck: {
 
     px.dashboard = {
         properties: {
+            selectedDeckUrl: {
+                type: String,
+                observer: "deckUrlChanged"
+            },
             viewServiceBaseUrl: {
                 type: String
             },
@@ -55,9 +59,15 @@ selectedDeck: {
                 observer: "contextChanged"
             }
         },
+        deckUrlChanged: function(newDeckUrl){
+            if (newDeckUrl && newDeckUrl.substring(0, 2) !== '{{') {
+                this.fetchAndRenderDeck(newDeckUrl);
+            }
+        },
         deckIdChanged: function (newDeckId) {
             if (newDeckId && newDeckId.substring(0, 2) !== '{{') {
-                this.switchDeck(newDeckId);
+                var url = this._getBaseUrl() + 'decks/' + newDeckId + '?filter[include][cards]';
+                this.fetchAndRenderDeck(url);
             }
         },
         contextChanged: function (newContext) {
@@ -79,11 +89,10 @@ selectedDeck: {
                 e.target.init();
             });
         },
-        switchDeck: function (newDeckId) {
+        fetchAndRenderDeck: function(url){
             var container = this.$.container;
             if (container) {
                 container.innerHTML = "";
-                var url = this._getBaseUrl() + '/decks/' + newDeckId + '?filter[include][cards]';
                 var self = this;
 
                 px.dealer.getDeck(url).then(function (res) {
@@ -101,7 +110,7 @@ selectedDeck: {
                 });
             }
             else {
-                console.log('there is no container');
+                console.error('container is not defined');
             }
         },
         _buildDeck: function (deck) {
@@ -110,17 +119,22 @@ selectedDeck: {
             var self = this;
             if (deck.cards.constructor == Array) {
                 deck.cards.forEach(function (card) {
-                    card.attributes.url = self._getBaseUrl() + '/cards/'+card.id;
+                    card.attributes.url = self._getBaseUrl() + 'cards/'+card.id;
                     deckElement.addCard(card.slug, card.id, card.title, card.attributes);
                 });
             }
             return deckElement;
         },
         _getBaseUrl: function(){
-            if (this.viewServiceBaseUrl && this.viewServiceBaseUrl.charAt(this.viewServiceBaseUrl.length) !=="/"){
-                return this.viewServiceBaseUrl + "/";
+            if (this.viewServiceBaseUrl){
+                if (this.viewServiceBaseUrl.charAt(this.viewServiceBaseUrl.length) !=="/"){
+                    return this.viewServiceBaseUrl + "/";
+                }
+                return this.viewServiceBaseUrl;
             }
-            return this.viewServiceBaseUrl;
+            else{
+                throw 'view service base url is undefined';
+            }
         }
     };
 

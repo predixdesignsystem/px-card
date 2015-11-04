@@ -319,12 +319,12 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
 
             cardBehaviors.forEach(function (behavior) {
                 for (prop in behavior.properties) {
-                    cardState[self._propertyToAttributeName(prop)] = cardElement[prop];
+                    cardState[px.convertPropertyToAttributeName(prop)] = cardElement[prop];
                 }
             });
 
             for (var prop in cardElement.properties) {
-                cardState[this._propertyToAttributeName(prop)] = cardElement[prop];
+                cardState[px.convertPropertyToAttributeName(prop)] = cardElement[prop];
             }
 
             return cardState;
@@ -334,8 +334,6 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
          */
         save: function () {
             var state = this.getCardAttributes();
-
-            console.log(state);
 
             var url = this.url;
             var serializedCard = {};
@@ -361,19 +359,6 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
             else {
                 throw 'Card url is undefined';
             }
-        },
-        _propertyToAttributeName: function(propertyName){
-            // Separate camel-cased words with a space for later processing.
-            var attrName = propertyName.replace(/[A-Z]/g, function (s) {
-                return " " + s;
-            });
-            attrName = attrName.toLowerCase();
-            attrName = attrName.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-                    .replace(/\s+/g, '-') // collapse whitespace and replace by -
-                    .replace(/-+/g, '-'); // collapse dashes
-            // Trim leading and trailing whitespace and dashes.
-            attrName = attrName.replace(/^[\s|-]+|[\s|-]+$/g, '');
-            return attrName;
         }
     };
 })();
