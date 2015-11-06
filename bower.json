@@ -20,6 +20,7 @@
     "px-theme": "https://github.com/PredixDev/px-theme.git#~0.3.3"
   },
   "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#~3.3.30",
     "iron-component-page": "PolymerElements/iron-component-page#~v1.0.5",
     "jasmine-jquery": "~2.1.0",
     "jquery": "~2.1.4",

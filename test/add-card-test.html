@@ -1,0 +1,121 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <link rel="import" href="../px-deck.html"/>
+    <link rel="import" href="cards/sample-card.html"/>
+    <link rel="import" href="cards/sample-card2.html"/>
+</head>
+<body>
+
+    <script>
+
+        'use strict';
+        describe('Add card to deck', function () {
+
+            beforeEach
+
+            describe('1 card', function () {
+                beforeEach(function (done) {
+                    pxDeck.addCard('sample-card', '123', '', {});
+                    done();
+                });
+
+                it('can be initialized', function () {
+                    var card1 = document.querySelector('sample-card');
+                    assert.equal(card1.chartState.min, 0);
+                    assert.equal(card1.chartState.max, 100);
+                })
+            });
+
+            it('throws an error if no card name', function () {
+                try {
+                    pxDeck.addCard();
+                    assert.equal('this should','throw an error');
+                } catch (e) {
+                    assert.equal(e,'Add card must be called with a card name and card id');
+                }
+            });
+
+            it('throws an error if no card id', function () {
+                try {
+                    pxDeck.addCard('sample-card');
+                    assert.equal('this should','throw an error');
+                } catch (e) {
+                    assert.equal(e,'Add card must be called with a card name and card id');
+                }
+            });
+
+            describe('able to add more cards', function () {
+
+                beforeEach(function () {
+                    pxDeck = document.querySelector('px-deck');
+                    spyOn(pxDeck, 'init').and.callThrough();
+                    pxDeck.addCard('sample-card', 'card1');
+                    pxDeck.addCard('sample-card', 'card2');
+                    pxDeck.addCard('sample-card', 'card3');
+                    pxDeck.addCard('sample-card2', 'card4');
+                });
+
+                it('adds all the cards', function () {
+                    var cards = document.querySelectorAll('sample-card');
+                    assert.equal(cards.length,3);
+                });
+
+                it('calls init on each new card', function () {
+                    var cards = document.querySelectorAll('sample-card');
+                    var sampleCard2 = document.querySelector('sample-card2');
+                    assert.equal(cards[0].chartState.min,0);
+                    assert.equal(cards[0].chartState.max,100);
+                    assert.equal(cards[1].chartState.min,0);
+                    assert.equal(cards[1].chartState.max,100);
+                    assert.equal(cards[2].chartState.min,0);
+                    assert.equal(cards[2].chartState.max,100);
+                    assert.equal(sampleCard2.count,5);
+                });
+
+                it('allows card to card communication to work', function () {
+                    var cards = document.querySelectorAll('sample-card');
+                    cards[2].chartState = {min: 3, max: 33};
+                    assert.equal(cards[0].chartState.min,3);
+                    assert.equal(cards[0].chartState.max,33);
+                    assert.equal(cards[1].chartState.min,3);
+                    assert.equal(cards[1].chartState.max,33);
+                    assert.equal(cards[2].chartState.min,3);
+                    assert.equal(cards[2].chartState.max,33);
+                });
+
+                it('deck to be initialized only once', function () {
+                    assert.equal(pxDeck.init.calls.count(),1);
+                });
+
+                describe('add more card after deck initialized', function () {
+                    var card5;
+                    beforeEach(function () {
+                        var card4 = document.querySelector('#card4');
+                        card4.count = 10;
+                        pxDeck.addCard('sample-card2', 'card5');
+                    });
+
+                    it('deck will not be initialized again', function () {
+                        assert.equal(pxDeck.init.calls.count(),1);
+                        assert.equal(card4.count,10);
+                    });
+
+                    it('card 5 will be initialized', function () {
+                        var card5 = document.querySelector('#card5');
+                        assert.equal(card5.count,5);
+                    });
+
+                });
+
+
+            });
+        });
+
+    </script>
+</body>
+</html>

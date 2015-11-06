@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <link rel="import" href="cards/demo-card.html"/>
+    <script src="px-test.js"></script>
+</head>
+<body>
+    <demo-card id="my-demo-card"></demo-card>
+    <script>
+
+        'use strict';
+        describe('Demo Card', function () {
+
+            var demoCard;
+
+            beforeEach(function () {
+                demoCard = document.querySelector('demo-card');
+            });
+
+            it('should display context', function () {
+
+                var stubContext = {
+                    name: 'Stub Context Name'
+                };
+                demoCard.context = stubContext;
+
+                assert.include(demoCard.innerHTML, stubContext.name);
+            });
+
+            it('is initially shown', function () {
+                assert.isFalse(px.isHidden(demoCard));
+            });
+
+            it('should be able to hide', function () {
+                demoCard.hideCard();
+                assert.isTrue(px.isHidden(demoCard));
+            });
+
+            it('should be able to be shown if it is hidden', function () {
+                demoCard.hideCard();
+                demoCard.showCard();
+                assert.isFalse(px.isHidden(demoCard));
+            });
+        });
+
+    </script>
+</body>
+</html>
