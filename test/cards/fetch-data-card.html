@@ -1,3 +1,4 @@
+<link rel="import" href="../../px-card.html"/>
 <dom-module id="fetch-data-card">
     <template>
         <px-card icon="fa-suitcase" header-text="Fetch Data Card">
@@ -25,7 +26,6 @@
                 self.currentTemperature = data.value;
             }, function(reason) {
                 // on rejection
-                console.error('ERROR', reason);
                 self.currentTemperature = 'error';
             });
         },
