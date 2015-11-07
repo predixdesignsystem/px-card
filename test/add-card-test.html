@@ -16,11 +16,11 @@
             var pxDeck, spyInit;
 
             afterEach(function(){
-                document.body.innerHTML = '';
+                document.querySelector('#fixture').innerHTML = '';
             });
 
             beforeEach(function(){
-                document.body.innerHTML = '<px-deck></px-deck>';
+                document.querySelector('#fixture').innerHTML = '<px-deck></px-deck>';
                 pxDeck = document.querySelector('px-deck');
                 spyInit = sinon.spy(pxDeck, 'init');
             });
