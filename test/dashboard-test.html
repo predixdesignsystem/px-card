@@ -24,7 +24,7 @@ describe('Dashboard', function () {
         fixture.innerHTML = '';
     });
 
-    describe('deck returning html', function () {
+    describe('get deck by direct url', function () {
         beforeEach(function (done) {
             var fixture = document.querySelector('#fixture');
             fixture.innerHTML = '<px-dashboard selected-deck-url="{{selectedDeck}}" context="{{context}}"></px-dashboard>';
@@ -160,14 +160,8 @@ describe('Dashboard', function () {
 
     });
 
-    describe('deck returning json', function () {
+    describe('get deck with view service', function () {
         describe('when passed a view service url and selected deck id', function () {
-            var deckWithSampleCardMarkup = {id: "1", slug: "px-deck", cards: [
-                {slug: "sample-card", id: "1", attributes: {}}
-            ]};
-            var deckWithDemoCardMarkup = {"id": "1", "slug": "px-deck", "cards": [
-                {"slug": "demo-card", "id": "1", attributes: {}}
-            ]};
 
             beforeEach(function (done) {
                 var fixture = document.querySelector('#fixture');
@@ -181,6 +175,13 @@ describe('Dashboard', function () {
 
             describe('if deck return successfully', function () {
                 beforeEach(function (done) {
+                    var deckWithSampleCardMarkup = {id: "1", slug: "px-deck", cards: [
+                        {slug: "sample-card", id: "1", attributes: {}}
+                    ]};
+                    var deckWithDemoCardMarkup = {"id": "1", "slug": "px-deck", "cards": [
+                        {"slug": "demo-card", "id": "1", attributes: {}}
+                    ]};
+
                     px.dealer = {
                         getDeck: function (url) {
                             return new Promise(function (resolve, reject) {

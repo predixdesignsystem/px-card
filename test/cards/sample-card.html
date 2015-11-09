@@ -5,8 +5,8 @@
     <template>
         <h4>Dummy Timeseries</h4>
         <ul>
-          <li>Min: <span>{{chartState.min}}</span></li>
-          <li>Max: <span>{{chartState.max}}</span></li>
+            <li>Min: <span>{{chartState.min}}</span></li>
+            <li>Max: <span>{{chartState.max}}</span></li>
         </ul>
         <button on-click="zoom">Zoom</button>
     </template>
@@ -20,7 +20,7 @@
                 notify: true
             }
         },
-        zoom: function() {
+        zoom: function () {
             this.chartState.min++;
             this.chartState.max--;
 
@@ -30,7 +30,7 @@
                 max: this.chartState.max
             });
         },
-        ready: function() {
+        ready: function () {
             // initialize the chart state
             this.chartState = {
                 min: 0,
@@ -54,21 +54,27 @@
     Polymer({
         is: 'sample-card',
         observers: ['chartStateChanged(chartState.*)'],
-        deckStateChanged: function(newState, oldState) {
+        deckStateChanged: function (newState, oldState) {
             // when the deck state has changed (for example, when another card has changed that state),
             //   then we will handle it here - in this case, by passing that information into the widget
-            if(newState.zoom) {
+            if (newState.zoom) {
                 this.chartState = {
                     min: newState.zoom.min,
                     max: newState.zoom.max
                 };
             }
         },
-        chartStateChanged: function(newChartState) {
+        chartStateChanged: function (newChartState) {
             // when the chartState property has changed, we'll update the deck state to broadcast it to other cards
             this.updateDeck({
                 zoom: {min: newChartState.base.min, max: newChartState.base.max}
             });
+        },
+        init: function () {
+            this.initCalled = 1;
+        },
+        contextChanged: function () {
+            this.contextCalled = 1;
         },
         behaviors: [px.card]
     });
