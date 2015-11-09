@@ -1,0 +1,35 @@
+<link rel="import" href="../../px-card.html"/>
+<dom-module id="test-attr-card">
+    <template>
+        <px-card icon="fa-suitcase" header-text="Attributes Card">
+            <span id="attr1">{{attr1}}</span>
+            <span id="attr2">{{attr2}}</span>
+            <span id="attr3">{{attr3}}</span>
+            <span id="attr4">{{attr4}}</span>
+            <span id="attr5">{{attr5}}</span>
+        </px-card>
+    </template>
+</dom-module>
+<script>
+    Polymer({
+        is: 'test-attr-card',
+        init: function(){
+            this.attr0 = 'ok';
+        },
+        properties: {
+            attr1: Number,
+            attr2: String,
+            attr3: String,
+            attr4: Object,
+            attr5: Array
+        },
+        changeState: function(){
+            this.attr1 = 1000;
+            this.attr2 = 'testX';
+            this.attr3 = 'testY';
+            this.attr4 = {'c': 1, 'd': 2}
+            this.attr5 = [8,9,10];
+        },
+        behaviors: [px.card]
+    });
+</script>

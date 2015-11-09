@@ -1,0 +1,116 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../bower_components/px/dist/px.min.js"></script>
+    <link rel="import" href="../px-deck.html"/>
+    <link rel="import" href="cards/test-attr-card.html"/>
+</head>
+<body>
+    <test-attr-card title="testcard" attr1="1" attr2="test" attr3="test2" attr4='{"a":1, "b":2}' attr5="[1,2,3]"></test-attr-card>
+    <script>
+        'use strict';
+        describe('save a card', function () {
+            var card;
+
+            beforeEach(function () {
+                card = document.querySelector('test-attr-card');
+            });
+
+            describe('can serialize attributes', function () {
+                it('when no attr change', function () {
+                    var state = card.getCardAttributes();
+                    assert.equal(state.attr1, 1);
+                    assert.equal(state.attr2, 'test');
+                    assert.equal(state.attr3, 'test2');
+                    assert.deepEqual(state.attr4, {a: 1, b: 2});
+                    assert.deepEqual(state.attr5, [1, 2, 3]);
+                });
+
+                it('when attr change', function () {
+                    card.changeState();
+                    var state = card.getCardAttributes();
+                    assert.equal(state.attr1, 1000);
+                    assert.equal(state.attr2, 'testX');
+                    assert.equal(state.attr3, 'testY');
+                    assert.deepEqual(state.attr4, {c: 1, d: 2});
+                    assert.deepEqual(state.attr5, [8, 9, 10]);
+                });
+            });
+
+            describe('can save', function () {
+                it('should throw if url is not set', function () {
+                    try {
+                        card.save();
+                        assert.equal('exception', 'Card does not throw error');
+                    }
+                    catch (e) {
+                        assert.equal(e, 'Card url is undefined');
+                    }
+
+                });
+
+                describe('if success', function () {
+
+                    beforeEach(function (done) {
+                        card.url = 'http://card.url';
+
+                        window.px.dealer = {
+                            httpRequest: sinon.spy(function (config) {
+                                return new Promise(function (resolve) {
+                                    resolve(config);
+                                });
+                            })
+                        };
+
+                        card.save();
+
+                        setTimeout(function () {
+                            done();
+                        }, 0)
+                    });
+
+                    it('should save state', function () {
+                        window.px.dealer.httpRequest.calledWith(
+                                {
+                                    method: 'PUT',
+                                    url: card.url,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    data: {
+                                        attr1: 1,
+                                        attr2: 'test',
+                                        attr3: 'test2',
+                                        attr4: {a: 1, b: 2},
+                                        attr5: [1, 2, 3]
+                                    }
+                                }
+                        );
+                    });
+                });
+
+                xdescribe('if error', function () {
+                    beforeEach(function () {
+                        window.px.dealer = {
+                            httpRequest: function (config) {
+                                return new Promise(function (resolve, reject) {
+                                    resolve('error');
+                                });
+                            }
+                        };
+
+                    });
+
+                    it('should throw', function () {
+
+                    });
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>
+
