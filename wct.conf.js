@@ -9,5 +9,5 @@ module.exports = {
             disabled: true
         }
     },
-    suites:      ['test/save-card-test.html']
+    suites:      ['test/*.html']
 };

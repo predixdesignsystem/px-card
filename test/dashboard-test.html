@@ -11,153 +11,272 @@
     <link rel="import" href="cards/demo-card.html"/>
 </head>
 <body>
-    <div id="fixture"></div>
-    <script>
+<div id="fixture"></div>
+<script>
 
-        'use strict';
-        describe('Dashboard', function () {
+'use strict';
+describe('Dashboard', function () {
 
-            var dashboard;
+    var dashboard;
 
-            afterEach(function(){
-                var fixture = document.querySelector('#fixture');
-                fixture.innerHTML = '';
-            });
+    afterEach(function () {
+        var fixture = document.querySelector('#fixture');
+        fixture.innerHTML = '';
+    });
 
-            beforeEach(function (done) {
-                var fixture = document.querySelector('#fixture');
-                fixture.innerHTML = '<px-dashboard selected-deck-url="{{selectedDeck}}" context="{{context}}"></px-dashboard>';
+    describe('deck returning html', function () {
+        beforeEach(function (done) {
+            var fixture = document.querySelector('#fixture');
+            fixture.innerHTML = '<px-dashboard selected-deck-url="{{selectedDeck}}" context="{{context}}"></px-dashboard>';
 
-                setTimeout(function(){
-                    dashboard = document.querySelector('px-dashboard');
-                    done();
-                },10);
-            });
+            setTimeout(function () {
+                dashboard = document.querySelector('px-dashboard');
+                done();
+            }, 10);
+        });
 
+        describe('when passed a selected-deck url', function () {
+            var deckWithSampleCardMarkup = '<px-deck><sample-card class="px-card" id="card1"></sample-card></px-deck>';
+            var deckWithDemoCardMarkup = '<px-deck><demo-card class="px-card" id="card1"></demo-card></px-deck>';
 
-            describe('when passed a selected-deck url', function () {
-                var deckWithSampleCardMarkup = '<px-deck><sample-card class="px-card" id="card1"></sample-card></px-deck>';
-                var deckWithDemoCardMarkup = '<px-deck><demo-card class="px-card" id="card1"></demo-card></px-deck>';
+            describe('if deck return successfully', function () {
+                beforeEach(function (done) {
+                    px.dealer = {
+                        getDeck: function (url) {
 
-                describe('if deck return successfully', function () {
+                            return new Promise(function (resolve, reject) {
+                                if (url === 'url1') {
+                                    resolve(deckWithSampleCardMarkup);
+                                } else {
+                                    resolve(deckWithDemoCardMarkup);
+                                }
+                            });
+                        }
+                    };
+
+                    dashboard.selectedDeckUrl = "url1";
+                    setTimeout(function () {
+                        done();
+                    }, 100)
+                });
+
+                it('should render the deck (fetched from dealer)', function () {
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card.chartState.min, 0);
+                    assert.equal(card.chartState.max, 100);
+                });
+
+                it('should pass context to deck', function () {
+                    dashboard.context = 'ABC 123';
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card.context, 'ABC 123');
+
+                });
+
+                it('does not render the demo-card deck', function () {
+                    var card = dashboard.querySelector('demo-card');
+                    assert.equal(card, null);
+                });
+
+                it('when context changes, passes to deck', function () {
+                    dashboard.context = 'ABC 123';
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card.context, 'ABC 123');
+
+                    dashboard.context = 'another context';
+                    assert.equal(card.context, 'another context');
+
+                });
+
+                describe('when selected-deck changes', function () {
+
                     beforeEach(function (done) {
-                        px.dealer = {
-                            getDeck: function (url) {
-
-                                return new Promise(function (resolve, reject) {
-                                    if (url === 'url1') {
-                                        resolve(deckWithSampleCardMarkup);
-                                    } else {
-                                        resolve(deckWithDemoCardMarkup);
-                                    }
-                                });
-                            }
-                        };
-
-                        dashboard.selectedDeckUrl = "url1";
-                        setTimeout(function(){
+                        dashboard.selectedDeckUrl = "url2";
+                        setTimeout(function () {
                             done();
                         }, 100)
                     });
 
-                    it('should render the deck (fetched from dealer)', function () {
+                    it('does not render the sample-card deck', function () {
                         var card = dashboard.querySelector('sample-card');
-                        assert.equal(card.chartState.min,0);
-                        assert.equal(card.chartState.max,100);
+                        assert.equal(card, null);
                     });
 
-                    it('should pass context to deck', function () {
-                        dashboard.context = 'ABC 123';
-                        var card = dashboard.querySelector('sample-card');
-                        assert.equal(card.context,'ABC 123');
-
-                    });
-
-                    it('does not render the demo-card deck', function () {
+                    it('should render the demo-card deck', function () {
                         var card = dashboard.querySelector('demo-card');
-                        assert.equal(card,null);
+                        assert.include(card.innerText, 'Hello World');
                     });
 
-                    it('when context changes, passes to deck', function () {
+                    it('it should pass context', function () {
                         dashboard.context = 'ABC 123';
-                        var card = dashboard.querySelector('sample-card');
-                        assert.equal(card.context,'ABC 123');
-
-                        dashboard.context = 'another context';
-                        assert.equal(card.context,'another context');
-
+                        var card = dashboard.querySelector('demo-card');
+                        assert.equal(card.context, 'ABC 123');
                     });
-
-                    describe('when selected-deck changes', function () {
-
-                        beforeEach(function (done) {
-                            dashboard.selectedDeckUrl = "url2";
-                            setTimeout(function(){
-                                done();
-                            },100)
-                        });
-
-                        it('does not render the sample-card deck', function () {
-                            var card = dashboard.querySelector('sample-card');
-                            assert.equal(card,null);
-                        });
-
-                        it('should render the demo-card deck', function () {
-                            var card = dashboard.querySelector('demo-card');
-                            assert.include(card.innerText,'Hello World');
-                        });
-
-                        it('it should pass context', function () {
-                            dashboard.context = 'ABC 123';
-                            var card = dashboard.querySelector('demo-card');
-                            assert.equal(card.context,'ABC 123');
-                        });
-                    });
-
-                });
-
-                describe('if deck failed to return', function () {
-                    beforeEach(function () {
-                        px.dealer = {
-                            getDeck: function (url) {
-                                return new Promise(function (resolve, reject) {
-                                    reject();
-                                });
-                            }
-                        };
-
-                        dashboard.selectedDeckUrl = "url";
-                    });
-
-                    it('does not return the deck', function () { // TODO - need better error handling here
-                        var card = dashboard.querySelector('sample-card');
-                        assert.equal(card,null);
-                    });
-
                 });
 
             });
 
-            describe('when passed a {{selectedDeck}}', function () {
+            describe('if deck failed to return', function () {
                 beforeEach(function () {
                     px.dealer = {
                         getDeck: function (url) {
-                            assert.equal('this should','not be called');
+                            return new Promise(function (resolve, reject) {
+                                reject();
+                            });
                         }
                     };
 
-                    dashboard.selectedDeckUrl = "{{selectedDeck}}";
+                    dashboard.selectedDeckUrl = "url";
                 });
 
-                it('it should not bother calling px.dealer.getDeck', function () {
-                    // it should not try to fetch the deck with the uncompiled string
+                it('does not return the deck', function () { // TODO - need better error handling here
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card, null);
                 });
 
-                it('dashboard container should be empty', function () {
-                    assert.equal(dashboard.querySelector('#container').innerText,'');
-                });
             });
 
         });
-    </script>
+
+        describe('when passed a {{selectedDeckUrl}}', function () {
+            beforeEach(function () {
+                px.dealer = {
+                    getDeck: function (url) {
+                        assert.equal('this should', 'not be called');
+                    }
+                };
+
+                dashboard.selectedDeckUrl = "{{selectedDeckUrl}}";
+            });
+
+            it('it should not bother calling px.dealer.getDeck', function () {
+                // it should not try to fetch the deck with the uncompiled string
+            });
+
+            it('dashboard container should be empty', function () {
+                assert.equal(dashboard.querySelector('#container').innerText, '');
+            });
+        });
+
+    });
+
+    describe('deck returning json', function () {
+        describe('when passed a view service url and selected deck id', function () {
+            var deckWithSampleCardMarkup = {id: "1", slug: "px-deck", cards: [
+                {slug: "sample-card", id: "1", attributes: {}}
+            ]};
+            var deckWithDemoCardMarkup = {"id": "1", "slug": "px-deck", "cards": [
+                {"slug": "demo-card", "id": "1", attributes: {}}
+            ]};
+
+            beforeEach(function (done) {
+                var fixture = document.querySelector('#fixture');
+                fixture.innerHTML = '<px-dashboard view-service-base-url="/vs" context="{{context}}"></px-dashboard>';
+
+                setTimeout(function () {
+                    dashboard = document.querySelector('px-dashboard');
+                    done();
+                }, 10);
+            });
+
+            describe('if deck return successfully', function () {
+                beforeEach(function (done) {
+                    px.dealer = {
+                        getDeck: function (url) {
+                            return new Promise(function (resolve, reject) {
+                                if (url === '/vs/decks/1?filter[include][cards]') {
+                                    resolve(deckWithSampleCardMarkup);
+                                } else {
+                                    resolve(deckWithDemoCardMarkup);
+                                }
+                            });
+                        }
+                    };
+
+                    dashboard.selectedDeckId = "1";
+
+                    setTimeout(function () {
+                        done();
+                    }, 300)
+                });
+
+                it('should render the deck (fetched from dealer)', function () {
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card.chartState.min, 0);
+                    assert.equal(card.chartState.max, 100);
+                });
+
+                it('should pass context to deck', function () {
+                    dashboard.context = 'ABC 123';
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card.context, 'ABC 123');
+
+                });
+
+                it('does not render the demo-card deck', function () {
+                    var card = dashboard.querySelector('demo-card');
+                    assert.equal(card, null);
+                });
+
+                it('when context changes, passes to deck', function () {
+                    dashboard.context = 'ABC 123';
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card.context, 'ABC 123');
+
+                    dashboard.context = 'another context';
+                    assert.equal(card.context, 'another context');
+
+                });
+
+                describe('when selected-deck changes', function () {
+
+                    beforeEach(function (done) {
+                        dashboard.selectedDeckId = "2";
+                        setTimeout(function () {
+                            done();
+                        }, 100)
+                    });
+
+                    it('does not render the sample-card deck', function () {
+                        var card = dashboard.querySelector('sample-card');
+                        assert.equal(card, null);
+                    });
+
+                    it('should render the demo-card deck', function () {
+                        var card = dashboard.querySelector('demo-card');
+                        assert.include(card.innerText, 'Hello World');
+                    });
+
+                    it('it should pass context', function () {
+                        dashboard.context = 'ABC 123';
+                        var card = dashboard.querySelector('demo-card');
+                        assert.equal(card.context, 'ABC 123');
+                    });
+                });
+
+            });
+
+            describe('if deck failed to return', function () {
+                beforeEach(function () {
+                    px.dealer = {
+                        getDeck: function (url) {
+                            return new Promise(function (resolve, reject) {
+                                reject();
+                            });
+                        }
+                    };
+                    dashboard.viewServiceUrl = "/vs"
+                    dashboard.selectedDeckId = "2";
+                });
+
+                it('does not return the deck', function () { // TODO - need better error handling here
+                    var card = dashboard.querySelector('sample-card');
+                    assert.equal(card, null);
+                });
+            });
+        });
+    });
+
+});
+</script>
 </body>
