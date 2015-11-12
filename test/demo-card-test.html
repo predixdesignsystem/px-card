@@ -33,18 +33,18 @@
             });
 
             it('is initially shown', function () {
-                assert.isFalse(px.isHidden(demoCard));
+                assert.isFalse(px.test.isHidden(demoCard));
             });
 
             it('should be able to hide', function () {
                 demoCard.hideCard();
-                assert.isTrue(px.isHidden(demoCard));
+                assert.isTrue(px.test.isHidden(demoCard));
             });
 
             it('should be able to be shown if it is hidden', function () {
                 demoCard.hideCard();
                 demoCard.showCard();
-                assert.isFalse(px.isHidden(demoCard));
+                assert.isFalse(px.test.isHidden(demoCard));
             });
         });
 

@@ -41,7 +41,7 @@
 
             it('should initialize from px.dealer', function () {
                 currentTemp = sampleCard.querySelector('#temp');
-                assert.include(currentTemp.innerText, 'Current Temperature:50F');
+                assert.include(px.test.getText(currentTemp), 'Current Temperature:50F');
             });
 
             describe('getMoreTemperatureData sets the current temperature', function () {
@@ -65,7 +65,7 @@
 
                 it('should return temperature from dealer', function () {
                     currentTemp = sampleCard.querySelector('#temp');
-                    assert.include(currentTemp.innerText, 'Current Temperature:100F');
+                    assert.include(px.test.getText(currentTemp), 'Current Temperature:100F');
                 });
 
             });
@@ -89,7 +89,7 @@
 
                 it('should show error on card', function () {
                     currentTemp = sampleCard.querySelector('#temp');
-                    assert.include(currentTemp.innerText, 'Current Temperature:errorF');
+                    assert.include(px.test.getText(currentTemp), 'Current Temperature:errorF');
                 });
             });
         });

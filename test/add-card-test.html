@@ -8,11 +8,14 @@
     <link rel="import" href="cards/sample-card.html"/>
     <link rel="import" href="cards/sample-card2.html"/>
     <link rel="import" href="cards/test-attr-card.html"/>
+    <script src="px-test.js"></script>
 </head>
 <body>
     <div id="fixture"></div>
     <script>
         'use strict';
+        var waitTimeAfterAddCard = 400;
+
         describe('Add card to deck', function () {
             var pxDeck, spyInit;
 
@@ -20,10 +23,13 @@
                 document.querySelector('#fixture').innerHTML = '';
             });
 
-            beforeEach(function () {
+            beforeEach(function (done) {
                 document.querySelector('#fixture').innerHTML = '<px-deck></px-deck>';
-                pxDeck = document.querySelector('px-deck');
-                spyInit = sinon.spy(pxDeck, 'init');
+                setTimeout(function(){
+                    pxDeck = document.querySelector('px-deck');
+                    spyInit = sinon.spy(pxDeck, 'init');
+                    done();
+                },0)
             });
 
             it('throws an error if no card name', function () {
@@ -52,7 +58,7 @@
                     setTimeout(function () {
                         card = document.querySelector('#card-123');
                         done();
-                    }, 500);
+                    }, waitTimeAfterAddCard);
                 });
 
                 it('init will be called', function(){
@@ -78,7 +84,7 @@
                     pxDeck.addCard('sample-card', '123', 'my sample card', null);
                     setTimeout(function () {
                         done();
-                    }, 100);
+                    }, waitTimeAfterAddCard);
                 });
 
                 it('can be initialized', function () {
@@ -96,7 +102,7 @@
                         var card = document.querySelector('#card-1');
                         assert.equal(card.attr0, 'ok');
                         done();
-                    },500);
+                    },waitTimeAfterAddCard);
                 });
 
                 it('can create card with 1 attr', function (done) {
@@ -104,9 +110,9 @@
                     setTimeout(function () {
                         var card = document.querySelector('#card-2');
                         assert.equal(card.attr0, 'ok');
-                        assert.equal(card.querySelector('#attr1').innerText, 1);
+                        assert.equal(px.test.getText(card.querySelector('#attr1')), 1);
                         done();
-                    },500);
+                    },waitTimeAfterAddCard);
                 });
 
                 it('can create card with more attrs', function (done) {
@@ -114,10 +120,10 @@
                     setTimeout(function () {
                         var card = document.querySelector('#card-3');
                         assert.equal(card.attr0, 'ok');
-                        assert.equal(card.querySelector('#attr1').innerText, 1);
-                        assert.equal(card.querySelector('#attr2').innerText, 'test');
+                        assert.equal(px.test.getText(card.querySelector('#attr1')), 1);
+                        assert.equal(px.test.getText(card.querySelector('#attr2')), 'test');
                         done();
-                    },500);
+                    },waitTimeAfterAddCard);
                 });
 
                 it('can create card with attr with array type', function (done) {
@@ -125,10 +131,10 @@
                     setTimeout(function () {
                         var card = document.querySelector('#card-4');
                         assert.equal(card.attr0, 'ok');
-                        assert.equal(card.querySelector('#attr4').innerText,  "[object Object]");
+                        assert.equal(px.test.getText(card.querySelector('#attr4')),  "[object Object]");
                         assert.deepEqual(card.attr4,  {'6a:': 1, '6b': 2});
                         done();
-                    },500);
+                    },waitTimeAfterAddCard);
                 });
 
                 it('can create card with attr with object type', function (done) {
@@ -136,9 +142,9 @@
                     setTimeout(function () {
                         var card = document.querySelector('#card-5');
                         assert.equal(card.attr0, 'ok');
-                        assert.equal(card.querySelector('#attr5').innerText,  "1,2,3");
+                        assert.equal(px.test.getText(card.querySelector('#attr5')),  "1,2,3");
                         done();
-                    },500);
+                    },waitTimeAfterAddCard);
                 });
             });
 
@@ -151,7 +157,7 @@
                     pxDeck.addCard('sample-card2', '4');
                     setTimeout(function () {
                         done();
-                    }, 3000);
+                    }, waitTimeAfterAddCard);
                 });
 
                 it('adds all the cards', function () {
@@ -194,7 +200,7 @@
                         pxDeck.addCard('sample-card2', '5');
                         setTimeout(function () {
                             done();
-                        }, 1000);
+                        }, waitTimeAfterAddCard);
                     });
 
                     it('deck will not be initialized again', function () {

@@ -9,6 +9,7 @@
     <link rel="import" href="cards/sample-card.html"/>
     <link rel="import" href="cards/sample-card2.html"/>
     <link rel="import" href="cards/demo-card.html"/>
+    <script src="px-test.js"></script>
 </head>
 <body>
 <div id="fixture"></div>
@@ -18,6 +19,7 @@
 describe('Dashboard', function () {
 
     var dashboard;
+    var waitTimeAfterAddComponenet = 400;
 
     afterEach(function () {
         var fixture = document.querySelector('#fixture');
@@ -32,7 +34,7 @@ describe('Dashboard', function () {
             setTimeout(function () {
                 dashboard = document.querySelector('px-dashboard');
                 done();
-            }, 10);
+            }, waitTimeAfterAddComponenet);
         });
 
         describe('when passed a selected-deck url', function () {
@@ -104,7 +106,7 @@ describe('Dashboard', function () {
 
                     it('should render the demo-card deck', function () {
                         var card = dashboard.querySelector('demo-card');
-                        assert.include(card.innerText, 'Hello World');
+                        assert.include(px.test.getText(card), 'Hello World');
                     });
 
                     it('it should pass context', function () {
@@ -154,7 +156,8 @@ describe('Dashboard', function () {
             });
 
             it('dashboard container should be empty', function () {
-                assert.equal(dashboard.querySelector('#container').innerText, '');
+                assert.equal(px.test.getText(dashboard.querySelector('#container'))
+                        , '');
             });
         });
 
@@ -170,7 +173,7 @@ describe('Dashboard', function () {
                 setTimeout(function () {
                     dashboard = document.querySelector('px-dashboard');
                     done();
-                }, 10);
+                }, waitTimeAfterAddComponenet);
             });
 
             describe('if deck return successfully', function () {
@@ -235,7 +238,7 @@ describe('Dashboard', function () {
                         dashboard.selectedDeckId = "2";
                         setTimeout(function () {
                             done();
-                        }, 100)
+                        }, waitTimeAfterAddComponenet)
                     });
 
                     it('does not render the sample-card deck', function () {
@@ -245,7 +248,7 @@ describe('Dashboard', function () {
 
                     it('should render the demo-card deck', function () {
                         var card = dashboard.querySelector('demo-card');
-                        assert.include(card.innerText, 'Hello World');
+                        assert.include(px.test.getText(card), 'Hello World');
                     });
 
                     it('it should pass context', function () {

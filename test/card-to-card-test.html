@@ -7,11 +7,13 @@
     <link rel="import" href="../px-deck.html"/>
     <link rel="import" href="cards/sample-card.html"/>
     <link rel="import" href="cards/sample-card2.html"/>
+    <script src="px-test.js"></script>
 </head>
 <body>
 <div id="fixture"></div>
 <script>
 'use strict';
+var waitTimeAfterAddCard = 400;
 describe('Card to card communication', function() {
 
     //clear fixture
@@ -24,13 +26,15 @@ describe('Card to card communication', function() {
 
         var card1, card2;
         
-        beforeEach(function() {
+        beforeEach(function(done) {
             var fixture = document.querySelector("#fixture");
             fixture.innerHTML = '<px-deck>' +
             '<sample-card id="card1"></sample-card>' +
             '<sample-card id="card2"></sample-card>' +
             '</px-deck>';
-
+            setTimeout(function(){
+                done();
+            },waitTimeAfterAddCard);
         });
 
         it('initializes the chart states to 0 and 100', function() {
@@ -61,7 +65,7 @@ describe('Card to card communication', function() {
 
         var card1, card2, card3, card4;
 
-        beforeEach(function() {
+        beforeEach(function(done) {
             var fixture = document.querySelector("#fixture");
             fixture.innerHTML = '<px-deck>' +
             '<sample-card id="card1"></sample-card>' +
@@ -69,7 +73,10 @@ describe('Card to card communication', function() {
             '<sample-card id="card3"></sample-card>' +
             '<sample-card id="card4"></sample-card>' +
             '</px-deck>';
-            
+            setTimeout(function(){
+                done();
+            },waitTimeAfterAddCard);
+
         });
 
         it('zoom in one card should change zoom on another card', function() {
@@ -105,7 +112,7 @@ describe('Card to card communication', function() {
             '</px-deck>';
             setTimeout(function(){
                 done();
-            },1000);
+            },waitTimeAfterAddCard);
         });
 
         it('initializes the cards', function() {
@@ -159,12 +166,15 @@ describe('Card to card communication', function() {
 
         var card1, card2;
 
-        beforeEach(function() {
+        beforeEach(function(done) {
             var fixture = document.querySelector("#fixture");
             fixture.innerHTML = '<px-deck>' +
             '<sample-card id="card1"></sample-card>' +
             '<sample-card id="card2"></sample-card>' +
             '</px-deck>';
+            setTimeout(function(){
+                done();
+            },waitTimeAfterAddCard);
         });
 
         it('changes in one card should still affect the hidden card', function() {
@@ -194,13 +204,16 @@ describe('Card to card communication', function() {
 
         var card1, card3, pxDeck;
 
-        beforeEach(function() {
+        beforeEach(function(done) {
             var fixture = document.querySelector("#fixture");
             fixture.innerHTML = '<px-deck>' +
             '<sample-card id="card1"></sample-card>' +
             '<sample-card id="card2"></sample-card>' +
             '<sample-card id="card3"></sample-card>' +
             '</px-deck>';
+            setTimeout(function(){
+                done();
+            },waitTimeAfterAddCard);
         });
 
         describe('when deleted', function() {
