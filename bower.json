@@ -28,7 +28,7 @@
     "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#~0.4.12",
     "px-layout-design": "https://github.com/PredixDev/px-layout-design.git#~0.3.0",
     "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.5",
-    "px-chart": "https://github.com/PredixDev/px-chart.git#~1.0.0",
+    "px-chart": "https://github.com/PredixDev/px-chart.git#~1.1.3",
     "px-defaults-design": "https://github.com/PredixDev/px-defaults-design.git#~0.2.4"
   },
   "resolutions": {
