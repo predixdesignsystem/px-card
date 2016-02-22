@@ -1,3 +1,3 @@
-v0.0.1
+v0.2.4
 ==================
-* Initial release
+* Updated License
