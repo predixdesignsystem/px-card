@@ -8,9 +8,12 @@
 <link rel="import" href="px-card-header.html"/>
 
 <!--
+
 Element providing basic styling and behaviors (API) for card
 
-#### Usage
+# Behavior APIs
+## px.card
+### Usage
 ```
 <dom-module id="demo-card">
     <template>
@@ -39,24 +42,34 @@ Element providing basic styling and behaviors (API) for card
 </script>
 ```
 
-#### px.card behavior api
-
-##### properties
+### Properties
 
 _context object being passed into the card from deck/dashboard_
 ```
 context: {
-    type: Object
+  type: Object
 }
 ```
 _deck state object being passed from the deck, deck state object is a shared object between all cards within a deck_
 ```
 deckState: {
-    type: Object
+  type: Object
 }
 ```
-
-##### methods
+_url card url in view service card persistence
+```
+url: {
+  type: String
+}
+```
+_title title of your card
+```
+title: {
+  type: String,
+  reflectToAttributes: true
+}
+```
+### Methods
 
 ```
 init: function () {
@@ -84,7 +97,7 @@ updateDeck: function (object) {
 //broadcast an object to other cards within the deck
 },
 
-// Example:
+//Example:
 this.updateDeck({
     count: this.count
 });
@@ -95,7 +108,7 @@ showCard: function () {
 //show this card
 },
 
-// Example:
+//Example:
 document.querySelector('demo-card').showCard();
 ```
 
@@ -104,7 +117,7 @@ hideCard: function () {
 //hide this card
 },
 
-// Example:
+//Example:
 document.querySelector('demo-card').hideCard();
 ```
 
@@ -113,7 +126,7 @@ getData: function (url, httpConfig) {
 //getData from web resources with url, config is optional
 }
 
-// Example:
+//Example:
 this.getData('http://weather.com/sanramon').then(function(data) {
     // on fulfillment
     self.currentTemperature = data.value;
@@ -143,7 +156,7 @@ px.dealer.httpRequest({
 }).then(function(data){
     // on fulfillment
     self.currentTemperature = data.value;
-});;
+});
 
 ```
 
@@ -161,7 +174,7 @@ save: function() {
 ```
 
 
-##### initialization
+### Initialization
 
 If you are not using px-deck, you will need to initialize your card yourself.  Example:
 ```
@@ -174,6 +187,91 @@ document.querySelector('demo-card').addEventListener('px-card-ready', function(e
     demoCard.init();
 });
 
+```
+
+## px-deck
+A collection of cards which has an API
+
+#### Usage
+```
+<px-deck context="{{context}}">
+    <vibration-card id="card2"></vibration-card>
+    <temperature-card id="card3"></temperature-card>
+</px-deck>
+
+```
+
+### properties
+
+context object which will then be passed into the deck's cards
+```
+context: {
+    type: Object
+}
+```
+
+### methods
+
+```
+addCard: function(cardName, cardId) {
+//add card to the deck by passing card name (the element name) and card id
+}
+
+// Example:
+document.querySelector('#my-deck').addCard('sample-card', new Date().getTime());
+```
+
+```
+removeCardById: function(cardId){
+//remove card from the deck by card id
+
+// Example:
+document.querySelector('#my-deck').removeCardById('sample-card-1');
+}
+```
+
+## px-dashboard
+Deck renderer with an API
+
+### Usage
+```
+//if using with predix view service
+<px-dashboard view-service-base-url="{{viewServiceBaseUrl}}" selected-deck-id="{{selectedDeck.id}}" context="{{context}}"></px-dashboard>
+
+//if you would like to render your deck from html file. you can put the url of the deck html in selected-deck-url attribute
+<px-dashboard selected-deck-url="{{selectedDeck}}" context="{{context}}"></px-dashboard>
+```
+
+### properties
+
+context object being passed into the deck & cards from dashboard
+```
+context: {
+    type: Object
+}
+```
+
+deck id to pass to dashboard which will be used to load the deck that should be displayed
+currently, this is just a url
+```
+selectedDeckUrl: {
+    type: String
+}
+```
+
+if using with view service, you can put view service base url here
+```
+viewServiceBaseUrl: {
+    type: String
+}
+```
+
+deck id in view service
+```
+selectedDeckId: {
+    type: String,
+    observer: "deckIdChanged"
+}
 ```
 
 
