@@ -8,7 +8,7 @@ Context is an object.  It can contain details about an asset, urls to fetch addi
 
 Cards are web components with a standard API that are initialized with a context.  They are reusable and can be placed anywhere because they are passed in everything they need to render from the context.
 
-Cards share this properties:
+Cards share these properties:
 
 * Use < px-card > template for styling
 * Inherit px.card behaviors
