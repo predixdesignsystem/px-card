@@ -1,3 +1,7 @@
+v0.3.2
+==================
+* added pull request check to travis
+
 v0.3.1
 ==================
 * added auto github pages creation functionality
