@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": [
     "px-card.html"
   ],
@@ -11,7 +11,8 @@
     "sass",
     "bower_components",
     "node_modules",
-    "test"
+    "test",
+    "OSS_Notice.pdf"
   ],
   "dependencies": {
     "polymer": "~v1.4.0",
