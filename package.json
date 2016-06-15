@@ -2,7 +2,7 @@
     "name": "px-card",
     "author": "General Electric",
     "description": "A Px component",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "private": true,
     "extName" : null,
     "repository" :
