@@ -1,3 +1,7 @@
+v0.4.2
+==================
+* Upver px, remove unneeded test deps, added grunt-bump task.
+
 v0.4.1
 ==================
 * Upver px-chart
