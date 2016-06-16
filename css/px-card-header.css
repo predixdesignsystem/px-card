@@ -43,6 +43,9 @@ Predix branding rules go in px-card-predix.scss, not in this file.
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -230,14 +233,19 @@ pre {
 html {
   box-sizing: border-box; }
 
-:host {
-  /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
-  box-sizing: border-box; }
-
 *,
 *:before,
 *:after {
   box-sizing: inherit; }
+
+/**
+ * the html and :host declarations cannot be adjacent to one other
+ * or cssmin will combine them into a single rule, breaking in
+ * Safari and Firefox.
+ */
+:host {
+  /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
+  box-sizing: border-box; }
 
 /**
  * A series of helper classes to use arbitrarily. Only use a helper class if an
@@ -445,6 +453,11 @@ a {
   display: -ms-flexbox;
   display: flex; }
 
+.inline--flex {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
+
 .flex--row {
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
@@ -619,6 +632,13 @@ a {
     background-color: #9999a3; }
   .btn:active {
     outline: none; }
+
+/** Workaround for FF since it does not support calc().
+  * Other buttons appear ok with the height declaration, but non-button elements do not.
+**/
+@-moz-document url-prefix() {
+  .btn:not(button) {
+    line-height: 1.8em; } }
 
 button.btn {
   -webkit-appearance: button; }
