@@ -1,5 +1,9 @@
 0.4.4
 ==================
+* forced moment resolution 
+
+0.4.4
+==================
 * Added vulcanize index and demo
 
 0.4.3
