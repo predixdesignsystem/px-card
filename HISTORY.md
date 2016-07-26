@@ -1,3 +1,7 @@
+0.4.4
+==================
+* Added vulcanize index and demo
+
 0.4.3
 ==================
 * Correct version and include of es6-promise polyfill
