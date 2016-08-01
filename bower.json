@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.4.5",
+  "version": "0.4.7",
   "main": [
     "px-card.html"
   ],
@@ -14,7 +14,8 @@
     "test",
     "OSS_Notice.pdf",
     "scripts",
-    ".github"
+    ".github",
+    "px-card.png"
   ],
   "dependencies": {
     "polymer": "^v1.5.0",
@@ -32,7 +33,8 @@
     "px-layout-design": "~0.3.0",
     "px-starter-kit-design": "~0.4.5",
     "px-chart": "~1.6.0",
-    "px-defaults-design": "~0.2.4"
+    "px-defaults-design": "~0.2.4",
+    "px-polymer-font-awesome":"^0.1.8"
   },
   "resolutions": {
     "moment": "~2.13.0"
