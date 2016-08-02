@@ -1,19 +1,159 @@
 <!doctype html>
-<html lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>px-card API</title>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>px-card Demo</title>
+  <link rel="stylesheet" type="text/css" href="css/px-card-demo.css"/>
+  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+  <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../px-theme/px-theme.html"/>
+  <link rel="import" href="../px-api-viewer/px-api-viewer.html" />
+  <link rel="import" href="../px-tabs/px-tab-set.html" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+  <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
+  <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
+  <link rel="import" href="../px-dropdown/px-dropdown.html" />
+  <link rel="import" href="px-card.html" />
+</head>
 
-        <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
-        <link rel="import" href="../iron-component-page/iron-component-page.html"/>
-π    </head>
-    <body>
+<body>
 
-    <!--
-    API docs for component are generated from the JSDoc comments in the component's *.html at runtime via <iron-component-page>
-    -->
-    <iron-component-page src="doc-import.html" active="px-card"></iron-component-page>
+  <!-- Wrap elements with auto-binding template to -->
+  <!-- allow use of Polymer bindings in main document -->
+  <template id="just-for-demo" is="dom-bind" >
 
-    </body>
+    <!-- discription -->
+    <div class="hero u-p++ text--shadow">
+      <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-card" target="_blank"><iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github</a>
+  		<h1 class="delta">px-card</h1>
+  		<p>
+
+  		</p>
+      <br />
+  		<div class="flex">
+  			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-card.svg?style=flat-square" alt="Travis"/>
+  			<img class="u-mr--" src="https://img.shields.io/bower/v/px-card.svg?style=flat-square" alt="Bower"/>
+  			<img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-card.svg?style=flat-square" alt="Issues"/>
+  		</div>
+  	</div>
+    <br />
+
+    <!-- mega demo -->
+    <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
+      <div class="tabContainer u-pt++ u-pl++">
+        <px-tab-set selected="{{selected}}" bare no-bottom-border>
+          <template is="dom-repeat" items="{{optionsArray}}">
+            <px-tab>Configuration {{indexPlusOne(index)}}</px-tab>
+          </template>
+        </px-tab-set>
+      </div>
+      <px-tab-pages selected="{{selected}}">
+        <template is="dom-repeat" items="{{optionsArray}}">
+          <section class="tab-page flex flex--right flex--wrap">
+            <div class="mega-demo flex u-pb++">
+            <!-- Properties -->
+            <div class="properties u-ph+ u-pb+  u-m++">
+              <p class="epsilon">Properties</p>
+              <div class="flex u-mb-">
+                <input id="chevron{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.chevron::change}}">
+                <label for$="chevron{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                <div class="u-ml-">Chevron</div>
+              </div>
+              <div class="u-mb-">Header Text: <input class="text-input" type="text" placeholder="{{item.headerText}}" value="{{item.headerText::input}}" /></div>
+              <div class="flex">Icon:</div>
+              <div class="flex u-mb-">
+                <px-dropdown id="icon{{indexPlusOne(index)}}" style="width:100%;" value="{{item.icon}}" display-value="Select">
+                  <px-dropdown-content
+                  items={{items}}>
+                </px-dropdown-content>
+                </px-dropdown>
+              </div>
+            </div>
+            <div class="demoContainer u-mr++">
+              <!-- demo -->
+              <div class="flex flex--col">
+                <div class="flex__item demo u-ph+ u-pb+ u-mt++">
+                  <br />
+                  <div style="position:relative;">
+                    <px-card icon="{{item.icon}}" header-text="[[item.headerText]]" chevron=[[item.chevron]]>
+                        <h4>Hello World</h4>
+                        <p>This is the bare minimum you need for a Predix Experience card.</p>
+                    </px-card>
+                  </div>
+                </div>
+                <div class="flex__item">
+                  <px-demo-snippet
+                    element-properties={{item}}
+                    element-name="px-card">
+                  </px-demo-snippet>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="apiContainer">
+            <div class="flex flex--col api u-mt++" >
+              <div>
+                <px-api-viewer source="px-card"></px-api-viewer>
+              </div>
+            </div>
+          </div>
+        </section>
+      </template>
+    </px-tab-pages>
+  </div>
+  <footer class="footer flex flex--center">
+    <div class="footer__container u-pv++">
+      <div>
+        <a href="https://ge.com/digital" >
+          <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
+        </a>
+      </div>
+      <div class="footer__list">
+        <ul class="list-inline list-inline--delimited">
+          <li>
+            <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
+          </li>
+          <li>
+            <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
+          </li>
+          <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</template>
+<script>
+window.addEventListener('WebComponentsReady', function() {
+  var template = document.querySelector('template[is=dom-bind]'),
+  items = [
+    {"key":"one","val":"fa-suitcase"},
+    {"key":"two","val":"fa-bell-o"},
+    {"key":"three","val":"fa-coffee"},
+    {"key":"four","val":"fa-fighter-jet"},
+    {"key":"five","val":"fa-hospital-o"}
+  ],
+      optionsArray = [
+        {
+          "lightDomContent": '<h4>Hello World</h4><p>{{context.name}}</p><p>This is the bare minimum you need for a Predix Experience card.</p>',
+          "headerText": "Demo Card",
+          "chevron": true,
+          "icon":"fa-suitcase"
+        }
+      ],
+      indexPlusOne = function(num) {
+        return num + 1;
+      },
+      year = new Date();
+
+  template.selected = 0;
+  template.optionsArray = optionsArray;
+  template.indexPlusOne = indexPlusOne;
+  template.items = items;
+  template.year = year.getFullYear();
+
+});
+</script>
+
+</body>
 </html>

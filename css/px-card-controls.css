@@ -192,9 +192,7 @@ pre {
 html {
   box-sizing: border-box; }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: inherit; }
 
 /**
@@ -265,11 +263,7 @@ html {
   text-transform: none;
   white-space: nowrap;
   background-color: #e4e4ea; }
-  .btn,
-  .btn:link,
-  .btn:visited,
-  .btn:hover,
-  .btn:active {
+  .btn, .btn:link, .btn:visited, .btn:hover, .btn:active {
     color: black; }
   .btn:hover {
     border-color: #9999a3;
@@ -305,11 +299,7 @@ button.btn {
   border-color: #2b5ea2;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
   background-color: #3e87e8; }
-  .btn--primary,
-  .btn--primary:link,
-  .btn--primary:visited,
-  .btn--primary:hover,
-  .btn--primary:active {
+  .btn--primary, .btn--primary:link, .btn--primary:visited, .btn--primary:hover, .btn--primary:active {
     color: white; }
   .btn--primary:hover {
     border-color: transparent;
@@ -324,7 +314,7 @@ button.btn {
 .btn--small {
   height: 1.6666666667em;
   font-size: 0.8rem;
-  line-height: calc($inuit-btn-height--small - 2px); }
+  line-height: calc(1.6666666667em - 2px); }
 
 /** Workaround for FF since it does not support calc().
     * Other buttons appear ok with the height declaration, but non-button elements do not.

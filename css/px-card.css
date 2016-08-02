@@ -233,9 +233,7 @@ pre {
 html {
   box-sizing: border-box; }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: inherit; }
 
 /**
@@ -269,8 +267,7 @@ html {
   display: block;
   /* [1] */
   padding: 1rem; }
-  .box > :last-child,
-  :host > :last-child {
+  .box > :last-child, :host > :last-child {
     margin-bottom: 0; }
 
 /**
@@ -299,52 +296,66 @@ html {
 /**
      * Add large margins.
      */
-.u-m\00002b {
+.u-m\00002b
+{
   margin: 1.3333333333rem !important; }
 
-.u-mt\00002b {
+.u-mt\00002b
+{
   margin-top: 1.3333333333rem !important; }
 
-.u-mr\00002b {
+.u-mr\00002b
+{
   margin-right: 1.3333333333rem !important; }
 
-.u-mb\00002b {
+.u-mb\00002b
+{
   margin-bottom: 1.3333333333rem !important; }
 
-.u-ml\00002b {
+.u-ml\00002b
+{
   margin-left: 1.3333333333rem !important; }
 
-.u-mh\00002b {
+.u-mh\00002b
+{
   margin-right: 1.3333333333rem !important;
   margin-left: 1.3333333333rem !important; }
 
-.u-mv\00002b {
+.u-mv\00002b
+{
   margin-top: 1.3333333333rem !important;
   margin-bottom: 1.3333333333rem !important; }
 
 /**
      * Add huge margins.
      */
-.u-m\00002b\00002b {
+.u-m\00002b\00002b
+{
   margin: 2rem !important; }
 
-.u-mt\00002b\00002b {
+.u-mt\00002b\00002b
+{
   margin-top: 2rem !important; }
 
-.u-mr\00002b\00002b {
+.u-mr\00002b\00002b
+{
   margin-right: 2rem !important; }
 
-.u-mb\00002b\00002b {
+.u-mb\00002b\00002b
+{
   margin-bottom: 2rem !important; }
 
-.u-ml\00002b\00002b {
+.u-ml\00002b\00002b
+{
   margin-left: 2rem !important; }
 
-.u-mh\00002b\00002b {
+.u-mh\00002b\00002b
+{
   margin-right: 2rem !important;
   margin-left: 2rem !important; }
 
-.u-mv\00002b\00002b {
+.u-mv\00002b\00002b
+{
   margin-top: 2rem !important;
   margin-bottom: 2rem !important; }
 

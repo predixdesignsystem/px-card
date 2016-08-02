@@ -23,13 +23,17 @@
           type: String
         },
         icon:{
-          type: String
+          type: String,
+          observer: '_iconChange'
         },
         chevron: {
           type: Boolean
         }
       },
       attached: function(){
+        this._iconChange();
+      },
+      _iconChange: function() {
         if(this.icon){
           var iconObj = this.$.headericon;
           this.toggleClass(this.icon, true, iconObj);

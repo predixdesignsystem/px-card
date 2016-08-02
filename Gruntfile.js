@@ -54,6 +54,11 @@ module.exports = function (grunt) {
                     'css/noprefix/px-card-header-sketch.css': 'sass/px-card-header-sketch.scss',
                     'css/noprefix/px-card-header.css': 'sass/px-card-header-predix.scss'
                 }
+            },
+            demo: {
+                files: {
+                  'css/noprefix/px-card-demo.css': 'sass/px-card-demo.scss'
+                }
             }
         },
 

@@ -3,7 +3,7 @@
 
 This repository holds the px-card, px-dashboard, and px-deck components.
 
-[![px-card demo](px-card.png?raw=true)](https://github.com/PredixDev/px-card)
+[![px-card demo](px-card.png?raw=true)](https://predixdev.github.io/px-card/)
 
 ## Overview
 
