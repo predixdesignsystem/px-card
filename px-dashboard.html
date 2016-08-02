@@ -35,6 +35,7 @@ selectedDeck: {
 <dom-module id="px-dashboard">
     <template>
         <div id="container"></div>
+        <div id="pxDashboardSpinner" class="pxh-spinner pxh-spinner--large" hidden></div>
     </template>
 </dom-module>
 <script>
@@ -94,7 +95,8 @@ selectedDeck: {
             if (container) {
                 container.innerHTML = "";
                 var self = this;
-
+                self.$.pxDashboardSpinner.removeAttribute('hidden');
+                self.fire('loadingCardsAndDeck');
                 px.dealer.getDeck(url).then(function (res) {
                     //if the result is from view service then insert element / backward compatible of loading deck as html mark up
                     if (typeof res === 'object') {
@@ -103,10 +105,14 @@ selectedDeck: {
                     else {
                         container.innerHTML = res;
                     }
+                    self.$.pxDashboardSpinner.setAttribute('hidden', 'hidden');
+
+                    self.fire("deckRendered", {"cards": res.cards});
 
                 }, function () {
                     // TODO - need better error handling here
                     console.error('fail to load the deck with url ' + url);
+                    self.$.pxDashboardSpinner.setAttribute('hidden', 'hidden');
                 });
             }
             else {
@@ -120,7 +126,7 @@ selectedDeck: {
             if (deck.cards.constructor == Array) {
                 deck.cards.forEach(function (card) {
                     card.attributes.url = self._getBaseUrl() + 'cards/'+card.id;
-                    deckElement.addCard(card.slug, card.id, card.title, card.attributes);
+                    deckElement.addCard(card.slug, card.id, card.title, card.attributes, card.createTimeStamp);
                 });
             }
             return deckElement;

@@ -139,7 +139,7 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
             card._deck = this;
             this.cards[card.id] = card;
         },
-        addCard: function (cardName, cardId, title, attributes) {
+        addCard: function (cardName, cardId, title, attributes, timestamp) {
             if (!cardName || !cardId) {
                 throw 'Add card must be called with a card name and card id';
             }
@@ -147,7 +147,10 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
             var newCard = document.createElement(cardName);
             newCard.setAttribute('id', 'card-'+cardId);
             newCard.setAttribute('title', title);
-            newCard.setAttribute('context', '{{context}}');
+            //new attributes set to make the deck loading faster without network calls.
+            newCard.setAttribute('slug', cardName);
+            newCard.setAttribute('timestamp', timestamp);
+
 
             if (attributes && typeof attributes === 'object'){
                 for (var attrName in attributes) {
@@ -159,6 +162,7 @@ document.querySelector('#my-deck').removeCardById('sample-card-1');
                     }
                 }
             }
+            newCard.setAttribute('context', '{{context}}');
 
             Polymer.dom(this).appendChild(newCard);
         },
