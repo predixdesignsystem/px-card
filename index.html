@@ -27,39 +27,48 @@
     <div class="hero u-p++ text--shadow">
       <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-card" target="_blank"><iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github</a>
   		<h1 class="delta">px-card</h1>
-  		<p>
-
-  		</p>
-      <br />
+      <div class="description-text">
+    		<p>
+          Cards consist of a header area and content area, with a horizontal rule or border in between. The header can
+          optionally contain a descriptive icon in the top left corner and/or a chevron button in the top right corner
+          for configuration options or other menu items. Cards are incredibly flexible in terms of what widgets can be
+          placed in the content area of the card and how they’re arranged, but a few preset configurations are provided
+          – the 2-UP, 3-UP, 4-UP, and 6-UP card templates organize widgets in a responsive grid that adapts to various
+          device sizes.
+    		</p>
+        <p>
+          Cards are designed to be containers for an application’s content and functions. They reside within the content
+          areas and must be associated with a context and a view.
+        </p>
+      </div>
   		<div class="flex">
   			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-card.svg?style=flat-square" alt="Travis"/>
   			<img class="u-mr--" src="https://img.shields.io/bower/v/px-card.svg?style=flat-square" alt="Bower"/>
   			<img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-card.svg?style=flat-square" alt="Issues"/>
   		</div>
   	</div>
-    <br />
 
     <!-- mega demo -->
     <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
       <div class="tabContainer u-pt++ u-pl++">
         <px-tab-set selected="{{selected}}" bare no-bottom-border>
           <template is="dom-repeat" items="{{optionsArray}}">
-            <px-tab>Configuration {{indexPlusOne(index)}}</px-tab>
+            <px-tab>Option {{indexPlusOne(index)}}</px-tab>
           </template>
         </px-tab-set>
       </div>
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
-          <section class="tab-page flex flex--right flex--wrap">
-            <div class="mega-demo flex u-pb++">
-            <!-- Properties -->
-            <div class="properties u-ph+ u-pb+  u-m++">
-              <p class="epsilon">Properties</p>
-              <div class="flex u-mb-">
-                <input id="chevron{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.chevron::change}}">
-                <label for$="chevron{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">Chevron</div>
-              </div>
+          <section class="tab-page">
+            <div class="mega-demo flex flex--wrap u-ph++ u-pb++">
+              <!-- Properties -->
+              <div class="properties u-ph+ u-pb+ u-mt+">
+                <p class="epsilon">Properties</p>
+                <div class="flex u-mb-">
+                  <input id="chevron{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.chevron::change}}">
+                  <label for$="chevron{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
+                  <div class="u-ml-">Chevron</div>
+                </div>
               <div class="u-mb-">Header Text: <input class="text-input" type="text" placeholder="{{item.headerText}}" value="{{item.headerText::input}}" /></div>
               <div class="flex">Icon:</div>
               <div class="flex u-mb-">
@@ -70,59 +79,60 @@
                 </px-dropdown>
               </div>
             </div>
-            <div class="demoContainer u-mr++">
-              <!-- demo -->
-              <div class="flex flex--col">
-                <div class="flex__item demo u-ph+ u-pb+ u-mt++">
-                  <br />
-                  <div style="position:relative;">
-                    <px-card icon="{{item.icon}}" header-text="[[item.headerText]]" chevron=[[item.chevron]]>
-                        <h4>Hello World</h4>
-                        <p>This is the bare minimum you need for a Predix Experience card.</p>
-                    </px-card>
+            <div class="demoContainer u-mt+">
+                <!-- demo -->
+                <div class="flex flex--col">
+                  <div class="flex__item demo u-p+">
+
+                    <div style="position:relative;">
+                      <px-card icon="{{item.icon}}" header-text="[[item.headerText]]" chevron=[[item.chevron]]>
+                          <h4>Hello World</h4>
+                          <p>This is the bare minimum you need for a Predix Experience card.</p>
+                      </px-card>
+                    </div>
+
+                  </div>
+                  <div class="flex__item">
+                    <px-demo-snippet
+                      element-properties={{item}}
+                      element-name="px-card">
+                    </px-demo-snippet>
                   </div>
                 </div>
-                <div class="flex__item">
-                  <px-demo-snippet
-                    element-properties={{item}}
-                    element-name="px-card">
-                  </px-demo-snippet>
+              </div>
+            </div>
+            <div class="apiContainer">
+              <div class="flex flex--col api u-mt++" >
+                <div>
+                  <px-api-viewer source="px-card"></px-api-viewer>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="apiContainer">
-            <div class="flex flex--col api u-mt++" >
-              <div>
-                <px-api-viewer source="px-card"></px-api-viewer>
-              </div>
-            </div>
-          </div>
-        </section>
-      </template>
-    </px-tab-pages>
-  </div>
-  <footer class="footer flex flex--center">
-    <div class="footer__container u-pv++">
-      <div>
-        <a href="https://ge.com/digital" >
-          <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
-        </a>
-      </div>
-      <div class="footer__list">
-        <ul class="list-inline list-inline--delimited">
-          <li>
-            <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
-          </li>
-          <li>
-            <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
-          </li>
-          <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
-        </ul>
-      </div>
+          </section>
+        </template>
+      </px-tab-pages>
     </div>
-  </footer>
-</template>
+    <footer class="footer flex flex--center">
+      <div class="footer__container u-pv++">
+        <div>
+          <a href="https://ge.com/digital" >
+            <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
+          </a>
+        </div>
+        <div class="footer__list">
+          <ul class="list-inline list-inline--delimited">
+            <li>
+              <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
+            </li>
+            <li>
+              <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
+            </li>
+            <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </template>
 <script>
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),

@@ -1,3 +1,11 @@
+0.4.9
+==================
+* updated mega demo styles and bower px-demo-snippet to ^
+
+0.4.8
+==================
+* removed demo from vulcanize
+
 0.4.7
 ==================
 * changes for repo readme and demo page
