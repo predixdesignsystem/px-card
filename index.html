@@ -60,7 +60,7 @@
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
           <section class="tab-page">
-            <div class="mega-demo flex flex--wrap u-ph++ u-pb++">
+            <div class="mega-demo flex u-ph++ u-pb++">
               <!-- Properties -->
               <div class="properties u-ph+ u-pb+ u-mt+">
                 <p class="epsilon">Properties</p>
@@ -82,7 +82,7 @@
             <div class="demoContainer u-mt+">
                 <!-- demo -->
                 <div class="flex flex--col">
-                  <div class="flex__item demo u-p+">
+                  <div class="demo u-p+">
 
                     <div style="position:relative;">
                       <px-card icon="{{item.icon}}" header-text="[[item.headerText]]" chevron=[[item.chevron]]>
@@ -92,7 +92,7 @@
                     </div>
 
                   </div>
-                  <div class="flex__item">
+                  <div>
                     <px-demo-snippet
                       element-properties={{item}}
                       element-name="px-card">
@@ -136,13 +136,13 @@
 <script>
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),
-  items = [
-    {"key":"one","val":"fa-suitcase"},
-    {"key":"two","val":"fa-bell-o"},
-    {"key":"three","val":"fa-coffee"},
-    {"key":"four","val":"fa-fighter-jet"},
-    {"key":"five","val":"fa-hospital-o"}
-  ],
+      items = [
+        {"key":"one","val":"fa-suitcase"},
+        {"key":"two","val":"fa-bell-o"},
+        {"key":"three","val":"fa-coffee"},
+        {"key":"four","val":"fa-fighter-jet"},
+        {"key":"five","val":"fa-hospital-o"}
+      ],
       optionsArray = [
         {
           "lightDomContent": '<h4>Hello World</h4><p>{{context.name}}</p><p>This is the bare minimum you need for a Predix Experience card.</p>',
