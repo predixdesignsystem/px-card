@@ -1,13 +1,14 @@
 <link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
 
 <dom-module id="px-card-header">
   <link rel="import" type="css" href="css/px-card-header.css">
   <template>
     <header class="u-mb flex flex--middle flex--justify">
-      <h3 class="caps u-mv0" id="headertext"><i id="headericon"></i>{{headerText}}</h3>
+      <h3 class="caps u-mv0" id="headertext"><iron-icon id="headericon"></iron-icon>{{headerText}}</h3>
       <template is="dom-if" if="{{chevron}}">
         <button class="btn btn--bare">
-          <i class="fa fa-chevron-down"></i>
+          <iron-icon icon="fa:fa-chevron-down"></iron-icon>
         </button>
       </template>
     </header>
@@ -35,9 +36,10 @@
       },
       _iconChange: function() {
         if(this.icon){
+          var headerIcon = Polymer.dom(this.root).querySelector('#headericon');
+
+          headerIcon.icon = "fa:"+this.icon;
           var iconObj = this.$.headericon;
-          this.toggleClass(this.icon, true, iconObj);
-          this.toggleClass("fa", true, iconObj);
           this.toggleClass("u-mr--", true, iconObj);
         }
       }

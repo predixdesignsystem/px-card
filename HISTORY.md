@@ -1,3 +1,7 @@
+0.4.12
+==================
+* made icons available in shadow dom.
+
 0.4.11
 ==================
 * moved px-polymer-font-awesome out of devdeps and into deps in bower.
