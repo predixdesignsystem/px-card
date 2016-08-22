@@ -1,6 +1,14 @@
+0.4.11
+==================
+* moved px-polymer-font-awesome out of devdeps and into deps in bower.
+
+0.4.10
+==================
+* added overflow to demoContainer and removed flex__wrap from mega-demo
+
 0.4.9
 ==================
-* moved px-polymer-font-awesome out of dev deps and into deps.
+* travis update config
 
 0.4.8
 ==================
