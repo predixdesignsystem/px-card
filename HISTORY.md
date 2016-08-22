@@ -1,4 +1,4 @@
-0.4.8
+0.4.9
 ==================
 * moved px-polymer-font-awesome out of dev deps and into deps.
 
