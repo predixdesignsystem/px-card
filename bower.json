@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "main": [
     "px-card.html"
   ],
@@ -25,12 +25,9 @@
     "px-polymer-font-awesome":"^0.1.8"
   },
   "devDependencies": {
-    "jasmine-jquery": "~2.1.0",
-    "jquery": "~2.1.4",
     "px-box-design": "~0.3.8",
     "px-buttons-design": "~0.4.12",
     "px-layout-design": "~0.3.0",
-    "px-chart": "~1.6.0",
     "px-defaults-design": "~0.2.4",
     "px-starter-kit-design": "~0.4.0",
     "web-component-tester": "~3.3.14",
@@ -39,7 +36,7 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
     "px-tabs": "~0.4.0",
     "px-api-viewer": "~0.0.5",
-    "px-demo-snippet": "^0.2.2",
+    "px-demo-snippet": "^0.4.0",
     "px-actionable-text-icons-design": "^0.0.3",
     "px-code-design": "^0.2.11",
     "px-headings-design": "^0.2.14",
@@ -47,8 +44,5 @@
     "px-dropdown": "^0.10.1",
     "px-spacing-design": "~0.3.8",
     "px-toggle-design": "^0.2.12"
-  },
-  "resolutions": {
-    "moment": "~2.13.0"
   }
 }
