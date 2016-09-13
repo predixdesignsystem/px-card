@@ -20,9 +20,12 @@ Element providing refresh controls for cards
 @homepage index.html
 -->
 
+<link rel="import" href="css/px-card-header-styles.html">
+
 <dom-module id="px-card-controls">
-  <link rel="import" type="css" href="css/px-card-controls.css"/>
   <template>
+    <style include="px-card-header-styles"></style>
+    <style include="px-theme-styles"></style>
     <button class="btn btn--small btn--primary" on-click="refresh">refresh</button>
   </template>
 </dom-module>

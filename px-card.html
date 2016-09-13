@@ -4,8 +4,8 @@
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="px-card-header.html"/>
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="px-card-header.html" />
 
 <!--
 
@@ -282,214 +282,213 @@ selectedDeckId: {
 @homepage index.html
 -->
 
+<link rel="import" href="css/px-card-styles.html">
+
+
 <dom-module id="px-card">
-    <link rel="import" type="css" href="css/px-card.css"/>
-    <template>
-        <template is="dom-if" if="{{headerText}}">
-            <px-card-header icon="{{icon}}" header-text="{{headerText}}" chevron="{{chevron}}"></px-card-header>
-        </template>
-        <content></content>
+  <template>
+    <style include="px-card-styles"></style>
+    <style include="px-theme-styles"></style>
+    <template is="dom-if" if="{{headerText}}">
+        <px-card-header icon="{{icon}}" header-text="{{headerText}}" chevron="{{chevron}}"></px-card-header>
     </template>
+  <content></content>
+  </template>
 </dom-module>
 
 <script type="text/javascript">
-
-(function () {
+  (function() {
     window.px = window.px || {};
 
     window.px.card = {
-        properties: {
-            // title of your card
-            title: {
-                type: String,
-                reflectToAttributes: true
-            },
-            // context object being pass into the card from deck/dashboard
-            context: {
-                type: Object,
-                observer: '_contextChanged'
-            },
-            /**
-             * card url in view service card persistence
-             */
-            url: {
-                type: String
-            },
-            /**
-             * deck state object being pass from the deck, deck state object is a shared object between all cards within a deck
-             */
-            deckState: {
-                type: Object,
-                observer: '_deckStateChanged'
-            }
+      properties: {
+        // title of your card
+        title: {
+          type: String,
+          reflectToAttributes: true
+        },
+        // context object being pass into the card from deck/dashboard
+        context: {
+          type: Object,
+          observer: '_contextChanged'
         },
         /**
-         * context change handler to be called when context is changed. This private method will call public contextChanged method which will be implemented by developer
+         * card url in view service card persistence
          */
-        _contextChanged: function (newContext, oldContext) {
-            if (this.contextChanged && typeof this.contextChanged === 'function' && this.isInit === true) {
-                this.contextChanged(newContext, oldContext);
-            }
+        url: {
+          type: String
         },
         /**
-         * deck state change handler to be called when deck state is changed in deck by other cards. This private method will call public deckStateChanged method which will be implemented by developer
+         * deck state object being pass from the deck, deck state object is a shared object between all cards within a deck
          */
-        _deckStateChanged: function (newDealerState, oldDealerState) {
-            this.fromDeck = true;
-            if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
-                this.deckStateChanged(newDealerState, oldDealerState);
-            }
-            this.fromDeck = false;
-        },
-        _refresh: function () {
-            if (this.refresh && typeof this.refresh === 'function') {
-                this.refresh();
-            }
-        },
-        /**
-         * web component ready callback to be called by the browser when the web component is ready to listen to handle property changes
-         */
-        ready: function () {
-            this.addEventListener('px-card-refresh', this._refresh);
-            //console.log('----------> card-ready!!');
-
-        },
-        attached: function () {
-            this.isInit = false;
-            //console.log('----> card-attached!!');
-            this.fire('px-card-ready');
-            if (!this.id) {
-                throw 'Card ' + this.tagName + ' cannot be created without an id!';
-            }
-        },
-        /**
-         * init method to be called when card is ready
-         */
-        init: function () {
-            // this default init function is needed in case they don't implement init
-            // this is the 'instantiate' requirement
-            //console.log('px-card init is called');
-        },
-        /**
-         * call this method with an object that the card wants to share with other cards wthin the deck
-         */
-        updateDeck: function (value) {
-            if (!this.fromDeck) {
-                if (this._deck && this._deck.updateState) {
-                    this._deck.updateState(this.id, value);
-                }
-                else {
-                    //console.log('no updatestate');
-                }
-            }
-            else {
-                //console.log('KILL this update because from deck');
-            }
-        },
-        /**
-         * this method can be called to show a card from dom
-         */
-        showCard: function () {
-            this.hidden = false;
-            this.querySelector('px-card').hidden = false;
-        },
-        /**
-         * this method can be called to hide a card from dom
-         */
-        hideCard: function () {
-            this.hidden = true;
-            this.querySelector('px-card').hidden = true;
-        },
-        /**
-         * getData from web resources with url
-         */
-        getData: function () {
-            return window.px.dealer.getData.apply(window.px.dealer, arguments);
-        },
-        /**
-         * get all properties of a card and return an object of element attribute names and values
-         * each card property name will be converted from camel case property name to lowercase words separated by dashes
-         */
-        getCardAttributes: function () {
-            var cardState = {},
-                cardElement = document.querySelector(this.nodeName),
-                cardBehaviors = cardElement.behaviors;
-
-            cardBehaviors.forEach(function (behavior) {
-                for (var prop in behavior.properties) {
-                    cardState[window.px.slugify(prop)] = cardElement[prop];
-                }
-            });
-
-            for (var prop in cardElement.properties) {
-                cardState[window.px.slugify(prop)] = cardElement[prop];
-            }
-
-            return cardState;
-        },
-        /**
-         * save card in view service when a card url is provided
-         * If you render a deck and card using px-dashboard with view-service-base-url attribute set, card url will be set by the px-dashboard component behind the scene
-         */
-        save: function () {
-            var state = this.getCardAttributes(),
-                url = this.url;
-
-            if (url) {
-                var serializedCard = {};
-
-                if (state.title){
-                    serializedCard.title = state.title;
-                    delete state.title;
-                }
-
-                if (state.url){
-                    delete state.url;
-                }
-
-                delete state.id;
-
-                serializedCard.attributes = state;
-
-                return window.px.dealer.httpRequest({
-                    method: 'PUT',
-                    url: url,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data: serializedCard
-                });
-            }
-            else {
-                throw 'Card url is undefined';
-            }
+        deckState: {
+          type: Object,
+          observer: '_deckStateChanged'
         }
-    };
-})();
+      },
+      /**
+       * context change handler to be called when context is changed. This private method will call public contextChanged method which will be implemented by developer
+       */
+      _contextChanged: function(newContext, oldContext) {
+        if (this.contextChanged && typeof this.contextChanged === 'function' && this.isInit === true) {
+          this.contextChanged(newContext, oldContext);
+        }
+      },
+      /**
+       * deck state change handler to be called when deck state is changed in deck by other cards. This private method will call public deckStateChanged method which will be implemented by developer
+       */
+      _deckStateChanged: function(newDealerState, oldDealerState) {
+        this.fromDeck = true;
+        if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
+          this.deckStateChanged(newDealerState, oldDealerState);
+        }
+        this.fromDeck = false;
+      },
+      _refresh: function() {
+        if (this.refresh && typeof this.refresh === 'function') {
+          this.refresh();
+        }
+      },
+      /**
+       * web component ready callback to be called by the browser when the web component is ready to listen to handle property changes
+       */
+      ready: function() {
+        this.addEventListener('px-card-refresh', this._refresh);
+        //console.log('----------> card-ready!!');
 
-Polymer({
+      },
+      attached: function() {
+        this.isInit = false;
+        //console.log('----> card-attached!!');
+        this.fire('px-card-ready');
+        if (!this.id) {
+          throw 'Card ' + this.tagName + ' cannot be created without an id!';
+        }
+      },
+      /**
+       * init method to be called when card is ready
+       */
+      init: function() {
+        // this default init function is needed in case they don't implement init
+        // this is the 'instantiate' requirement
+        //console.log('px-card init is called');
+      },
+      /**
+       * call this method with an object that the card wants to share with other cards wthin the deck
+       */
+      updateDeck: function(value) {
+        if (!this.fromDeck) {
+          if (this._deck && this._deck.updateState) {
+            this._deck.updateState(this.id, value);
+          } else {
+            //console.log('no updatestate');
+          }
+        } else {
+          //console.log('KILL this update because from deck');
+        }
+      },
+      /**
+       * this method can be called to show a card from dom
+       */
+      showCard: function() {
+        this.hidden = false;
+        this.querySelector('px-card').hidden = false;
+      },
+      /**
+       * this method can be called to hide a card from dom
+       */
+      hideCard: function() {
+        this.hidden = true;
+        this.querySelector('px-card').hidden = true;
+      },
+      /**
+       * getData from web resources with url
+       */
+      getData: function() {
+        return window.px.dealer.getData.apply(window.px.dealer, arguments);
+      },
+      /**
+       * get all properties of a card and return an object of element attribute names and values
+       * each card property name will be converted from camel case property name to lowercase words separated by dashes
+       */
+      getCardAttributes: function() {
+        var cardState = {},
+          cardElement = document.querySelector(this.nodeName),
+          cardBehaviors = cardElement.behaviors;
+
+        cardBehaviors.forEach(function(behavior) {
+          for (var prop in behavior.properties) {
+            cardState[window.px.slugify(prop)] = cardElement[prop];
+          }
+        });
+
+        for (var prop in cardElement.properties) {
+          cardState[window.px.slugify(prop)] = cardElement[prop];
+        }
+
+        return cardState;
+      },
+      /**
+       * save card in view service when a card url is provided
+       * If you render a deck and card using px-dashboard with view-service-base-url attribute set, card url will be set by the px-dashboard component behind the scene
+       */
+      save: function() {
+        var state = this.getCardAttributes(),
+          url = this.url;
+
+        if (url) {
+          var serializedCard = {};
+
+          if (state.title) {
+            serializedCard.title = state.title;
+            delete state.title;
+          }
+
+          if (state.url) {
+            delete state.url;
+          }
+
+          delete state.id;
+
+          serializedCard.attributes = state;
+
+          return window.px.dealer.httpRequest({
+            method: 'PUT',
+            url: url,
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: serializedCard
+          });
+        } else {
+          throw 'Card url is undefined';
+        }
+      }
+    };
+  })();
+
+  Polymer({
     is: 'px-card',
     properties: {
-        /**
-         * px-card header text
-         */
-        headerText: {
-            type: String
-        },
-        /**
-         * px-card icon
-         */
-        icon: {
-            type: String,
-            notify: true
-        },
-        /**
-         * px-card chevron
-         */
-        chevron: {
-            type: Boolean
-        }
+      /**
+       * px-card header text
+       */
+      headerText: {
+        type: String
+      },
+      /**
+       * px-card icon
+       */
+      icon: {
+        type: String,
+        notify: true
+      },
+      /**
+       * px-card chevron
+       */
+      chevron: {
+        type: Boolean
+      }
     }
-});
-
+  });
 </script>
