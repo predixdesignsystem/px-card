@@ -46,6 +46,13 @@ h3 {
   @include inuit-font-size(15px,false);
 }
 
+iron-icon {
+  --iron-icon-height: calculateRem($inuit-base-font-size);
+  --iron-icon-width: calculateRem($inuit-base-font-size);
+  margin-bottom: calculateRem(3px);
+}
+
+
 // Trumps
 $inuit-enable-margins       : true;
 $inuit-enable-margins--tiny : true;

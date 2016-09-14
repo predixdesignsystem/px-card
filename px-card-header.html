@@ -8,7 +8,9 @@
     <style include="px-card-header-styles"></style>
     <style include="px-theme-styles"></style>
     <header class="u-mb flex flex--middle flex--justify">
-      <h3 class="caps u-mv0" id="headertext"><iron-icon id="headericon"></iron-icon>{{headerText}}</h3>
+      <h3 class="caps u-mv0" id="headertext">
+        <iron-icon id="headericon"></iron-icon>{{headerText}}
+      </h3>
       <template is="dom-if" if="{{chevron}}">
         <button class="btn btn--bare">
           <iron-icon icon="fa:fa-chevron-down"></iron-icon>
