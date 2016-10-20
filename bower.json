@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "main": [
     "px-card.html"
   ],
@@ -28,7 +28,7 @@
     "px-box-design": "~0.3.13",
     "px-buttons-design": "~0.4.26",
     "px-layout-design": "~0.3.13",
-    "px-defaults-design": "~0.2.9",
+    "px-defaults-design": "~0.3.0",
     "px-starter-kit-design": "~0.6.0",
     "web-component-tester": "~4.3.5",
     "px-forms-design": "~0.3.17",
@@ -37,7 +37,7 @@
     "px-tabs": "~0.5.2",
     "px-api-viewer": "~0.1.0",
     "px-demo-snippet": "^0.6.4",
-    "px-actionable-text-icons-design": "^0.0.3",
+    "px-actionable-text-icons-design": "^0.0.7",
     "px-code-design": "^0.2.11",
     "px-headings-design": "^0.2.14",
     "px-list-inline-design": "^0.2.11",

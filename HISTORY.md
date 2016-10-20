@@ -1,3 +1,8 @@
+0.5.3
+==================
+* Updated dependencies
+* Updated boilerplate files
+
 0.4.13
 ==================
 * added code pen
