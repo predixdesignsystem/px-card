@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "main": [
     "px-card.html"
   ],
@@ -37,7 +37,7 @@
     "px-tabs": "~0.5.2",
     "px-api-viewer": "~0.1.0",
     "px-demo-snippet": "^0.6.4",
-    "px-actionable-text-icons-design": "^0.0.7",
+    "px-actionable-text-icons-design": "^0.1.0",
     "px-code-design": "^0.2.11",
     "px-headings-design": "^0.2.14",
     "px-list-inline-design": "^0.2.11",
