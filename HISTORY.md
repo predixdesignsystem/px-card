@@ -1,3 +1,7 @@
+0.5.6
+==================
+* added style variables for theming
+
 0.5.5
 ==================
 * Updated dependencies
