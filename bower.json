@@ -1,13 +1,13 @@
 {
     "name": "px-card",
-    "version": "0.5.7",
+    "version": "0.5.8",
     "main": [
         "px-card.html"
     ],
     "ignore": [
         ".*",
         "npm-debug.log",
-        "Gruntfile.js",
+        "gulpfile.js",
         "sass",
         "bower_components",
         "node_modules",
