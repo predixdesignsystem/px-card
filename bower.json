@@ -1,6 +1,6 @@
 {
     "name": "px-card",
-    "version": "0.5.9",
+    "version": "0.5.10",
     "main": [
         "px-card.html"
     ],
@@ -41,7 +41,7 @@
         "px-code-design": "^0.2.11",
         "px-headings-design": "^0.2.14",
         "px-list-inline-design": "^0.2.11",
-        "px-dropdown": "^0.12.1",
+        "px-dropdown": "~2.0.0",
         "px-spacing-design": "~0.3.8",
         "px-toggle-design": "^0.2.12"
     }
