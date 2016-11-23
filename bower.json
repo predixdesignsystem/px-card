@@ -1,6 +1,6 @@
 {
     "name": "px-card",
-    "version": "0.5.10",
+    "version": "0.5.11",
     "main": [
         "px-card.html"
     ],
@@ -21,7 +21,7 @@
         "polymer": "^v1.6.1",
         "px": "~1.4.3",
         "es6-promise": "~3.3.1",
-        "px-theme": "~1.1.2",
+        "px-theme": "^2.0.1",
         "px-polymer-font-awesome": "^0.1.9"
     },
     "devDependencies": {
