@@ -1,6 +1,6 @@
 {
     "name": "px-card",
-    "version": "0.5.12",
+    "version": "0.5.13",
     "main": [
         "px-card.html"
     ],
@@ -25,24 +25,24 @@
         "px-polymer-font-awesome": "^0.1.9"
     },
     "devDependencies": {
-        "px-box-design": "~0.3.13",
-        "px-buttons-design": "~0.4.26",
-        "px-layout-design": "~0.3.13",
-        "px-defaults-design": "~0.3.0",
-        "px-starter-kit-design": "~0.6.0",
+        "px-box-design": "^0.3.13",
+        "px-buttons-design": "^0.4.26",
+        "px-layout-design": "^0.3.13",
+        "px-defaults-design": "^0.3.0",
+        "px-starter-kit-design": "^0.6.0",
         "web-component-tester": "~4.3.5",
-        "px-forms-design": "~0.3.17",
-        "px-tables-design": "~0.3.13",
+        "px-forms-design": "^0.3.17",
+        "px-tables-design": "^0.3.13",
         "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-        "px-tabs": "~0.5.2",
-        "px-api-viewer": "~0.1.0",
+        "px-tabs": "^0.5.2",
+        "px-api-viewer": "^0.1.0",
         "px-demo-snippet": "^0.6.9",
         "px-actionable-text-icons-design": "^0.1.0",
         "px-code-design": "^0.2.11",
         "px-headings-design": "^0.2.14",
         "px-list-inline-design": "^0.2.11",
-        "px-dropdown": "~2.0.0",
-        "px-spacing-design": "~0.3.8",
+        "px-dropdown": "^2.0.0",
+        "px-spacing-design": "^0.3.8",
         "px-toggle-design": "^0.2.12"
     }
 }
