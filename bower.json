@@ -1,11 +1,11 @@
 {
   "name": "px-card",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "main": [
     "px-card.html"
   ],
   "ignore": [
-    ".*",
+    "**/.*",
     "npm-debug.log",
     "gulpfile.js",
     "sass",
@@ -15,7 +15,8 @@
     "OSS_Notice.pdf",
     "scripts",
     ".github",
-    "px-card.png"
+    "*.png",
+    "*.md"
   ],
   "dependencies": {
     "polymer": "^v1.6.1",

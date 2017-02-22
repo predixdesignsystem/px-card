@@ -295,7 +295,7 @@ Custom property | Description | Default
 <dom-module id="px-card">
   <template>
     <style include="px-card-styles"></style>
-    
+
     <template is="dom-if" if="{{headerText}}">
         <px-card-header icon="{{icon}}" header-text="{{headerText}}" chevron="{{chevron}}"></px-card-header>
     </template>
@@ -478,20 +478,21 @@ Custom property | Description | Default
     is: 'px-card',
     properties: {
       /**
-       * px-card header text
+       * Text to be displayed in the header of the card.
        */
       headerText: {
         type: String
       },
       /**
-       * px-card icon
+       * Icon that appears to the left of the card header text.
+       * Should be a valid icon name from [the FontAwesome list](http://fontawesome.io/cheatsheet/).
        */
       icon: {
         type: String,
         notify: true
       },
       /**
-       * px-card chevron
+       * Boolean representing whether to display the chevron in the right side of the card header.
        */
       chevron: {
         type: Boolean

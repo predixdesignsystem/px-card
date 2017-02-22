@@ -1,3 +1,8 @@
+v0.6.5
+==================
+* fixed typo in demo
+* improved code comments for API
+
 v0.6.4
 ==================
 * Updated to px-demo
