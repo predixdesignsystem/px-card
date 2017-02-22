@@ -1,3 +1,7 @@
+v0.6.6
+==================
+* fixed wct config
+
 v0.6.5
 ==================
 * fixed typo in demo
