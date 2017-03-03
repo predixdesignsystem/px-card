@@ -22,5 +22,5 @@ common/abstract rules go in px-card-sketch.scss, not in this file.
 @import 'px-card-header-sketch.scss';
 
 header {
-  border-bottom: 1px solid var(--px-card-border-color, $gray7);
+  border-bottom: 1px solid var(--px-card-border-color, $gray5);
 }
