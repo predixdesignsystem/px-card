@@ -1,3 +1,7 @@
+v0.7.0
+==================
+* fixed style per design feedback
+
 v0.6.10
 ==================
 * fixed spacing when icon is absent

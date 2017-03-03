@@ -34,7 +34,6 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 
 // Objects
 $inuit-enable-btn--bare    : true;
-
 @import "px-buttons-design/_objects.buttons.scss";
 
 // Components
@@ -58,10 +57,8 @@ iron-icon {
 
 
 // Trumps
-$inuit-enable-margins                 : true;
 $inuit-enable-margins--tiny           : true;
-$inuit-enable-margins--none           : true;
+$inuit-enable-margins--large          : true;
 $inuit-enable-margins--negative-large : true;
 $inuit-enable-paddings--large         : true;
-
 @import "px-spacing-design/_trumps.spacing.scss";

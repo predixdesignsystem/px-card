@@ -26,29 +26,9 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 @import "px-normalize-design/_generic.normalize.scss";
 @import "px-box-sizing-design/_generic.box-sizing.scss";
 
-// Objects
-$inuit-enable-box--flush               : true;
-
-@import "px-box-design/_objects.box.scss";
-
 // Component
 :host {
-  @extend %box;
-  @extend %box--flush;
+  display: block;
   margin-bottom: $inuit-base-spacing-unit--tiny;
   padding: 0 $inuit-base-spacing-unit--large $inuit-base-spacing-unit--huge;
-  :host {
-    margin-right: -$inuit-base-spacing-unit--large;
-    margin-bottom: 0;
-    margin-left: -$inuit-base-spacing-unit--large;
-    &:last-of-type {
-      padding-bottom: 0;
-    }
-  }
 }
-
-// Trumps
-$inuit-enable-margins--large : true;
-$inuit-enable-margins--huge : true;
-
-@import "px-spacing-design/_trumps.spacing.scss";
