@@ -46,6 +46,11 @@ h3 {
   @include inuit-font-size(15px,false);
 }
 
+.btn--bare {
+  height: calculateRem($inuit-base-font-size);
+  width: calculateRem($inuit-base-font-size);
+}
+
 iron-icon {
   --iron-icon-height: calculateRem($inuit-base-font-size);
   --iron-icon-width: calculateRem($inuit-base-font-size);
@@ -54,8 +59,10 @@ iron-icon {
 
 
 // Trumps
-$inuit-enable-margins       : true;
-$inuit-enable-margins--tiny : true;
-$inuit-enable-margins--none : true;
+$inuit-enable-margins                 : true;
+$inuit-enable-margins--tiny           : true;
+$inuit-enable-margins--none           : true;
+$inuit-enable-margins--negative-large : true;
+$inuit-enable-paddings--large         : true;
 
 @import "px-spacing-design/_trumps.spacing.scss";

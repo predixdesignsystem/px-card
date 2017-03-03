@@ -1,3 +1,7 @@
+v0.6.7
+==================
+* fixed style per design feedback
+
 v0.6.6
 ==================
 * fixed wct config
