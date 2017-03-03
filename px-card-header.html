@@ -9,7 +9,7 @@
 
     <header class="u-mb u--mh+ u-ph+ flex flex--middle flex--justify">
       <h3 class="caps u-mv0" id="headertext">
-        <iron-icon id="headericon"></iron-icon>{{headerText}}
+        <iron-icon id="headericon" class="u-mr--"></iron-icon>{{headerText}}
       </h3>
       <template is="dom-if" if="{{chevron}}">
         <button class="btn btn--bare">
@@ -42,10 +42,13 @@
       _iconChange: function() {
         if(this.icon){
           var headerIcon = Polymer.dom(this.root).querySelector('#headericon');
-
           headerIcon.icon = "fa:"+this.icon;
-          var iconObj = this.$.headericon;
-          this.toggleClass("u-mr--", true, iconObj);
+          this.toggleClass("hidden", false, headerIcon);
+        }
+        else {
+          var headerIcon = Polymer.dom(this.root).querySelector('#headericon');
+          headerIcon.icon = "";
+          this.toggleClass("hidden", true, headerIcon);
         }
       }
     });
