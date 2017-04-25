@@ -5,6 +5,7 @@
     "px-card.html"
   ],
   "ignore": [
+    "*.enc",
     "**/.*",
     "npm-debug.log",
     "gulpfile.js",
