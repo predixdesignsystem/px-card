@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "0.7.1",
+  "version": "1.0.0",
   "main": [
     "px-card.html"
   ],
@@ -23,13 +23,11 @@
     "polymer": "^v1.6.1",
     "px": "~1.4.3",
     "es6-promise": "~3.3.1",
-    "px-theme": "^2.0.1",
-    "px-polymer-font-awesome": "^1.1.0"
+    "px-polymer-font-awesome": "^2.0.0"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^0.7.0",
-    "px-demo": "^1.2.8",
-    "px-buttons-design": "^1.1.4",
-    "px-box-design": "^0.4.2"
+    "px-theme": "^3.0.0",
+    "px-starter-kit-design": "^1.0.0",
+    "px-demo": "^2.0.0"
   }
 }

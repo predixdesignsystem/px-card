@@ -8,21 +8,9 @@
  * under which the software has been supplied.
  */
 
-//
-// Sass for the "sketch" notion of the px-card-controls component
-//
-// @author
-//
-
-/*
-THIS FILE SHOULD CONTAIN ONLY ABSTRACT/'SKETCH' THEME RULES, NOT SPECIFIC TO PREDIX BRANDING
-Predix branding rules go in px-card-predix.scss, not in this file.
-*/
-
 // Settings
 @import "px-defaults-design/_settings.defaults.scss";
 @import "px-colors-design/_settings.colors.scss";
-@import "px-mixins-design/_tools.mixins.scss";
 
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
@@ -32,29 +20,50 @@ Predix branding rules go in px-card-predix.scss, not in this file.
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
 
-// Objects
-$inuit-enable-btn--bare    : true;
-@import "px-buttons-design/_objects.buttons.scss";
+// Component
+:host {
+  display: block;
+  width: 100%;
+  background-color: var(--px-card-background-color, $gray1);
+  padding-bottom: 4*$inuit-base-spacing-unit;
+  border-top: 1px solid var(--px-card-border-color, $gray3);
+}
 
-// Components
 header {
-  height: calculateRem(60px);
+  padding: $inuit-base-spacing-unit--huge;
+  padding-top: $inuit-base-spacing-unit--large;
+  .epsilon {
+    height: 2rem;
+    line-height: 2rem;
+    color: var(--px-card-header-color, $gray10);
+    font-weight: bold;
+  }
 }
 
-h3 {
-  @include inuit-font-size(15px,false);
+.contents {
+  padding-left: $inuit-base-spacing-unit--huge;
+  padding-right: $inuit-base-spacing-unit--huge;
+  &.full-bleed {
+    padding: 0;
+  }
 }
 
-.btn--bare {
-  width: calculateRem($inuit-base-font-size);
+#headericon {
+  height: 2rem;
+  width: 2rem;
+  color: var(--px-card-icon-color, $gray10);
 }
-
-iron-icon {
-  --iron-icon-height: calculateRem($inuit-base-font-size);
-  --iron-icon-width: calculateRem($inuit-base-font-size);
-  margin-bottom: calculateRem(3px);
+header ::content iron-icon { // actions icons
+  height: 2rem;
+  width: 2rem;
+  color: var(--px-card-action-icon-color, $gray10);
+  &:hover {
+    color: var(--px-card-action-icon-color--hover, $primary-hover);
+  }
+  &:active {
+    color: var(--px-card-action-icon-color--pressed, $primary-pressed);
+  }
 }
-
 
 // Trumps
 $inuit-enable-margins                 : true;

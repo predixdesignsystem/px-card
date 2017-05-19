@@ -1,3 +1,10 @@
+v1.0.0
+==================
+* bump dependencies for redesign
+* component redesign
+* add new icons
+* complete overhaul of documentation pages
+
 v0.7.1
 ==================
 * fixed small display issue with borders
