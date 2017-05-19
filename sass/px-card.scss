@@ -39,15 +39,6 @@ header {
     font-weight: bold;
   }
 }
-
-.contents {
-  padding-left: $inuit-base-spacing-unit--huge;
-  padding-right: $inuit-base-spacing-unit--huge;
-  &.full-bleed {
-    padding: 0;
-  }
-}
-
 #headericon {
   height: 2rem;
   width: 2rem;
@@ -62,6 +53,16 @@ header ::content iron-icon { // actions icons
   }
   &:active {
     color: var(--px-card-action-icon-color--pressed, $primary-pressed);
+  }
+  &:not(:last-of-type) {
+    margin-right: .66666rem;
+  }
+}
+.contents {
+  padding-left: $inuit-base-spacing-unit--huge;
+  padding-right: $inuit-base-spacing-unit--huge;
+  &.full-bleed {
+    padding: 0;
   }
 }
 
