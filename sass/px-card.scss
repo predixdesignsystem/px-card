@@ -10,7 +10,6 @@
 
 // Settings
 @import "px-defaults-design/_settings.defaults.scss";
-@import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
@@ -24,9 +23,9 @@
 :host {
   display: block;
   width: 100%;
-  background-color: var(--px-card-background-color, $gray1);
+  background-color: var(--px-card-background-color, lightgray);
   padding-bottom: 4*$inuit-base-spacing-unit;
-  border-top: 1px solid var(--px-card-border-color, $gray3);
+  border-top: 1px solid var(--px-card-border-color, gray);
 }
 
 header {
@@ -35,24 +34,24 @@ header {
   .epsilon {
     height: 2rem;
     line-height: 2rem;
-    color: var(--px-card-header-color, $gray10);
+    color: var(--px-card-header-color, black);
     font-weight: bold;
   }
 }
 #headericon {
   height: 2rem;
   width: 2rem;
-  color: var(--px-card-icon-color, $gray10);
+  color: var(--px-card-icon-color, black);
 }
 header ::content iron-icon { // actions icons
   height: 2rem;
   width: 2rem;
-  color: var(--px-card-action-icon-color, $gray10);
+  color: var(--px-card-action-icon-color, black);
   &:hover {
-    color: var(--px-card-action-icon-color--hover, $primary-hover);
+    color: var(--px-card-action-icon-color--hover, blue);
   }
   &:active {
-    color: var(--px-card-action-icon-color--pressed, $primary-pressed);
+    color: var(--px-card-action-icon-color--pressed, blue);
   }
   &:not(:last-of-type) {
     margin-right: .66666rem;
