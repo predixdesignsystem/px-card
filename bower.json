@@ -20,7 +20,7 @@
     "*.md"
   ],
   "dependencies": {
-    "polymer": "^v1.6.1",
+    "polymer": "^1.9.0",
     "px": "~1.4.3",
     "es6-promise": "~3.3.1",
     "px-polymer-font-awesome": "^2.0.0"
