@@ -1,9 +1,7 @@
-# Px-card, Px-dashboard, Px-deck
+# px-card, px-dashboard, px-deck
 [![Build Status](https://travis-ci.org/PredixDev/px-card.svg?branch=master)](https://travis-ci.org/PredixDev/px-card)
 
 This repository holds the px-card, px-dashboard, and px-deck components.
-
-[![px-card demo](px-card.png?raw=true)](https://predixdev.github.io/px-card/)
 
 ## Overview
 
@@ -24,7 +22,7 @@ A Deck is a collection of cards.
 * initialize Cards after the deck is initialized
 * enable card-to-card communication through the deck state object
 
-Dashboard is a deck renderer, which renders a deck with the given url.  That url can either be to a file with a ```<px-deck>``` and cards or to a deck in the [Views service](https://www.predix.io/catalog/service.html?id=1186).  
+Dashboard is a deck renderer, which renders a deck with the given url.  That url can either be to a file with a ```<px-deck>``` and cards or to a deck in the [Views service](https://www.predix.io/catalog/service.html?id=1186).
 
 In the [Dashboard Seed](https://github.com/PredixDev/predix-seed), there is an example of using the [Views service](https://www.predix.io/catalog/service.html?id=1186), px-dashboard, [px-context-browser](https://github.com/PredixDev/px-context-browser), and [px-deck-selector](https://github.com/PredixDev/px-deck-selector) to build a dynamically-rendering dashboard application.
 
@@ -87,7 +85,7 @@ Element providing basic styling and behaviors (API) for card
 
 </script>
 ```
-## documentation
+## Documentation
 
 Read the full API and view the demo [here](https://predixdev.github.io/px-card).
 
