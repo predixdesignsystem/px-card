@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html" />
-<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html" />
+<link rel="import" href="../px-icon-set/px-icon-set.html" />
+<link rel="import" href="../px-icon/px-icon.html" />
 
 <!--
 
@@ -10,9 +11,9 @@ in the top right corner of the card header.
 ```
 <px-card header-text="Card" icon="analysis">
   <div class='actions'>
-    <iron-icon icon='px:launch' on-tap='doThing1'></iron-icon>
-    <iron-icon icon='px:help' on-tap='doThing2'></iron-icon>
-    <iron-icon icon='px:settings' on-tap='doThing3'></iron-icon>
+    <px-icon icon='px:launch' on-tap='doThing1'></px-icon>
+    <px-icon icon='px:help' on-tap='doThing2'></px-icon>
+    <px-icon icon='px:settings' on-tap='doThing3'></px-icon>
   </div>
   <p>This is the main content area of a Predix card.</p>
 </px-card>
@@ -53,7 +54,7 @@ Custom property | Description
   <header class="flex flex--middle flex--justify">
     <div class="epsilon caps" id="headerText">
     <template is="dom-if" if="{{icon}}">
-      <iron-icon id="headericon" icon="px:{{icon}}"></iron-icon>
+      <px-icon id="headericon" icon="px:{{icon}}"></px-icon>
     </template>{{headerText}}
     </div>
     <content select=".actions"></content>

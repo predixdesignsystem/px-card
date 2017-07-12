@@ -4,6 +4,7 @@ v1.0.0
 * component redesign
 * add new icons
 * complete overhaul of documentation pages
+* removed px-polymer-font-awesome and replace with px-icon-set
 
 v0.7.1
 ==================
