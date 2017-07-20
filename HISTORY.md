@@ -1,3 +1,8 @@
+v0.7.2
+==================
+* Added comment to decorate px.card behavior that is required by Polymer
+linter/build tools
+
 v0.7.1
 ==================
 * fixed small display issue with borders
