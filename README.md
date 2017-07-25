@@ -1,7 +1,7 @@
 # px-card, px-dashboard, px-deck
 [![Build Status](https://travis-ci.org/PredixDev/px-card.svg?branch=master)](https://travis-ci.org/PredixDev/px-card)
 
-This repository holds the px-card, px-dashboard, and px-deck components.
+This repository holds the `px-card`, `px-dashboard`, and `px-deck components`.
 
 ## Overview
 
