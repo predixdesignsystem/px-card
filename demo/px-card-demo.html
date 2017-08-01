@@ -47,8 +47,8 @@
           full-bleed="{{props.fullBleed.value}}">
             <div class="actions">
               <px-icon icon="px-nav:new-window"></px-icon>
-              <px-icon icon="px-utl:help"></px-icon>
-              <px-icon icon="px-utl:app-settings"></px-icon>
+              <px-icon icon="px-nav:reload"></px-icon>
+              <px-icon icon="px-nav:more"></px-icon>
             </div>
             <p>This is the main content area of a Predix card.</p>
         </px-card>
@@ -110,7 +110,8 @@
 
       icon: {
         type: String,
-        defaultValue: 'px-fea:analysis'
+        defaultValue: 'px-fea:analysis',
+        inputType: 'text'
       },
 
       fullBleed: {

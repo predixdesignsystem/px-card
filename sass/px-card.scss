@@ -19,6 +19,9 @@
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
 
+// Objects
+@import "px-actionable-design/_objects.actionable.scss";
+
 // Component
 :host {
   display: block;
@@ -42,9 +45,9 @@ header {
   width: 2rem;
   color: var(--px-card-icon-color, black);
 }
-header ::content iron-icon { // actions icons
-  height: 2rem;
-  width: 2rem;
+header ::content px-icon { // actions icons
+  --iron-icon-height: 2rem;
+  --iron-icon-width: 2rem;
   color: var(--px-card-action-icon-color, black);
   &:hover {
     color: var(--px-card-action-icon-color--hover, blue);

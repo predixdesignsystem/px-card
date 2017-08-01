@@ -1,3 +1,7 @@
+v1.0.1
+==================
+* fix icons etc
+
 v1.0.0
 ==================
 * bump dependencies for redesign
