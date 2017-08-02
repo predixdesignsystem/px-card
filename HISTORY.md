@@ -1,3 +1,7 @@
+v1.0.2
+==================
+* remove failing test
+
 v1.0.1
 ==================
 * fix icons etc
