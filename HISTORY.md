@@ -1,3 +1,7 @@
+v1.0.3
+==================
+* add cursor:pointer on action buttons
+
 v1.0.2
 ==================
 * remove failing test
