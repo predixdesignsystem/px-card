@@ -1,3 +1,7 @@
+v1.0.4
+==================
+* Fix comments for analyzer
+
 v1.0.3
 ==================
 * add cursor:pointer on action buttons
