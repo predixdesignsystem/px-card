@@ -1,3 +1,7 @@
+v1.0.5
+==================
+* fix cursor for main card icon
+
 v1.0.4
 ==================
 * Fix comments for analyzer

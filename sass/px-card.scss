@@ -43,6 +43,7 @@ header {
   height: 2rem;
   width: 2rem;
   color: var(--px-card-icon-color, black);
+  cursor: auto;
 }
 header ::content px-icon { // actions icons
   --iron-icon-height: 2rem;
