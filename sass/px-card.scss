@@ -28,6 +28,9 @@
   background-color: var(--px-card-background-color, lightgray);
   padding-bottom: 4*$inuit-base-spacing-unit;
   border-top: 1px solid var(--px-card-border-color, gray);
+  &[full-bleed] .contents {
+    padding: 0;
+  }
 }
 
 header {
@@ -63,9 +66,6 @@ header ::content px-icon { // actions icons
 .contents {
   padding-left: $inuit-base-spacing-unit--huge;
   padding-right: $inuit-base-spacing-unit--huge;
-  &.full-bleed {
-    padding: 0;
-  }
 }
 
 // Trumps

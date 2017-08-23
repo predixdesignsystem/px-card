@@ -260,14 +260,9 @@ Custom property | Description
        */
       fullBleed: {
         type: Boolean,
-        value: false
+        value: false,
+        reflectToAttribute: true
       }
-    },
-    /**
-     * Calculates the class to include for full-bleed cards.
-     */
-    _computeClass: function(fullBleed) {
-      return fullBleed === true ? "full-bleed" : "";
     }
   });
 </script>

@@ -1,3 +1,7 @@
+v1.0.6
+==================
+* remove computeClass
+
 v1.0.5
 ==================
 * fix cursor for main card icon
