@@ -1,3 +1,7 @@
+v1.0.8
+==================
+* fix documentation
+
 v1.0.7
 ==================
 * remove computeClass
