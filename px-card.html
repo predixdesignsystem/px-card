@@ -46,19 +46,21 @@ Custom property | Description
 -->
 <dom-module id="px-card">
   <template>
-  <style include="px-card-styles"></style>
+    <style include="px-card-styles"></style>
 
-  <header class="flex flex--middle flex--justify">
-    <div class="epsilon caps" id="headerText">
-    <template is="dom-if" if="{{icon}}">
-      <px-icon id="headericon" icon="{{icon}}"></px-icon>
-    </template>{{headerText}}
+    <template is="dom-if" if="{{headerText}}">
+      <header class="flex flex--middle flex--justify">
+        <div class="epsilon caps" id="headerText">
+          <template is="dom-if" if="{{icon}}">
+            <px-icon id="headericon" icon="{{icon}}"></px-icon>
+          </template>{{headerText}}
+        </div>
+        <content select=".actions"></content>
+      </header>
+    </template>
+    <div class="contents">
+      <content></content>
     </div>
-    <content select=".actions"></content>
-  </header>
-  <div class="contents">
-    <content></content>
-  </div>
   </template>
 </dom-module>
 
@@ -242,6 +244,10 @@ Custom property | Description
     properties: {
       /**
        * Text to be displayed in the header of the card.
+       * Note: if you do not specify a value for this property,
+       * the entire header area (including icon and actions slot)
+       * will not be shown. Pass a blank space (e.g. ' ')
+       * if you need the icon/actions but not the title.
        */
       headerText: {
         type: String
