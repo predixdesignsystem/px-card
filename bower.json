@@ -1,6 +1,6 @@
 {
   "name": "px-card",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "main": [
     "px-card.html"
   ],
@@ -20,7 +20,7 @@
     "*.md"
   ],
   "dependencies": {
-    "polymer": "^1.9.0",
+    "polymer": "^2.0.0",
     "px": "~1.4.3",
     "es6-promise": "~3.3.1",
     "px-icon-set": "^2.0.0"
@@ -36,6 +36,7 @@
     "px-demo": "^2.0.0"
   },
   "resolutions": {
-    "webcomponentsjs": "^0.7.24"
+    "polymer": "^2.0.0",
+    "webcomponentsjs": "^1.0.2"
   }
 }

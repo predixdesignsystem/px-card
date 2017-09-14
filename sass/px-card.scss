@@ -48,7 +48,7 @@ header {
   color: var(--px-card-icon-color, black);
   cursor: auto;
 }
-header ::content px-icon { // actions icons
+#actions ::slotted(px-icon) { // actions icons
   --iron-icon-height: 2rem;
   --iron-icon-width: 2rem;
   color: var(--px-card-action-icon-color, black);

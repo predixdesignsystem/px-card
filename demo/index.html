@@ -12,7 +12,9 @@
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
 
     <!-- Demo list/view change entrypoint -->
     <px-demo-collection demos="{{demos}}"></px-demo-collection>

@@ -7,15 +7,16 @@
 
 ### Usage
 Cards can be used directly in a page or application as shown below.
-Content included in a block with class `actions` will be rendered
-in the top right corner of the card header.
+
+Content that has the attribute `slot="actions"` will be rendered in the top
+right corecter of the card header. <px-icon> tags placed in the action slot
+will be automatically styled to the correct size/spacing/location.
+
 ```
 <px-card header-text="Card" icon="analysis">
-  <div class='actions'>
-    <px-icon icon="pxm:new-window"></px-icon>
-    <px-icon icon="pxs:help"></px-icon>
-    <px-icon icon="pxs:app-settings"></px-icon>
-  </div>
+  <px-icon slot="actions" icon="pxm:new-window"></px-icon>
+  <px-icon slot="actions" icon="pxs:help"></px-icon>
+  <px-icon slot="actions" icon="pxs:app-settings"></px-icon>
   <p>This is the main content area of a Predix card.</p>
 </px-card>
 ```
@@ -55,11 +56,13 @@ Custom property | Description
             <px-icon id="headericon" icon="{{icon}}"></px-icon>
           </template>{{headerText}}
         </div>
-        <content select=".actions"></content>
+        <div id="actions">
+          <slot name="actions"></slot>
+        </div>
       </header>
     </template>
     <div class="contents">
-      <content></content>
+      <slot></slot>
     </div>
   </template>
 </dom-module>

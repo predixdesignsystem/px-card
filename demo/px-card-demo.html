@@ -18,7 +18,9 @@
 <!-- Demo DOM module -->
 <dom-module id="px-card-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
 
     <!-- Header -->
     <px-demo-header
@@ -45,11 +47,9 @@
           icon="{{props.icon.value}}"
           header-text="{{props.headerText.value}}"
           full-bleed="{{props.fullBleed.value}}">
-            <div class="actions">
-              <px-icon icon="px-nav:new-window"></px-icon>
-              <px-icon icon="px-nav:reload"></px-icon>
-              <px-icon icon="px-nav:more"></px-icon>
-            </div>
+            <px-icon slot="actions" icon="px-nav:new-window"></px-icon>
+            <px-icon slot="actions" icon="px-nav:reload"></px-icon>
+            <px-icon slot="actions" icon="px-nav:more"></px-icon>
             <p>This is the main content area of a Predix card.</p>
         </px-card>
       </px-demo-component>
@@ -123,7 +123,7 @@
       //for demo snippet
       lightDomContent: {
         type: String,
-        defaultValue: '<div class="actions"><px-icon icon="px-nav:new-window"></px-icon><px-icon icon="px-utl:help"></px-icon><px-icon icon="px-utl:app-settings"></px-icon></div><p>This is the main content area of a Predix card.</p>',
+        defaultValue: '<px-icon slot="actions" icon="px-nav:new-window"></px-icon><px-icon slot="actions" icon="px-utl:help"></px-icon><px-icon slot="actions" icon="px-utl:app-settings"></px-icon><p>This is the main content area of a Predix card.</p>',
       },
     },
 

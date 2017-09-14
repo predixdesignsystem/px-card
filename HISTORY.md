@@ -1,3 +1,37 @@
+POLYMER2.0-PRERELEASE (VERSION PENDING)
+==================
+* Upgrades <px-card> element and its related styles to support hybrid mode
+(works in Polymer 1.9.x or Polymer 2.x.x).
+* BREAKING CHANGES: The px-card slot API has changed to support the webcomponents
+v1 specification for passing children into a custom element.
+
+The previous version of px-card allowed developers to pass in a div with the
+class "actions" to place icon buttons into the px-card header:
+
+```
+<px-card>
+  <div class="actions">
+    <px-icon icon="..."></px-icon>
+    <px-icon icon="..."></px-icon>
+    <px-icon icon="..."></px-icon>
+  </div>
+  <p>Card text goes here.</p>
+</px-card>
+```
+
+To upgrade, developers should remove the div with the "actions" class and
+instead put a new `slot="actions"` attribute directly on each <px-icon> tag.
+This is the same code as above with the updates:
+
+```
+<px-card>
+  <px-icon slot="actions" icon="..."></px-icon>
+  <px-icon slot="actions" icon="..."></px-icon>
+  <px-icon slot="actions" icon="..."></px-icon>
+  <p>Card text goes here.</p>
+</px-card>
+```
+
 v1.0.9
 ==================
 * hide header if no headerText specified (#17)

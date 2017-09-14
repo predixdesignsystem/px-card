@@ -17,7 +17,9 @@
 <!-- Demo DOM module -->
 <dom-module id="px-dashboard-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
 
     <!-- Header -->
     <px-demo-header
@@ -86,8 +88,7 @@
 
       //for demo snippet
       lightDomContent: {
-        type: String,
-        defaultValue: '<div class="actions"><iron-icon icon="px:launch"></iron-icon><iron-icon icon="px:help"></iron-icon><iron-icon icon="px:settings"></iron-icon></div><strong>Hello World</strong><p>This is the bare minimum you need for a Predix Experience card.</p>',
+        type: String
       },
     },
 
