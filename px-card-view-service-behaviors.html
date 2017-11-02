@@ -1,0 +1,378 @@
+<script>
+  (function() {
+    'use strict';
+
+    window.px = window.px || {};
+
+    /**
+     * Use as a basis for creating your own Polymer components that instantiate
+     * different styles of cards, and use them in combination with the Predix Views
+     * service and the px-deck and px-dashboard sub-components.
+     *
+     * @polymerBehavior px.card
+     */
+    window.px.card = {
+      properties: {
+        /**
+         * Title of your card
+         */
+        title: {
+          type: String,
+          reflectToAttributes: true
+        },
+        /**
+         * Context object being pass into the card from deck/dashboard
+         */
+        context: {
+          type: Object,
+          observer: '_contextChanged'
+        },
+        /**
+         * Card url in view service card persistence
+         */
+        url: {
+          type: String
+        },
+        /**
+         * Deck state object being pass from the deck, deck state object is a shared object between all cards within a deck
+         */
+        deckState: {
+          type: Object,
+          observer: '_deckStateChanged'
+        }
+      },
+
+      ready: function() {
+        this.addEventListener('px-card-refresh', this._refresh);
+      },
+
+      attached: function() {
+        this.isInit = false;
+        this.fire('px-card-ready');
+        if (!this.id) {
+          throw 'Card ' + this.tagName + ' cannot be created without an id!';
+        }
+      },
+
+      /**
+       * Context change handler to be called when context is changed.
+       * This private method will call public contextChanged method which will be implemented by developer
+       */
+      _contextChanged: function(newContext, oldContext) {
+        if (this.contextChanged && typeof this.contextChanged === 'function' && this.isInit === true) {
+          this.contextChanged(newContext, oldContext);
+        }
+      },
+
+      /**
+       * Deck state change handler to be called when deck state is changed in deck by other cards.
+       * This private method will call public deckStateChanged method which will be implemented by developer
+       */
+      _deckStateChanged: function(newDealerState, oldDealerState) {
+      this.fromDeck = true;
+        if (this.deckStateChanged && typeof this.deckStateChanged === 'function') {
+          this.deckStateChanged(newDealerState, oldDealerState);
+        }
+        this.fromDeck = false;
+      },
+
+      _refresh: function() {
+        if (this.refresh && typeof this.refresh === 'function') {
+          this.refresh();
+        }
+      },
+
+      /**
+       * Init method to be called when card is ready
+       */
+      init: function() {
+        // this default init function is needed in case they don't implement init
+        // this is the 'instantiate' requirement
+      },
+
+      /**
+       * Call with an object that the card wants to share with other
+       * cards within the deck. Example:
+       * ```
+       * this.updateDeck({ count: this.count });
+       * ```
+       */
+      updateDeck: function(value) {
+        if (!this.fromDeck && this._deck && this._deck.updateState) {
+          this._deck.updateState(this.id, value);
+        }
+      },
+
+      /**
+       * Call to show a card in the DOM.
+       */
+      showCard: function() {
+        this.hidden = false;
+        this.querySelector('px-card').hidden = false;
+      },
+
+      /**
+       * Call to hide a card in the DOM.
+       */
+      hideCard: function() {
+        this.hidden = true;
+        this.querySelector('px-card').hidden = true;
+      },
+
+      /**
+       * Get data from web resources with url. See examples above.
+       */
+      getData: function() {
+        return window.px.dealer.getData.apply(window.px.dealer, arguments);
+      },
+
+      /**
+       * Get all properties of a card and return an object of element attribute
+       * names and values. Each card property name will be converted from camel
+       * case property name to lowercase words separated by dashes
+       */
+      getCardAttributes: function() {
+        var cardState = {},
+          cardElement = document.querySelector(this.nodeName),
+          cardBehaviors = cardElement.behaviors;
+
+        cardBehaviors.forEach(function(behavior) {
+          for (var prop in behavior.properties) {
+            cardState[window.px.slugify(prop)] = cardElement[prop];
+          }
+        });
+
+        for (var prop in cardElement.properties) {
+          cardState[window.px.slugify(prop)] = cardElement[prop];
+        }
+
+        return cardState;
+      },
+
+      /**
+       * Save card in view service when a card url is provided. If you render a
+       * deck and card using px-dashboard with view-service-base-url attribute set,
+       * card url will be set by the px-dashboard component behind the scenes
+       */
+      save: function() {
+        var state = this.getCardAttributes(),
+          url = this.url;
+
+        if (url) {
+          var serializedCard = {};
+
+          if (state.title) {
+            serializedCard.title = state.title;
+            delete state.title;
+          }
+
+          if (state.url) {
+            delete state.url;
+          }
+
+          delete state.id;
+
+          serializedCard.attributes = state;
+
+          return window.px.dealer.httpRequest({
+            method: 'PUT',
+            url: url,
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: serializedCard
+          });
+        } else {
+          throw 'Card url is undefined';
+        }
+      }
+    };
+
+    /**
+     * Manages multiple cards and communicates with the view service.
+     *
+     * #### Usage
+     *
+     * ```
+     * var deckDefinition = {
+     *   'sample-cards': {
+     *     name: 'SampleCards',
+     *     url: 'views/sample-cards.html'
+     *   },
+     *   'fetch-data': {
+     *     name: 'FetchData',
+     *     url: 'views/fetch-data.html'
+     *   },
+     *   'card-to-card': {
+     *     name: 'CardToCard',
+     *     url: 'views/card-to-card.html'
+     *   }
+     * };
+     *
+     * var decksByClassification = {
+     *   'dashboard1': {
+     *     '/classification/country': ['sample-cards', 'fetch-data'],
+     *     '/classification/state': ['card-to-card'],
+     *     '/classification/county': ['sample-cards', 'card-to-card', 'fetch-data']
+     *   },
+     *   'dashboard2': {
+     *     '/classification/country': ['sample-cards', 'fetch-data'],
+     *     '/classification/state': ['card-to-card'],
+     *     '/classification/county': ['sample-cards', 'card-to-card', 'fetch-data']
+     *   }
+     * };
+     *
+     * window.px.dealer.init(deckDefinition, decksByClassification);
+     *
+     * $scope.$apply(function() {
+     *   $scope.context = {
+     *     name: 'newContextName'
+     *   };
+     *
+     *   window.px.dealer.getDecksByClassification('dashboard1', $scope.context.classification).then(function(decks) {
+     *     $scope.decks = decks;
+     *     if ($scope.decks.length) {
+     *       $scope.selectedDeck = $scope.decks[0].url;
+     *     }
+     *   });
+     * });
+     * ```
+     *
+     * @polymerBehavior px.dealer
+     */
+    window.px.dealer = {
+      /**
+       * Set $httpProvider for the dealer, useful for injecting during unit
+       * test with angular.
+       *
+       * @param {Anguar.$httpProvider}
+       */
+      setHttpProvider: function(httpProvider){
+        this.httpProvider = httpProvider;
+      },
+
+      /**
+       * Get the httpProvider set in the setHttpProvider or return
+       * `angular.element('body').injector().get('$http')` by default.
+       *
+       * @return {Angular.$httpProvider|null}
+       */
+      getHttpProvider: function(){
+        var $http = null;
+        if (this.httpProvider){
+          return this.httpProvider;
+        }
+        if (window.angular){
+          $http = angular.element('body').injector().get('$http');
+        }
+        return $http;
+      },
+
+      /**
+       * Makes a HTTP request by calling an Angular $httpProvider (Angular 1).
+       *
+       * @param  {Object} httpConfig
+       * @return {Promise|undefined}
+       */
+      httpRequest: function(httpConfig) {
+        var $http = this.getHttpProvider();
+        if ($http) {
+          return new Promise(function (resolve, reject) {
+            $http(httpConfig)
+              .success(function(data) {
+                return resolve(data);
+              })
+              .error(function(data) {
+                return reject(data);
+              });
+          });
+        }
+      },
+
+      /**
+       * Get data from web resources by url.
+       * @param  {string} url
+       * @param  {Object} httpConfig
+       * @return {Promise|undefined}
+       */
+      getData: function (url, httpConfig) {
+        if (httpConfig === null || typeof httpConfig !== 'object') {
+          httpConfig = {};
+        }
+        // check url for JSONP callback
+        if (/callback=/.test(url)) {
+          httpConfig.method = 'JSONP';
+
+        } else {
+          httpConfig.method = 'GET';
+        }
+        httpConfig.url = url;
+        return this.httpRequest(httpConfig);
+      },
+
+      /**
+       * Instantiate the dealer by setting up deck definition and deckByClassification
+       * for getDecksByClassification look up.
+       *
+       * @param  {Object} deckDefintions
+       * @param  {Object} decksByClassifications
+       */
+      init: function (deckDefintions, decksByClassifications) {
+        this.deckDefinitions = deckDefintions;
+        this.decksByClassification = decksByClassifications;
+      },
+
+      /**
+       * Gets a list of decks by dashboard Id and classification.
+       *
+       * @param  {*}      dashboardId
+       * @param  {string} classification
+       * @return {Promise.<Array>} Promise that resolves with an array of decks
+       */
+      getDecksByClassification: function (dashboardId, classification) {
+        var decks = [];
+        if (dashboardId && this.decksByClassification && dashboardId in this.decksByClassification) {
+          var decksInDashboard = this.decksByClassification[dashboardId];
+          if (classification in decksInDashboard) {
+            decksInDashboard[classification].forEach(function (deckId) {
+              if (this.deckDefinitions[deckId]) {
+                decks.push(this.deckDefinitions[deckId]);
+              }
+            }.bind(this));
+          }
+        }
+        return new Promise(function(resolve, reject) {
+          resolve(decks);
+        });
+      },
+
+      /**
+       * Get the deck markup by url.
+       * @param  {string} url
+       * @return {Promise|undefined}
+       */
+      getDeck: function (url) {
+        return this.getData(url);
+      }
+    };
+
+    /**
+     * Adds an anonymous listener to the window that listens for elements that
+     * fire the `px-deck-ready` event and calls `init()` on those elements.
+     */
+    window.addEventListener('px-deck-ready', function(e) {
+      e.target.init();
+    });
+
+    /**
+     * Converts camelCase to dash-case. E.g. somePropertyName to some-property-name.
+     * @param  {string} propName
+     * @return {string}
+     */
+    window.px.slugify = function(propName) {
+      var noCapitals = propName.replace(/([a-z])([A-Z])/g, '$1 $2');
+      var allLowercase = noCapitals.toLowerCase();
+      var attributeName = allLowercase.replace(/\s/g, '-');
+      return attributeName;
+    };
+  })();
