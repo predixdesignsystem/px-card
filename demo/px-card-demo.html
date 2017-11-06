@@ -25,11 +25,7 @@
     <!-- Header -->
     <px-demo-header
         module-name="px-card"
-        description="Cards consist of a header area and content area. The header can
-          optionally contain a descriptive icon in the top left corner and/or an actions area in the top right corner
-          for settings or other action icons. Cards are incredibly flexible in terms of what content can be
-          placed in the main area of the card and how it's arranged. A few layout configurations are provided
-          in the px-widget-cards component to help you organize content in a responsive grid within a card.">
+        description="The px-card component shows content formatted as a card. Cards consist of header, actions, and content areas. Place content directly inside the <px-card> tag to display it in the card content area.">
     </px-demo-header>
 
     <!-- Interactive -->
@@ -66,16 +62,14 @@
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
-
   </template>
-
 </dom-module>
+
 <script>
   Polymer({
     is: 'px-card-demo',
 
     properties: {
-
       props: {
         type: Object,
         value: function(){ return this.demoProps; }
@@ -101,7 +95,6 @@
     },
 
     demoProps: {
-
       headerText: {
         type: String,
         defaultValue: 'Card',
@@ -123,9 +116,8 @@
       //for demo snippet
       lightDomContent: {
         type: String,
-        defaultValue: '<px-icon slot="actions" icon="px-nav:new-window"></px-icon><px-icon slot="actions" icon="px-utl:help"></px-icon><px-icon slot="actions" icon="px-utl:app-settings"></px-icon><p>This is the main content area of a Predix card.</p>',
-      },
-    },
-
+        defaultValue: '<px-icon slot="actions" icon="px-nav:new-window"></px-icon><px-icon slot="actions" icon="px-nav:reload"></px-icon><px-icon slot="actions" icon="px-nav:more"></px-icon><p>This is the main content area of a Predix card.</p>',
+      }
+    }
   });
 </script>

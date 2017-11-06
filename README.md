@@ -1,30 +1,8 @@
-# px-card, px-dashboard, px-deck
-[![Build Status](https://travis-ci.org/PredixDev/px-card.svg?branch=master)](https://travis-ci.org/PredixDev/px-card)
-
-This repository holds the `px-card`, `px-dashboard`, and `px-deck components`.
+# px-card
 
 ## Overview
 
-Context is an object.  It can contain details about an asset, urls to fetch additional information from, user-specific information, etc.  A developer can define anything they want in the context.
-
-Cards are web components with a standard API that are initialized with a context.  They are reusable and can be placed anywhere because they are passed in everything they need to render from the context.
-
-Cards share these properties:
-
-* Use < px-card > template for styling
-* Inherit px.card behaviors
-* Fetch data in an abstract way that is not tied to the type of application that the card is running in (the default implementation is an Angular $http fetch)
-* Facilitate component-to-component communication within a card using data-binding
-* Facilitate card-to-card communication within a deck using card API methods
-
-A Deck is a collection of cards.
-
-* initialize Cards after the deck is initialized
-* enable card-to-card communication through the deck state object
-
-Dashboard is a deck renderer, which renders a deck with the given url.  That url can either be to a file with a ```<px-deck>``` and cards or to a deck in the [Views service](https://www.predix.io/catalog/service.html?id=1186).
-
-In the [Dashboard Seed](https://github.com/PredixDev/predix-seed), there is an example of using the [Views service](https://www.predix.io/catalog/service.html?id=1186), px-dashboard, [px-context-browser](https://github.com/PredixDev/px-context-browser), and [px-deck-selector](https://github.com/PredixDev/px-deck-selector) to build a dynamically-rendering dashboard application.
+The px-card component shows content formatted as a card. Cards consist of header, actions, and content areas. Place content directly inside the <px-card> tag to display it in the card content area.
 
 ## Usage
 
@@ -32,62 +10,39 @@ In the [Dashboard Seed](https://github.com/PredixDev/predix-seed), there is an e
 1. node.js
 2. npm
 3. bower
-4. Install the [webcomponents-lite.js polyfill](https://github.com/webcomponents/webcomponentsjs) to add support for web components and custom elements to your application.
+4. [webcomponents-lite.js polyfill](https://github.com/webcomponents/webcomponentsjs)
 
-### Getting Started
+Node, npm and bower are necessary to install the component and dependencies. webcomponents.js adds support for web components and custom elements to your application.
 
-First, install the px-card repo via bower on the command line.
+## Getting Started
 
-```
-bower install https://github.com/PredixDev/px-card.git --save
-```
-Second, import the component(s) you want to use in your application with the following tag(s) in your head.
+First, install the component via bower on the command line.
 
 ```
-<link rel="import" href="/bower_components/px-card/px-dashboard.html"/>
-<link rel="import" href="/bower_components/px-card/px-deck.html"/>
+bower install px-card --save
+```
+
+Second, import the component to your application with the following tag in your head.
+
+```
 <link rel="import" href="/bower_components/px-card/px-card.html"/>
 ```
 
-Finally, use the component(s) in your application. See specific examples in the [API](https://predixdev.github.io/px-card).
+Finally, use the component in your application:
+
+```
+Insert Your demo code here.
+```
 
 <br />
 <hr />
 
-### px-card
-Element providing basic styling and behaviors (API) for card
-
-#### Usage
-```
-<dom-module id="demo-card">
-    <template>
-        <px-card icon='demo-icon' header-text='Demo Card' chevron>
-            <h1>Hello World</h1>
-            <p>{{context.name}}</p>
-            <p>This is the bare minimum you need for a Predix Experience card.</p>
-        </px-card>
-    </template>
-</dom-module>
-<script>
-    Polymer({
-        is: 'demo-card',
-        init: function(){
-            // this is where you can do some initialization of your card
-        },
-        contextChanged: function(newContext, oldContext){
-            // this is where you will receive updates to the context
-        },
-        deckStateChanged: function(newDeckState, oldDeckState){
-            // this is where you will receive updates from other cards
-        },
-        behaviors: [px.card]
-    });
-
-</script>
-```
 ## Documentation
 
 Read the full API and view the demo [here](https://predixdev.github.io/px-card).
+
+The documentation in this repository is supplemental to the official Predix documentation, which is continuously updated and maintained by the Predix documentation team. Go to [http://predix.io](http://predix.io)  to see the official Predix documentation.
+
 
 ## Local Development
 
@@ -106,15 +61,6 @@ $ gulp serve
 ```
 
 Navigate to the root of that server (e.g. http://localhost:8080/) in a browser to open the API documentation page, with link to the "Demo" / working examples.
-
-### LiveReload
-
-By default gulp serve is configured to enable LiveReload and will be watching for modifications in your root directory as well as `/css`.
-
-
-
-
-
 
 ### GE Coding Style Guide
 [GE JS Developer's Guide](https://github.com/GeneralElectric/javascript)

@@ -4,27 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>px-card simple demo (using Polymer 2.0)</title>
+  <title>px-card demo</title>
 
   <!-- Load webcomponentsjs + Polymer -->
   <script src="../webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="import" href="../polymer/polymer.html"/>
 
-  <!-- Load and use px-theme -->
+  <!-- Load theme -->
   <link rel="import" href="../px-theme/px-theme-styles.html"/>
   <custom-style>
     <style include="px-theme-styles"></style>
   </custom-style>
 
-  <!-- Load px-card and px-icon-set, since we use px-icon inside the card for actions -->
+  <!-- Load components -->
+  <link rel="import" href="../px-card.html"/>
   <link rel="import" href="../px-icon-set/px-icon-set.html"/>
-  <link rel="import" href="px-card.html"/>
+
+  <style>
+    html {
+      font-size: 15px;
+    }
+  </style>
 </head>
 <body>
-  <px-card header-text="Card" icon="px-fea:analysis">
+  <px-card header-text="Card" icon="px-fea:analysis" hide-header>
     <px-icon slot="actions" icon="px-nav:new-window"></px-icon>
-    <px-icon slot="actions" icon="px-utl:help"></px-icon>
-    <px-icon slot="actions" icon="px-utl:app-settings"></px-icon>
+    <px-icon slot="actions" icon="px-nav:reload"></px-icon>
+    <px-icon slot="actions" icon="px-nav:more"></px-icon>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quo veritatis autem ab sapiente animi, voluptatibus ducimus beatae quam, nisi aliquid deserunt vel illo amet odio rerum quia tempore quidem.</p>
   </px-card>
 </body>

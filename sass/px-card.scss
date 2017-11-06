@@ -28,9 +28,10 @@
   background-color: var(--px-card-background-color, lightgray);
   padding-bottom: 4*$inuit-base-spacing-unit;
   border-top: 1px solid var(--px-card-border-color, gray);
-  &[full-bleed] .contents {
-    padding: 0;
-  }
+}
+
+:host([full-bleed]) .contents {
+  padding: 0;
 }
 
 header {
@@ -42,27 +43,30 @@ header {
     color: var(--px-card-header-color, black);
   }
 }
+
 #headericon {
   height: 2rem;
   width: 2rem;
   color: var(--px-card-icon-color, black);
   cursor: auto;
 }
-#actions ::slotted(px-icon) { // actions icons
+
+#actions ::slotted(px-icon) {
   --iron-icon-height: 2rem;
   --iron-icon-width: 2rem;
   color: var(--px-card-action-icon-color, black);
-  cursor: pointer;
-  &:hover {
-    color: var(--px-card-action-icon-color--hover, blue);
-  }
-  &:active {
-    color: var(--px-card-action-icon-color--pressed, blue);
-  }
-  &:not(:last-of-type) {
-    margin-right: .66666rem;
-  }
+  margin-right: .66666rem;
 }
+#actions ::slotted(px-icon:last-of-type) {
+  margin-right: 0;
+}
+#actions ::slotted(px-icon:hover) {
+  color: var(--px-card-action-icon-color--hover, blue);
+}
+#actions ::slotted(px-icon:active) {
+  color: var(--px-card-action-icon-color--pressed, blue);
+}
+
 .contents {
   padding-left: $inuit-base-spacing-unit--huge;
   padding-right: $inuit-base-spacing-unit--huge;
