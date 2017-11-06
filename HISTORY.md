@@ -1,9 +1,37 @@
 POLYMER2.0-PRERELEASE (VERSION PENDING)
 ==================
-* Upgrades <px-card> element and its related styles to support hybrid mode
-(works in Polymer 1.9.x or Polymer 2.x.x).
-* BREAKING CHANGES: The px-card slot API has changed to support the webcomponents
-v1 specification for passing children into a custom element.
+Upgrades <px-card> element and its related styles to support Polymer 1 and 2.
+Refactors and removed deprecated code. There are many major breaking changes
+in this release, please see below for more information and an upgrade guide:
+
+## Breaking change: px-card view service behaviors and components deprecated
+
+px-card is now a presentation component only. All code related to managing
+decks, dashboards, dealers, and communications with the Predix View Service
+have been removed as of this version.
+
+The following components and behaviors have been deprecated and their files deleted:
+
+* `window.px.card` behavior removed
+* `window.px.dealer` behavior removed
+* `window.px.dashboard` behavior removed
+* `<px-dashboard>` component removed
+* px-card/px-dashboard.html file deleted
+* `window.px.deck` behavior removed
+* `<px-deck>` component removed
+* px-card/px-deck.html file deleted
+* `<px-sample-card>` component removed
+* px-card/px-sample-card.html file deleted
+
+Search your code to ensure you do not import any deleted files or rely on any
+removed behaviors/components.
+
+**Upgrade path:** To continue using these behaviors, do not upgrade to the newest
+px-card version and remain on the last major release.
+
+## Breaking change: px-card actions slot API
+The px-card slot API has changed to support the webcomponents v1 specification
+for passing children into a custom element.
 
 The previous version of px-card allowed developers to pass in a div with the
 class "actions" to place icon buttons into the px-card header:
@@ -19,9 +47,9 @@ class "actions" to place icon buttons into the px-card header:
 </px-card>
 ```
 
-To upgrade, developers should remove the div with the "actions" class and
-instead put a new `slot="actions"` attribute directly on each <px-icon> tag.
-This is the same code as above with the updates:
+**Upgrade path:** To upgrade, developers should remove the div with the "actions"
+class and instead put a new `slot="actions"` attribute directly on each <px-icon>
+tag. This is the same code as above with the updates:
 
 ```
 <px-card>
@@ -31,6 +59,25 @@ This is the same code as above with the updates:
   <p>Card text goes here.</p>
 </px-card>
 ```
+
+## Breaking change: px-card header always shown unless configured
+
+Previously, not setting the `headerText` property caused the px-card to hide
+its header, including the icon and actions areas. The documentation recommended
+passing in a single space to the `headerText` property to show the icon and
+actions areas without showing any header text.
+
+This behavior has been changed. Not setting the `headerText` property no longer
+hides the px-card header. To hide the header, set the `hideHeader` property to
+true. It defaults to false.
+
+**Upgrade path:** Ensure your code did not rely on this px-card behavior and does
+not expect cards with no header text to hide their headers. If your code does
+rely on this behavior, you should decide whether or not to hide the header for
+any px-card elements and set the `hideHeader` property to true to hide the header.
+
+You should also remove any instances of setting the px-card header text to a
+string with a single space (e.g. `header-text=" "`). This is no longer needed.
 
 v1.0.9
 ==================
