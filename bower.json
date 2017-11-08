@@ -21,9 +21,10 @@
   ],
   "dependencies": {
     "polymer": "#1.9 - 2",
-    "px-icon-set": "polymer2.0-preview"
+    "px-icon-set": "^2.1.0"
   },
   "devDependencies": {
+    "px-demo": "^3.0.0",
     "px-theme": "^3.0.0",
     "px-defaults-design": "^2.0.0",
     "px-normalize-design": "^1.0.0",
@@ -31,7 +32,7 @@
     "px-helpers-design": "^1.0.0",
     "px-flexbox-design": "^1.0.0",
     "px-spacing-design": "^1.0.0",
-    "web-component-tester": "^6.3.0"
+    "web-component-tester": "^6.4.0"
   },
   "resolutions": {
     "webcomponentsjs": "^1.0.0"

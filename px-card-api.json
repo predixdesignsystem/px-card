@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "### Usage\n\nThe px-card component shows content formatted as a card. Cards consist of header,\nactions, and content areas. Place content directly inside the <px-card> tag to\ndisplay it in the card content area.\n\nAdd the attribute `slot=\"actions\"` to content to render the content in the actions\nslot at the top right corner of the card header. <px-icon> tags placed in the\nactions slot will be automatically styled to the correct size/spacing/location.\n\n```\n<px-card header-text=\"Card\" icon=\"analysis\">\n  <px-icon slot=\"actions\" icon=\"pxm:new-window\"></px-icon>\n  <px-icon slot=\"actions\" icon=\"pxs:help\"></px-icon>\n  <px-icon slot=\"actions\" icon=\"pxs:app-settings\"></px-icon>\n  <p>This is the main content area of a Predix card.</p>\n</px-card>\n```\n\n### Styling\nThe following custom properties are available for styling:\n\nCustom property | Description\n----------------|-------------\n`--px-card-background-color` | Background color of the card\n`--px-card-border-color` | Border color for the top of the card\n`--px-card-header-color` | Color of the header text\n`--px-card-icon-color` | Color of the card's main icon'\n`--px-card-action-icon-color` | Color of icons in actions slot\n`--px-card-action-icon-color--hover` | Color of icons in actions slot when hovered\n`--px-card-action-icon-color--pressed` | Color of icons in actions slot when pressed",
+      "summary": "",
+      "path": "px-card.html",
+      "properties": [
+        {
+          "name": "headerText",
+          "type": "string",
+          "description": "Text to display in the card header.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 73,
+              "column": 6
+            },
+            "end": {
+              "line": 75,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "icon",
+          "type": "string",
+          "description": "Icon that appears to the left of the card header text. Should be a\nvalid icon name from the Predix icon set.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 80,
+              "column": 6
+            },
+            "end": {
+              "line": 82,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "fullBleed",
+          "type": "boolean",
+          "description": "Set to `true` to remove all padding from the main content area of the\ncard. Should only be used for displaying graphics like images or maps\nwithin a card.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 88,
+              "column": 6
+            },
+            "end": {
+              "line": 92,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "hideHeader",
+          "type": "boolean",
+          "description": "Set to `true` to hide the card header. Hides the header text, icon,\nand actions.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 97,
+              "column": 6
+            },
+            "end": {
+              "line": 100,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        }
+      ],
+      "methods": [],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 67,
+          "column": 10
+        },
+        "end": {
+          "line": 102,
+          "column": 3
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "attributes": [
+        {
+          "name": "header-text",
+          "description": "Text to display in the card header.",
+          "sourceRange": {
+            "start": {
+              "line": 73,
+              "column": 6
+            },
+            "end": {
+              "line": 75,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "icon",
+          "description": "Icon that appears to the left of the card header text. Should be a\nvalid icon name from the Predix icon set.",
+          "sourceRange": {
+            "start": {
+              "line": 80,
+              "column": 6
+            },
+            "end": {
+              "line": 82,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "full-bleed",
+          "description": "Set to `true` to remove all padding from the main content area of the\ncard. Should only be used for displaying graphics like images or maps\nwithin a card.",
+          "sourceRange": {
+            "start": {
+              "line": 88,
+              "column": 6
+            },
+            "end": {
+              "line": 92,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "hide-header",
+          "description": "Set to `true` to hide the card header. Hides the header text, icon,\nand actions.",
+          "sourceRange": {
+            "start": {
+              "line": 97,
+              "column": 6
+            },
+            "end": {
+              "line": 100,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [
+        {
+          "description": "",
+          "name": "",
+          "range": {
+            "file": "px-card.html",
+            "start": {
+              "line": 61,
+              "column": 6
+            },
+            "end": {
+              "line": 61,
+              "column": 19
+            }
+          }
+        }
+      ],
+      "tagname": "px-card"
+    }
+  ]
+}
