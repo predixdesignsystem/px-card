@@ -1,4 +1,4 @@
-POLYMER2.0-PRERELEASE (VERSION PENDING)
+v2.0.0
 ==================
 Upgrades <px-card> element and its related styles to support Polymer 1 and 2.
 Refactors and removed deprecated code. There are many major breaking changes
