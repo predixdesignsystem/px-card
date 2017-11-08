@@ -79,6 +79,10 @@ any px-card elements and set the `hideHeader` property to true to hide the heade
 You should also remove any instances of setting the px-card header text to a
 string with a single space (e.g. `header-text=" "`). This is no longer needed.
 
+v1.0.10
+==================
+* add device flags
+
 v1.0.9
 ==================
 * hide header if no headerText specified (#17)
