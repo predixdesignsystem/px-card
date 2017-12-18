@@ -1,3 +1,7 @@
+v2.0.1
+==================
+expose style variable for header padding
+
 v2.0.0
 ==================
 Upgrades <px-card> element and its related styles to support Polymer 1 and 2.

@@ -37,6 +37,7 @@
 header {
   padding: $inuit-base-spacing-unit--huge;
   padding-top: $inuit-base-spacing-unit--large;
+  padding-bottom: var(--px-card-header-padding, $inuit-base-spacing-unit--huge);
   .epsilon {
     height: 2rem;
     line-height: 2rem;
