@@ -1,3 +1,7 @@
+v2.0.2
+==================
+fix action icon sizing in Polymer 2
+
 v2.0.1
 ==================
 expose style variable for header padding

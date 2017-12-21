@@ -53,8 +53,8 @@ header {
 }
 
 #actions ::slotted(px-icon) {
-  --iron-icon-height: 2rem;
-  --iron-icon-width: 2rem;
+  --iron-icon-height: calculateRem(22px);
+  --iron-icon-width: calculateRem(22px);
   color: var(--px-card-action-icon-color, black);
   margin-right: .66666rem;
 }
