@@ -1,3 +1,7 @@
+v2.0.3
+==================
+* Fix demo for IE
+
 v2.0.2
 ==================
 fix action icon sizing in Polymer 2
