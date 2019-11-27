@@ -1,4 +1,4 @@
-<!--
+/*
 Copyright (c) 2018, General Electric
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
--->
-
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-icon-set/px-icon-set.html"/>
-<link rel="import" href="../px-icon-set/px-icon.html"/>
-<link rel="import" href="css/px-card-styles.html"/>
-
-<!--
+*/
+/**
 ### Usage
 
 The px-card component shows content formatted as a card. Cards consist of header,
@@ -57,9 +51,21 @@ Custom property | Description
 @blurb Shows content in a card
 @demo demo.html
 @homepage index.html
--->
-<dom-module id="px-card">
-  <template>
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
+
+import 'px-icon-set/px-icon-set.js';
+import 'px-icon-set/px-icon.js';
+import './css/px-card-styles.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
     <style include="px-card-styles"></style>
 
     <template is="dom-if" if="[[!hideHeader]]">
@@ -78,44 +84,41 @@ Custom property | Description
     <div class="contents">
       <slot></slot>
     </div>
-  </template>
-</dom-module>
+`,
 
-<script>
-  Polymer({
-    is: 'px-card',
-    properties: {
-      /**
-       * Text to display in the card header.
-       */
-      headerText: {
-        type: String
-      },
-      /**
-       * Icon that appears to the left of the card header text. Should be a
-       * valid icon name from the Predix icon set.
-       */
-      icon: {
-        type: String
-      },
-      /**
-       * Set to `true` to remove all padding from the main content area of the
-       * card. Should only be used for displaying graphics like images or maps
-       * within a card.
-       */
-      fullBleed: {
-        type: Boolean,
-        value: false,
-        reflectToAttribute: true
-      },
-      /**
-       * Set to `true` to hide the card header. Hides the header text, icon,
-       * and actions.
-       */
-      hideHeader: {
-        type: Boolean,
-        value: false
-      }
+  is: 'px-card',
+
+  properties: {
+    /**
+     * Text to display in the card header.
+     */
+    headerText: {
+      type: String
+    },
+    /**
+     * Icon that appears to the left of the card header text. Should be a
+     * valid icon name from the Predix icon set.
+     */
+    icon: {
+      type: String
+    },
+    /**
+     * Set to `true` to remove all padding from the main content area of the
+     * card. Should only be used for displaying graphics like images or maps
+     * within a card.
+     */
+    fullBleed: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true
+    },
+    /**
+     * Set to `true` to hide the card header. Hides the header text, icon,
+     * and actions.
+     */
+    hideHeader: {
+      type: Boolean,
+      value: false
     }
-  });
-</script>
+  }
+});
